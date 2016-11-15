@@ -48,12 +48,14 @@ public class FilePanel extends JPanel{
 		super(new BorderLayout());
 		this.file = file;
 		
-		JLabel label = new JLabel("",SwingConstants.CENTER);
-		label.setIcon(getBigIcon(file));
+		JLabel iconLabel = new JLabel("",SwingConstants.CENTER);
+		iconLabel.setIcon(getBigIcon(file));
 
-		add(label,BorderLayout.NORTH);
-		JLabel testLabel = new JLabel(file.getName(),SwingConstants.CENTER);
-		add(testLabel,BorderLayout.CENTER);
+		add(iconLabel,BorderLayout.NORTH);
+		JLabel fileNameLabel = new JLabel(file.getName(),SwingConstants.CENTER);
+		fileNameLabel.setToolTipText(file.getName());
+		
+		add(fileNameLabel,BorderLayout.CENTER);
 		setPreferredSize(new Dimension(50,50));
 		
 		addMouseListener(filePanelMouseController);

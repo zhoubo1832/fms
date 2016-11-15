@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import prd.fms.module.TreeNodeModule;
 import prd.fms.view.FilePanel;
+import prd.fms.view.RightPanel;
 
 public class FilePanelMouseController implements MouseListener{
 
@@ -18,12 +21,22 @@ public class FilePanelMouseController implements MouseListener{
 		int n = e.getClickCount();
 		if(n == 2){
 			FilePanel panel = (FilePanel)e.getSource();
-			Desktop desk = Desktop.getDesktop();
-			try {
-				desk.open(panel.getFile());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			File file = panel.getFile();
+			if(file.isDirectory()) {
+				File[] files = TreeNodeModule.getAllNodes(file.getPath());
+				
+				RightPanel rightPanel = RightPanel.instance;
+				rightPanel.removeAll();
+						
+				rightPanel.show(files);
+			} else {
+				Desktop desk = Desktop.getDesktop();
+				try {
+					desk.open(file);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		} else {
 			JPanel panel = (JPanel)e.getSource();
