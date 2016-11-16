@@ -1,6 +1,7 @@
 package prd.fms.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -18,13 +19,25 @@ public class RightPanel extends JPanel{
 	 
 	public RightPanel() {
 		instance = this;
+		this.setBackground(Color.white);
 		this.setLayout(new BorderLayout());
 		
 	}
 	
 	public void show(File[] files) {
+
+		if(files.length == 0 ) {
+			this.removeAll();
+			this.revalidate();
+			this.repaint();
+			return;
+		}
+		
+		this.removeAll();
+		
+		
 	    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
-	    
+	    panel.setBackground(Color.WHITE);
 	    panel.setPreferredSize(computePreferredSize(files.length));
 	    
 	    for(File file : files) {

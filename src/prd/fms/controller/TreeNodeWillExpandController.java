@@ -14,32 +14,8 @@ public class TreeNodeWillExpandController implements TreeWillExpandListener{
 
 	@Override
 	public void treeWillExpand(TreeExpansionEvent event) throws ExpandVetoException {
-		final TreePath path = event.getPath();
-		
-//		Object selectedComponent = path.getLastPathComponent();
-//		if(selectedComponent instanceof String) {
-//			return;
-//		}
-		
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-		if(node == null) {
-			return;
-		}
-		
-		int childCount = node.getChildCount();
-		if( childCount == 1) {
-			DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) node.getChildAt(0);
-			DirNode obj = (DirNode)childNode.getUserObject();
-			if(obj.isDummyNode()) {
-				DefaultTreeModel model = new DefaultTreeModel(node);
-				model.removeNodeFromParent(childNode);
-				
-				TreeNodeModule.getDirNodes(node);
-				//path.updateUI();
-			}
-		} else if(childCount > 1) {
-			return;
-		}
+		TreePath path = event.getPath();
+		TreeNodeModule.addChildrenDirNode(path);
 	}
 
 	@Override

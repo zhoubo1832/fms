@@ -9,6 +9,8 @@ import prd.fms.module.TreeNodeModule;
 
 public class MainTree extends JTree{
 	
+	public static MainTree instance;
+	
 	/**
 	 * 
 	 */
@@ -24,5 +26,6 @@ public class MainTree extends JTree{
 		
 		this.addTreeSelectionListener(new TreeNodeSelectionController());
 		this.addTreeWillExpandListener(new TreeNodeWillExpandController());
+		MainTree.instance = this;
 	}
 }

@@ -16,24 +16,9 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 	public void valueChanged(TreeSelectionEvent e) {
 		TreePath treePath = e.getPath();
 		
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode) treePath.getLastPathComponent();
-		if(node == null) {
-			return;
-		}
-
-		DirNode dirNode = (DirNode)node.getUserObject();
-		String path = dirNode.getPath();
-		File[] files = TreeNodeModule.getAllNodes(path);
-		if(files.length == 0 ) {
-			return;
-		}
+		TreeNodeModule.displayChildrenFiles(treePath);
 		
-		RightPanel rightPanel = RightPanel.instance;
-		rightPanel.removeAll();
-				
-		rightPanel.show(files);
-		
-		
+		TreeNodeModule.addChildrenDirNode(treePath);
 	}
 	
 	

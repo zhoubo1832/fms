@@ -1,6 +1,7 @@
 package prd.fms.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,6 +47,7 @@ public class FilePanel extends JPanel{
 	 
 	public FilePanel(File file) {
 		super(new BorderLayout());
+		this.setBackground(Color.WHITE);
 		this.file = file;
 		
 		JLabel iconLabel = new JLabel("",SwingConstants.CENTER);

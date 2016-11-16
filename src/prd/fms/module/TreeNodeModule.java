@@ -2,8 +2,11 @@ package prd.fms.module;
 
 import java.io.File;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
+import prd.fms.view.RightPanel;
 
 public class TreeNodeModule {
 
@@ -74,5 +77,48 @@ public class TreeNodeModule {
 			}
 		}
 		return true;
+	}
+	
+	public static void addChildrenDirNode(TreePath path) {
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+		if(node == null) {
+			return;
+		}
+		
+		DirNode dirNode = (DirNode)node.getUserObject();
+		if(dirNode.isRootNode()) {
+			return;
+		}
+		
+		int childCount = node.getChildCount();
+		if( childCount == 1) {
+			DefaultMutableTreeNode childNode = (DefaultMutableTreeNode) node.getChildAt(0);
+			DirNode obj = (DirNode)childNode.getUserObject();
+			if(obj.isDummyNode()) {
+				DefaultTreeModel model = new DefaultTreeModel(node);
+				model.removeNodeFromParent(childNode);
+				
+				TreeNodeModule.getDirNodes(node);
+			}
+		} else if(childCount > 1) {
+			return;
+		}
+	}
+	
+	
+	public static void displayChildrenFiles(TreePath treePath) {
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) treePath.getLastPathComponent();
+		if(node == null) {
+			return;
+		}
+
+		DirNode dirNode = (DirNode)node.getUserObject();
+		if(dirNode.isRootNode()) {
+			return;
+		}
+		String path = dirNode.getPath();
+		File[] files = TreeNodeModule.getAllNodes(path);
+				
+		RightPanel.instance.show(files);
 	}
 }

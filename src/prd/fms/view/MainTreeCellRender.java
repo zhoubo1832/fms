@@ -24,16 +24,8 @@ public class MainTreeCellRender extends DefaultTreeCellRenderer{
 			return this;
 		}
 		
-//		Object obj = node.getUserObject();
-//		if(obj instanceof String) {
-//			return this;
-//		}
-//		
-//		DirNode dirNode = (DirNode)obj;
-//		if(!dirNode.isEmpty()) {
-			this.setIcon(this.getClosedIcon());
+		this.setIcon(this.getClosedIcon());
 
-//		}
 		return this;
 	}
 
