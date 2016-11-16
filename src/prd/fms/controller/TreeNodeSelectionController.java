@@ -7,6 +7,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
+import prd.fms.common.Command;
+import prd.fms.common.CommandManager;
 import prd.fms.module.TreeNodeModule;
 import prd.fms.view.RightPanel;
 
@@ -19,6 +21,8 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 		TreeNodeModule.displayChildrenFiles(treePath);
 		
 		TreeNodeModule.addChildrenDirNode(treePath);
+		
+		CommandManager.pushCommand(new Command(treePath));
 	}
 	
 	

@@ -23,7 +23,8 @@ public class MainPanel extends JPanel{
 		mainSplit.add(new LeftPanel(),JSplitPane.LEFT,0);
 		
 		mainSplit.add(new RightPanel(),JSplitPane.RIGHT,0);
-		this.add(mainSplit);
+		this.add(new ToolbarPanel(), BorderLayout.NORTH);
+		this.add(mainSplit,BorderLayout.CENTER);
 		
 //		System.out.println(rightPanel.getScrollPaneWidth());
 	}
