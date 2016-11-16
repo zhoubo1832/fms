@@ -23,14 +23,17 @@ public class RightPanel extends JPanel{
 	}
 	
 	public void show(File[] files) {
-	    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	    panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
-
+	    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
+	    
+	    panel.setPreferredSize(computePreferredSize(files.length));
+	    
 	    for(File file : files) {
-	    	panel.add(new FilePanel(file));
+	    	FilePanel fp = new FilePanel(file);
+	    	panel.add(fp);
 	    }
 	    
 	    JScrollPane scrollPane = new JScrollPane(panel);
+	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 		scrollPane.setBorder(null);
 		this.add(scrollPane,BorderLayout.CENTER);
 		
@@ -38,4 +41,18 @@ public class RightPanel extends JPanel{
 		this.repaint();
 	}
 
+	private Dimension computePreferredSize(int fileNum) {
+		final int fw = ViewConstants.FILE_PANEL_WIDTH;
+		final int fh = ViewConstants.FILE_PANEL_HEIGHT;
+		
+		final int hgap = ViewConstants.RIGHT_PANEL_HGAP;
+		final int vgap = ViewConstants.RIGHT_PANEL_VGAP;
+		
+		int w = this.getWidth();	    
+	    int colNum = (w - (w/fw + 1) * hgap)/fw;
+	    int rowNum = (int) Math.ceil(fileNum/colNum);
+	    int height = (rowNum*fh)+(rowNum+1)*vgap;
+	    
+		return new Dimension(this.getWidth(), height);
+	}
 }

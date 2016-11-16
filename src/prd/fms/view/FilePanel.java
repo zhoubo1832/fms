@@ -56,7 +56,7 @@ public class FilePanel extends JPanel{
 		fileNameLabel.setToolTipText(file.getName());
 		
 		add(fileNameLabel,BorderLayout.CENTER);
-		setPreferredSize(new Dimension(50,50));
+		setPreferredSize(new Dimension(ViewConstants.FILE_PANEL_WIDTH,ViewConstants.FILE_PANEL_HEIGHT));
 		
 		addMouseListener(filePanelMouseController);
 
