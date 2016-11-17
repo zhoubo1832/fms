@@ -1,7 +1,6 @@
 package prd.fms.common;
 
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.Vector;
 
 import javax.swing.tree.TreePath;
 
@@ -9,20 +8,24 @@ import prd.fms.module.TreeNodeModule;
 import prd.fms.view.MainTree;
 
 public class CommandManager {
-	private static Stack<Command> backCommand = new Stack<Command>();
-	private static Stack<Command> forwardCommand = new Stack<Command>();
+	private static Vector<Command> backCommand = new Vector<Command>();
+	private static Vector<Command> forwardCommand = new Vector<Command>();
+
+	private static boolean backButtonClicked = false;
+	
+	public static boolean isCanBack() {
+		return (backCommand.size() > 1);
+	}
 	
 	public static void pushCommand(Command command) {
-		backCommand.push(command);
+		backCommand.addElement(command);
 	}
 	
 	public static void back() {
+		setBackButtonClicked(true);
+		
 		Command command = null;
-		try{
-			command = backCommand.pop();
-		} catch (EmptyStackException e) {
-			return;
-		}
+		command = backCommand.get(backCommand.size() - 2);
 		
 		TreePath treePath = command.getTreePath();
 		TreeNodeModule.displayChildrenFiles(treePath);
@@ -30,9 +33,19 @@ public class CommandManager {
 		
 		MainTree.instance.scrollPathToVisible(treePath);
 		MainTree.instance.setSelectionPath(treePath);
+		
+		backCommand.remove(backCommand.size() - 1);
 	}
 	
 	public static void forward() {
 		
+	}
+
+	public static boolean isBackButtonClicked() {
+		return backButtonClicked;
+	}
+
+	public static void setBackButtonClicked(boolean backButtonClicked) {
+		CommandManager.backButtonClicked = backButtonClicked;
 	}
 }

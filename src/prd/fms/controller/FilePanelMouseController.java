@@ -16,8 +16,6 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
-import prd.fms.common.Command;
-import prd.fms.common.CommandManager;
 import prd.fms.module.TreeNodeModule;
 import prd.fms.view.FilePanel;
 import prd.fms.view.MainTree;
@@ -48,7 +46,7 @@ public class FilePanelMouseController implements MouseListener{
 			        	TreePath treePath = new TreePath(nodes);
 			        	MainTree.instance.scrollPathToVisible(treePath);
 						MainTree.instance.setSelectionPath(treePath);
-						CommandManager.pushCommand(new Command(treePath));
+						//CommandManager.pushCommand(new Command(treePath));
 			        } 
 			    } 
 				

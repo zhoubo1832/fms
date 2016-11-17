@@ -1,16 +1,13 @@
 package prd.fms.controller;
 
-import java.io.File;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import prd.fms.bean.DirNode;
 import prd.fms.common.Command;
 import prd.fms.common.CommandManager;
 import prd.fms.module.TreeNodeModule;
-import prd.fms.view.RightPanel;
+import prd.fms.view.ToolbarPanel;
 
 public class TreeNodeSelectionController implements TreeSelectionListener{
 
@@ -22,7 +19,11 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 		
 		TreeNodeModule.addChildrenDirNode(treePath);
 		
-		CommandManager.pushCommand(new Command(treePath));
+		if(!CommandManager.isBackButtonClicked()) {
+			CommandManager.pushCommand(new Command(treePath));
+			ToolbarPanel.instance.setBackButtonEnable(true);
+		}
+		CommandManager.setBackButtonClicked(false);
 	}
 	
 	

@@ -16,6 +16,12 @@ public class Command {
 	public void setTreePath(TreePath treePath) {
 		this.treePath = treePath;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		TreePath tPath = (TreePath)obj;
+		return this.treePath.equals(tPath);
+	}
 	
 	
 }
