@@ -14,4 +14,6 @@ public class ViewConstants {
 	
 	public static final String TOOLBAR_BACK_TEXT = "Back";
 	public static final String TOOLBAR_FORWARD_TEXT = "Forward";
+	
+	public static final String INFO_LABEL_DEFAULT_TEXT = " ";
 }
