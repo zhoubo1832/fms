@@ -43,4 +43,8 @@ public class ToolbarPanel extends JPanel{
 	public void setBackButtonEnable(boolean status) {
 		this.backButton.setEnabled(status);
 	}
+	
+	public void setForwardButtonEnable(boolean status) {
+		this.forwardButton.setEnabled(status);
+	}
 }

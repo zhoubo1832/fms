@@ -19,11 +19,15 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 		
 		TreeNodeModule.addChildrenDirNode(treePath);
 		
-		if(!CommandManager.isBackButtonClicked()) {
-			CommandManager.pushCommand(new Command(treePath));
+		if(!CommandManager.isBackButtonClicked() && !CommandManager.isForwardButtonClicked()) {
+			CommandManager.pushBackCommand(new Command(treePath));
+			
 			ToolbarPanel.instance.setBackButtonEnable(true);
+			CommandManager.removeAllForwardCommand();
+			ToolbarPanel.instance.setForwardButtonEnable(false);
 		}
 		CommandManager.setBackButtonClicked(false);
+		CommandManager.setForwardButtonClicked(false);
 	}
 	
 	

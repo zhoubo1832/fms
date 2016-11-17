@@ -19,8 +19,13 @@ public class BackForwardButtonController implements ActionListener{
 			if(!CommandManager.isCanBack()) {
 				ToolbarPanel.instance.setBackButtonEnable(false);
 			}
-		} else {
-			
+			ToolbarPanel.instance.setForwardButtonEnable(true);
+		} else if(btn.getText().equals(ViewConstants.TOOLBAR_FORWARD_TEXT)) {
+			CommandManager.forward();
+			if(!CommandManager.isCanForward()) {
+				ToolbarPanel.instance.setForwardButtonEnable(false);
+			}
+			ToolbarPanel.instance.setBackButtonEnable(true);
 		}
 	}
 
