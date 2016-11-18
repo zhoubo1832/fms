@@ -18,6 +18,7 @@ import javax.swing.tree.TreePath;
 import prd.fms.bean.DirNode;
 import prd.fms.module.TreeNodeModule;
 import prd.fms.view.FilePanel;
+import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainTree;
 import prd.fms.view.RightPanel;
 
@@ -60,8 +61,10 @@ public class FilePanelMouseController implements MouseListener{
 				}
 			}
 		} else {
-			JPanel panel = (JPanel)e.getSource();
+			FilePanel panel = (FilePanel)e.getSource();
 			panel.requestFocus();
+			
+			InfoBarPanel.instance.setFileInfoLabel(panel.getFile().getPath());
 		}
 
 	}

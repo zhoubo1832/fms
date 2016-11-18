@@ -33,7 +33,7 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 		CommandManager.setBackButtonClicked(false);
 		CommandManager.setForwardButtonClicked(false);
 		
-		InfoBarPanel.instance.setInfoLabel(TreeUtil.getPath(treePath));
+		InfoBarPanel.instance.setNodeInfoLabel(TreeUtil.getPath(treePath));
 	}
 	
 	
