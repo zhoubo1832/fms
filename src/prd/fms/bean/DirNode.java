@@ -1,5 +1,11 @@
 package prd.fms.bean;
 
+/**
+ * <p>Dir node definition.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class DirNode {
 
 	public static String ROOT_NODE = "ROOT";

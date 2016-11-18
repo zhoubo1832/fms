@@ -9,6 +9,12 @@ import prd.fms.common.CommandManager;
 import prd.fms.view.ToolbarPanel;
 import prd.fms.view.ViewConstants;
 
+/**
+ * <p>Back and forward button's action listener.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class BackForwardButtonController implements ActionListener{
 
 	@Override

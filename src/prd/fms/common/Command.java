@@ -2,6 +2,12 @@ package prd.fms.common;
 
 import javax.swing.tree.TreePath;
 
+/**
+ * <p>Command used to back and forward operation.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class Command {
 	private TreePath treePath;
 	

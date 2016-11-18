@@ -9,6 +9,12 @@ import javax.swing.tree.TreePath;
 import prd.fms.util.TreeUtil;
 import prd.fms.view.InfoBarPanel;
 
+/**
+ * <p>Tree node's mouse listener.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class TreeNodeMouseController implements MouseListener{
 
 	@Override
@@ -19,6 +25,7 @@ public class TreeNodeMouseController implements MouseListener{
 			return;
 		}
 		String path = TreeUtil.getPath(tp);
+		// display node's detailed information in information panel
 		InfoBarPanel.instance.setNodeInfoLabel(path);
 	}
 

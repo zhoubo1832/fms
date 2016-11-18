@@ -1,5 +1,11 @@
 package prd.fms.view;
 
+/**
+ * <p>View constants definition.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class ViewConstants {
 
 	public static final String MAIN_FRAME_TITLE = "File Manage System";

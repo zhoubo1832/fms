@@ -9,6 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * <p>Information panel.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class InfoBarPanel extends JPanel{
 	
 	private JLabel infoLabel;
@@ -16,6 +22,9 @@ public class InfoBarPanel extends JPanel{
 	private static final String UPDATE_DATE = "       update date: ";
 	private static final String FILE_SIZE = "       size: ";
 	
+	/**
+	 * <p>InfoBarPanel object itself.</p>
+	 */
 	public static InfoBarPanel instance;
 	
 	public InfoBarPanel() {
@@ -25,6 +34,10 @@ public class InfoBarPanel extends JPanel{
 		this.add(infoLabel);
 	}
 	
+	/**
+	 * <p>Set node detail information.</p>
+	 * @param path  File path
+	 */
 	public void setNodeInfoLabel(String path) {
 		if(path == null) {
 			infoLabel.setIcon(null);
@@ -39,6 +52,10 @@ public class InfoBarPanel extends JPanel{
 		
 	}
 	
+	/**
+	 * <p>Set file detail information.</p>
+	 * @param path  File path
+	 */
 	public void setFileInfoLabel(String path) {
 		if(path == null) {
 			infoLabel.setIcon(null);
@@ -58,6 +75,11 @@ public class InfoBarPanel extends JPanel{
 		
 	}
 	
+	/**
+	 * <p>Get size string.</p>
+	 * @param size  File size(byte)
+	 * @return size string(byte/KB/MB/GB)
+	 */
 	private String getSize(long size) {
 		if(size < 1024) {
 			return size + " byte";

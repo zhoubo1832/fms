@@ -6,11 +6,14 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+/**
+ * <p>File tree cell render.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class MainTreeCellRender extends DefaultTreeCellRenderer{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -24,6 +27,7 @@ public class MainTreeCellRender extends DefaultTreeCellRenderer{
 			return this;
 		}
 		
+		// set icon to folder
 		this.setIcon(this.getClosedIcon());
 
 		return this;

@@ -7,6 +7,12 @@ import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+/**
+ * <p>File panel's focus listener.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FilePanelFocusController implements FocusListener{
 
 	@Override

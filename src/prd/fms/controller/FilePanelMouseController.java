@@ -22,20 +22,30 @@ import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainTree;
 import prd.fms.view.RightPanel;
 
+/**
+ * <p>File panel's mouse listener.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FilePanelMouseController implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int n = e.getClickCount();
+		// double click
 		if(n == 2){
 			FilePanel panel = (FilePanel)e.getSource();
 			File file = panel.getFile();
+			// folder was double clicked
 			if(file.isDirectory()) {
+				// display all folders and files in right panel
 				File[] files = TreeNodeModule.getAllNodes(file.getPath());
 				RightPanel rightPanel = RightPanel.instance;
 				rightPanel.removeAll();
 				rightPanel.show(files);
 				
+				// get and select current tree node
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) MainTree.instance.getSelectionPath().getLastPathComponent();
 				Enumeration enumeration = selectedNode.breadthFirstEnumeration();
 				while(enumeration.hasMoreElements()) {
@@ -47,23 +57,25 @@ public class FilePanelMouseController implements MouseListener{
 			        	TreePath treePath = new TreePath(nodes);
 			        	MainTree.instance.scrollPathToVisible(treePath);
 						MainTree.instance.setSelectionPath(treePath);
-						//CommandManager.pushCommand(new Command(treePath));
 			        } 
 			    } 
 				
 			} else {
+			// file was double clicked
 				Desktop desk = Desktop.getDesktop();
 				try {
+					// open file
 					desk.open(file);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		} else {
+		// one click	
 			FilePanel panel = (FilePanel)e.getSource();
+			// request focus for file panel, and focusGained method will be called automatically
 			panel.requestFocus();
-			
+			// display file detailed information in information panel
 			InfoBarPanel.instance.setFileInfoLabel(panel.getFile().getPath());
 		}
 

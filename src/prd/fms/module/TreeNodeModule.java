@@ -8,8 +8,18 @@ import javax.swing.tree.TreePath;
 import prd.fms.bean.DirNode;
 import prd.fms.view.RightPanel;
 
+/**
+ * <p>Tree node module.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class TreeNodeModule {
 
+	/**
+	 * <p>Get the first level nodes.</p>
+	 * @return Top node
+	 */
 	public static DefaultMutableTreeNode getRootNodes() {
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode(new DirNode(DirNode.ROOT_NODE));
 		File[] files = File.listRoots();
@@ -27,6 +37,11 @@ public class TreeNodeModule {
 		return top;
 	}
 	
+	/**
+	 * <p>Get all folders and files.</p>
+	 * @param path  File path
+	 * @return File array
+	 */
 	public static File[] getAllNodes(String path) {
 				
 		File file = new File(path);
@@ -35,7 +50,11 @@ public class TreeNodeModule {
 		return fileArray;
 	}
 	
-	
+	/**
+	 * <p>Get all folder nodes.</p>
+	 * @param node  Node
+	 * @return Node with all children folder nodes
+	 */
 	public static DefaultMutableTreeNode getDirNodes(DefaultMutableTreeNode node) {
 		DirNode dirNode = (DirNode)node.getUserObject();
 		
@@ -64,6 +83,11 @@ public class TreeNodeModule {
 		return node;
 	}
 	
+	/**
+	 * <p>Whether folder has sub folders.</p>
+	 * @param path  File path
+	 * @return true: has not  false:has
+	 */
 	public static boolean isEmptyDir(String path) {
 		
 		File file = new File(path);
@@ -79,6 +103,10 @@ public class TreeNodeModule {
 		return true;
 	}
 	
+	/**
+	 * <p>Get and add children folder nodes for current tree node</p>
+	 * @param path  Tree path
+	 */
 	public static void addChildrenDirNode(TreePath path) {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
 		if(node == null) {
@@ -96,8 +124,9 @@ public class TreeNodeModule {
 			DirNode obj = (DirNode)childNode.getUserObject();
 			if(obj.isDummyNode()) {
 				DefaultTreeModel model = new DefaultTreeModel(node);
+				// remove dummy node
 				model.removeNodeFromParent(childNode);
-				
+				// add all folder nodes
 				TreeNodeModule.getDirNodes(node);
 			}
 		} else if(childCount > 1) {
@@ -105,7 +134,10 @@ public class TreeNodeModule {
 		}
 	}
 	
-	
+	/**
+	 * <p>Display all folders and files in right panel</p>
+	 * @param treePath  Tree path
+	 */
 	public static void displayChildrenFiles(TreePath treePath) {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) treePath.getLastPathComponent();
 		if(node == null) {
