@@ -15,6 +15,9 @@ public class TreeNodeMouseController implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		JTree jtree = (JTree)e.getSource();
 		TreePath tp = jtree.getPathForLocation(e.getX(), e.getY());
+		if(tp == null) {
+			return;
+		}
 		String path = TreeUtil.getPath(tp);
 		InfoBarPanel.instance.setNodeInfoLabel(path);
 	}
