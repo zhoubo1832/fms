@@ -21,12 +21,14 @@ public class BackForwardButtonController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
 		if(btn.getText().equals(ViewConstants.TOOLBAR_BACK_TEXT) ) {
+			ToolbarPanel.instance.setBackButtonClicked(true);
 			CommandManager.back();
 			if(!CommandManager.isCanBack()) {
 				ToolbarPanel.instance.setBackButtonEnable(false);
 			}
 			ToolbarPanel.instance.setForwardButtonEnable(true);
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_FORWARD_TEXT)) {
+			ToolbarPanel.instance.setForwardButtonClicked(true);
 			CommandManager.forward();
 			if(!CommandManager.isCanForward()) {
 				ToolbarPanel.instance.setForwardButtonEnable(false);

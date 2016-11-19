@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+
 import prd.fms.controller.BackForwardButtonController;
 
 /**
@@ -26,6 +27,9 @@ public class ToolbarPanel extends JPanel{
 	private JToolBar toolBar;
 	private JButton backButton;
 	private JButton forwardButton;
+	
+	private static boolean backButtonClicked = false;
+	private static boolean forwardButtonClicked = false;
 	
 	private ActionListener controller = new BackForwardButtonController();
 	
@@ -63,5 +67,21 @@ public class ToolbarPanel extends JPanel{
 	
 	public void setForwardButtonEnable(boolean status) {
 		this.forwardButton.setEnabled(status);
+	}
+	
+	public boolean isBackButtonClicked() {
+		return backButtonClicked;
+	}
+	
+	public boolean isForwardButtonClicked() {
+		return forwardButtonClicked;
+	}
+
+	public void setBackButtonClicked(boolean backButtonClicked) {
+		ToolbarPanel.backButtonClicked = backButtonClicked;
+	}
+	
+	public void setForwardButtonClicked(boolean forwardButtonClicked) {
+		ToolbarPanel.forwardButtonClicked = forwardButtonClicked;
 	}
 }

@@ -27,7 +27,7 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 		// get and add children folder nodes for current tree node
 		TreeNodeModule.addChildrenDirNode(treePath);
 		// Neither back button nor forward button was clicked
-		if(!CommandManager.isBackButtonClicked() && !CommandManager.isForwardButtonClicked()) {
+		if(!ToolbarPanel.instance.isBackButtonClicked() && !ToolbarPanel.instance.isForwardButtonClicked()) {
 			// add history command to back command vector
 			CommandManager.pushBackCommand(new Command(treePath));
 			ToolbarPanel.instance.setBackButtonEnable(true);
@@ -36,8 +36,8 @@ public class TreeNodeSelectionController implements TreeSelectionListener{
 			
 		}
 				
-		CommandManager.setBackButtonClicked(false);
-		CommandManager.setForwardButtonClicked(false);
+		ToolbarPanel.instance.setBackButtonClicked(false);
+		ToolbarPanel.instance.setForwardButtonClicked(false);
 		
 		// display node's detailed information in information panel
 		InfoBarPanel.instance.setNodeInfoLabel(TreeUtil.getPath(treePath));

@@ -40,10 +40,10 @@ public class FilePanelMouseController implements MouseListener{
 			// folder was double clicked
 			if(file.isDirectory()) {
 				// display all folders and files in right panel
-				File[] files = TreeNodeModule.getAllNodes(file.getPath());
-				RightPanel rightPanel = RightPanel.instance;
-				rightPanel.removeAll();
-				rightPanel.show(files);
+//				File[] files = TreeNodeModule.getAllNodes(file.getPath());
+//				RightPanel rightPanel = RightPanel.instance;
+//				rightPanel.removeAll();
+//				rightPanel.show(files);
 				
 				// get and select current tree node
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) MainTree.instance.getSelectionPath().getLastPathComponent();
