@@ -7,7 +7,10 @@ import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.tree.TreePath;
+
+import prd.fms.common.ISubscriber;
+import prd.fms.util.TreeUtil;
 
 /**
  * <p>Information panel.</p>
@@ -15,8 +18,9 @@ import javax.swing.SwingConstants;
  * @author zhoubo
  * 
  */
-public class InfoBarPanel extends JPanel{
+public class InfoBarPanel extends JPanel implements ISubscriber{
 	
+	private static final long serialVersionUID = 1L;
 	private JLabel infoLabel;
 	private static final String ITEMS = " items";
 	private static final String UPDATE_DATE = "       update date: ";
@@ -32,6 +36,8 @@ public class InfoBarPanel extends JPanel{
 		instance = this;
 		infoLabel = new JLabel(ViewConstants.INFO_LABEL_DEFAULT_TEXT);
 		this.add(infoLabel);
+		// subscribe tree node selection change event
+		MainTree.instance.getTreeNodeSelectionController().add(this);
 	}
 	
 	/**
@@ -92,5 +98,15 @@ public class InfoBarPanel extends JPanel{
 		} else {
 			return size + " byte";
 		}
+	}
+
+	/**
+	 * <p>When selected tree node is changed, update information panel.</p>
+	 * @param treePath  Tree path
+	 */
+	@Override
+	public void update(TreePath treePath) {
+		// display node's detailed information in information panel
+		InfoBarPanel.instance.setNodeInfoLabel(TreeUtil.getPath(treePath));
 	}
 }

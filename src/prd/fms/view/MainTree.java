@@ -16,13 +16,15 @@ import prd.fms.module.TreeNodeModule;
  */
 public class MainTree extends JTree{
 	
+	private static final long serialVersionUID = 1L;
+	
+	private TreeNodeSelectionController treeNodeSelectionController;
+	
 	/**
 	 * <p>MainTree object itself.</p>
 	 */
 	public static MainTree instance;
 	
-	private static final long serialVersionUID = 1L;
-
 	public MainTree() {
 		// get and display the first level nodes for lazy load
 		super(TreeNodeModule.getRootNodes());
@@ -37,11 +39,16 @@ public class MainTree extends JTree{
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		// add selected node change listener
-		this.addTreeSelectionListener(new TreeNodeSelectionController());
+		treeNodeSelectionController = new TreeNodeSelectionController();
+		this.addTreeSelectionListener(treeNodeSelectionController);
 		// add node expand listener
 		this.addTreeWillExpandListener(new TreeNodeWillExpandController());
 		// add mouse listener
 		this.addMouseListener(new TreeNodeMouseController());
 		MainTree.instance = this;
+	}
+	
+	public TreeNodeSelectionController getTreeNodeSelectionController() {
+		return treeNodeSelectionController;
 	}
 }

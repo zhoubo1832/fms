@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.tree.TreePath;
 
+import prd.fms.common.Command;
+import prd.fms.common.CommandManager;
+import prd.fms.common.ISubscriber;
 import prd.fms.controller.BackForwardButtonController;
 
 /**
@@ -15,7 +19,7 @@ import prd.fms.controller.BackForwardButtonController;
  * @author zhoubo
  * 
  */
-public class ToolbarPanel extends JPanel{
+public class ToolbarPanel extends JPanel implements ISubscriber{
 
 	private static final long serialVersionUID = 1L;
 
@@ -59,6 +63,8 @@ public class ToolbarPanel extends JPanel{
 		
 		// add tool bar
 		this.add(toolBar);
+		// subscribe tree node selection change event
+		MainTree.instance.getTreeNodeSelectionController().add(this);
 	}
 	
 	public void setBackButtonEnable(boolean status) {
@@ -83,5 +89,26 @@ public class ToolbarPanel extends JPanel{
 	
 	public void setForwardButtonClicked(boolean forwardButtonClicked) {
 		ToolbarPanel.forwardButtonClicked = forwardButtonClicked;
+	}
+
+	/**
+	 * <p>When selected tree node is changed, update tool panel and command manager.</p>
+	 * @param treePath  Tree path
+	 */
+	@Override
+	public void update(TreePath treePath) {
+		// Neither back button nor forward button was clicked
+		if(!ToolbarPanel.instance.isBackButtonClicked() && !ToolbarPanel.instance.isForwardButtonClicked()) {
+			// add history command to back command vector
+			CommandManager.pushBackCommand(new Command(treePath));
+			ToolbarPanel.instance.setBackButtonEnable(true);
+			CommandManager.removeAllForwardCommand();
+			ToolbarPanel.instance.setForwardButtonEnable(false);
+			
+		}
+				
+		ToolbarPanel.instance.setBackButtonClicked(false);
+		ToolbarPanel.instance.setForwardButtonClicked(false);
+		
 	}
 }
