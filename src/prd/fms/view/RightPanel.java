@@ -30,6 +30,44 @@ public class RightPanel extends JPanel{
 		
 	}
 	
+	public void showList(File[] files) {
+		if(files.length == 0 ) {
+			this.removeAll();
+			this.revalidate();
+			this.repaint();
+			return;
+		}
+		
+		this.removeAll();
+		
+		// create scroll pane to contain panel
+	    JScrollPane scrollPane = new JScrollPane(new FileListPanel(files));
+	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+		scrollPane.setBorder(null);
+		this.add(scrollPane,BorderLayout.CENTER);
+
+/*		
+		// create panel to contain all file panels
+	    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
+	    panel.setBackground(Color.WHITE);
+	    panel.setPreferredSize(computePreferredSize(files.length));
+	    
+	    for(File file : files) {
+	    	// create file panel
+	    	FilePanel fp = new FilePanel(file);
+	    	panel.add(fp);
+	    }
+	    
+	    // create scroll pane to contain panel
+	    JScrollPane scrollPane = new JScrollPane(panel);
+	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
+		scrollPane.setBorder(null);
+		this.add(scrollPane,BorderLayout.CENTER);
+*/		
+		this.revalidate();
+		this.repaint();
+	}
+	
 	/**
 	 * <p>Display all folders and files.</p>
 	 * @param files

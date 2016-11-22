@@ -151,6 +151,7 @@ public class TreeNodeModule {
 		String path = dirNode.getPath();
 		File[] files = TreeNodeModule.getAllNodes(path);
 				
-		RightPanel.instance.show(files);
+//		RightPanel.instance.show(files);
+		RightPanel.instance.showList(files);
 	}
 }
