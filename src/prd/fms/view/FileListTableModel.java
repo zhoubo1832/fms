@@ -19,11 +19,14 @@ public class FileListTableModel extends AbstractTableModel{
 	
 	private String[] columNames = {"Name","Update date","Size"};
 	
+	private File[] files;
+	
 	public FileListTableModel() {
 		
 	}
 	
 	public FileListTableModel(File[] files) {
+		this.files = files;
 		vecData = new Vector<FileListItem>();
 		for(File file : files) {
 			FileListItem item = new FileListItem();
@@ -140,4 +143,9 @@ public class FileListTableModel extends AbstractTableModel{
 			return "";
 		}
 	}
+
+	public File[] getFiles() {
+		return files;
+	}
+
 }

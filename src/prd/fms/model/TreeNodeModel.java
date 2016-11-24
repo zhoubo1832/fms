@@ -1,4 +1,4 @@
-package prd.fms.module;
+package prd.fms.model;
 
 import java.io.File;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -14,7 +14,7 @@ import prd.fms.view.RightPanel;
  * @author zhoubo
  * 
  */
-public class TreeNodeModule {
+public class TreeNodeModel {
 
 	/**
 	 * <p>Get the first level nodes.</p>
@@ -127,7 +127,7 @@ public class TreeNodeModule {
 				// remove dummy node
 				model.removeNodeFromParent(childNode);
 				// add all folder nodes
-				TreeNodeModule.getDirNodes(node);
+				TreeNodeModel.getDirNodes(node);
 			}
 		} else if(childCount > 1) {
 			return;
@@ -149,9 +149,9 @@ public class TreeNodeModule {
 			return;
 		}
 		String path = dirNode.getPath();
-		File[] files = TreeNodeModule.getAllNodes(path);
+		File[] files = TreeNodeModel.getAllNodes(path);
 				
-//		RightPanel.instance.show(files);
-		RightPanel.instance.showList(files);
+		RightPanel.instance.show(files);
+//		RightPanel.instance.showList(files);
 	}
 }

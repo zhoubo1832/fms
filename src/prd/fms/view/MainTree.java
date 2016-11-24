@@ -6,7 +6,7 @@ import javax.swing.tree.TreeSelectionModel;
 import prd.fms.controller.TreeNodeMouseController;
 import prd.fms.controller.TreeNodeSelectionController;
 import prd.fms.controller.TreeNodeWillExpandController;
-import prd.fms.module.TreeNodeModule;
+import prd.fms.model.TreeNodeModel;
 
 /**
  * <p>File tree used to show folders.</p>
@@ -27,7 +27,7 @@ public class MainTree extends JTree{
 	
 	public MainTree() {
 		// get and display the first level nodes for lazy load
-		super(TreeNodeModule.getRootNodes());
+		super(TreeNodeModel.getRootNodes());
 		
 		// do not display root node
 		this.setRootVisible(false);

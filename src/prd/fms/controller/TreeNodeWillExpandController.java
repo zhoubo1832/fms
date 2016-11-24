@@ -5,7 +5,7 @@ import javax.swing.event.TreeWillExpandListener;
 import javax.swing.tree.ExpandVetoException;
 import javax.swing.tree.TreePath;
 
-import prd.fms.module.TreeNodeModule;
+import prd.fms.model.TreeNodeModel;
 
 /**
  * <p>Tree node's expand listener.</p>
@@ -19,7 +19,7 @@ public class TreeNodeWillExpandController implements TreeWillExpandListener{
 	public void treeWillExpand(TreeExpansionEvent event) throws ExpandVetoException {
 		TreePath path = event.getPath();
 		// get and add children folder nodes for current tree node
-		TreeNodeModule.addChildrenDirNode(path);
+		TreeNodeModel.addChildrenDirNode(path);
 	}
 
 	@Override

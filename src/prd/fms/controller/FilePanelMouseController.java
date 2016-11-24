@@ -16,7 +16,8 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
-import prd.fms.module.TreeNodeModule;
+import prd.fms.model.FileNodeModel;
+import prd.fms.model.TreeNodeModel;
 import prd.fms.view.FilePanel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainTree;
@@ -37,39 +38,7 @@ public class FilePanelMouseController implements MouseListener{
 		if(n == 2){
 			FilePanel panel = (FilePanel)e.getSource();
 			File file = panel.getFile();
-			// folder was double clicked
-			if(file.isDirectory()) {
-				// display all folders and files in right panel
-//				File[] files = TreeNodeModule.getAllNodes(file.getPath());
-//				RightPanel rightPanel = RightPanel.instance;
-//				rightPanel.removeAll();
-//				rightPanel.show(files);
-				
-				// get and select current tree node
-				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) MainTree.instance.getSelectionPath().getLastPathComponent();
-				Enumeration enumeration = selectedNode.breadthFirstEnumeration();
-				while(enumeration.hasMoreElements()) {
-
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode)enumeration.nextElement(); 
-			        if(file.getPath().equals(((DirNode)node.getUserObject()).getPath())) {
-			        	
-			        	TreeNode[] nodes = ((DefaultTreeModel) MainTree.instance.getModel()).getPathToRoot(node);
-			        	TreePath treePath = new TreePath(nodes);
-			        	MainTree.instance.scrollPathToVisible(treePath);
-						MainTree.instance.setSelectionPath(treePath);
-			        } 
-			    } 
-				
-			} else {
-			// file was double clicked
-				Desktop desk = Desktop.getDesktop();
-				try {
-					// open file
-					desk.open(file);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
+			FileNodeModel.openFileNode(file);
 		} else {
 		// one click	
 			FilePanel panel = (FilePanel)e.getSource();

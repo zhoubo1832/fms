@@ -9,7 +9,7 @@ import javax.swing.tree.TreePath;
 
 import prd.fms.common.IPublisher;
 import prd.fms.common.ISubscriber;
-import prd.fms.module.TreeNodeModule;
+import prd.fms.model.TreeNodeModel;
 
 /**
  * <p>Tree node's selection listener.</p>
@@ -27,9 +27,9 @@ public class TreeNodeSelectionController implements TreeSelectionListener, IPubl
 	public void valueChanged(TreeSelectionEvent e) {
 		treePath = e.getPath();
 		// display all folders and files in right panel
-		TreeNodeModule.displayChildrenFiles(treePath);
+		TreeNodeModel.displayChildrenFiles(treePath);
 		// get and add children folder nodes for current tree node
-		TreeNodeModule.addChildrenDirNode(treePath);
+		TreeNodeModel.addChildrenDirNode(treePath);
 		// publish value changed message to all subscribers
 		send();
 	}
