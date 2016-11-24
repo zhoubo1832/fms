@@ -3,6 +3,7 @@ package prd.fms.view;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -10,25 +11,34 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.AbstractTableModel;
 
-public class FileListTableModel extends AbstractTableModel{
+import prd.fms.bean.FileListItem;
 
-	private File[] files;
+public class FileListTableModel extends AbstractTableModel{
+	
+	private Vector<FileListItem> vecData;
+	
+	private String[] columNames = {"Name","Update date","Size"};
 	
 	public FileListTableModel() {
 		
 	}
 	
 	public FileListTableModel(File[] files) {
-		this.files = files;
+		vecData = new Vector<FileListItem>();
+		for(File file : files) {
+			FileListItem item = new FileListItem();
+			item.setFileLabel(this.getFileLabel(file));
+			item.setFileUpdateDate(this.getFileUpdateDate(file));
+			item.setFileSize(this.getFileSize(file));
+			
+			this.vecData.add(item);
+		}
 	}
 	
-	public void setFiles(File[] files) {
-		this.files = files;
-	}
-
+	
 	@Override
 	public int getRowCount() {
-		return files.length;
+		return vecData.size();
 	}
 
 	@Override
@@ -37,23 +47,25 @@ public class FileListTableModel extends AbstractTableModel{
 	}
 
 	@Override
+	public String getColumnName(int column) {
+		return columNames[column];
+	}
+	
+	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		File file = files[rowIndex];
-		if(columnIndex == 0) {
-			JLabel label = new JLabel(file.getName());
-			label.setIcon(getSmallIcon(file));
-			return label;
-		} else if(columnIndex == 1) {
-			Date lastModified = new Date(file.lastModified());
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			return fmt.format(lastModified);
-		} else {
-			if(file.isFile()) {
-				return getSize(file.length());
+		Object obj = null;
+		try{
+			if(columnIndex == 0) {
+				obj = vecData.get(rowIndex).getFileLabel();
+			} else if(columnIndex == 1) {
+				obj = vecData.get(rowIndex).getFileUpdateDate();
 			} else {
-				return "";
+				obj = vecData.get(rowIndex).getFileSize();
 			}
+		} catch (ArrayIndexOutOfBoundsException  e) {
+			return obj;
 		}
+		return obj;
 	}
 
 	@Override
@@ -65,6 +77,23 @@ public class FileListTableModel extends AbstractTableModel{
 		}
 	}
 
+//	@Override
+//	public boolean isCellEditable(int rowIndex, int columnIndex) {
+//        return true;
+//    }
+	
+	@Override
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		FileListItem item = vecData.get(rowIndex);
+		if( columnIndex == 0) {
+			item.setFileLabel((JLabel)aValue);
+		} else if( columnIndex == 1 ) {
+			item.setFileUpdateDate((String)aValue);
+		} else {
+			item.setFileSize((String)aValue);
+		}
+    }
+	
 	private static Icon getSmallIcon(File f) {  
 	    if (f != null && f.exists()) {  
 	        FileSystemView fsv = FileSystemView.getFileSystemView();  
@@ -89,6 +118,26 @@ public class FileListTableModel extends AbstractTableModel{
 			return size/1024/1024/1024 + " GB";
 		} else {
 			return size + " byte";
+		}
+	}
+	
+	private JLabel getFileLabel(File file) {
+		JLabel label = new JLabel(file.getName());
+		label.setIcon(getSmallIcon(file));
+		return label;
+	}
+	
+	private String getFileUpdateDate(File file) {
+		Date lastModified = new Date(file.lastModified());
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		return fmt.format(lastModified);
+	}
+
+	private String getFileSize(File file) {
+		if(file.isFile()) {
+			return getSize(file.length());
+		} else {
+			return "";
 		}
 	}
 }

@@ -1,88 +1,65 @@
 package prd.fms.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.io.File;
-import java.util.EventObject;
-
-import javax.swing.CellEditor;
-import javax.swing.DefaultCellEditor;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.event.CellEditorListener;
-import javax.swing.table.TableCellEditor;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 
 public class FileListPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JTable fileTable;
 	
+	public static FileListPanel instance;
+	
 	public FileListPanel(File[] files) {
-		fileTable = new JTable();
-		fileTable.setModel(new FileListTableModel(files));
-		fileTable.setAutoscrolls(true);
-		MyCellEditor editor = new MyCellEditor();
-		fileTable.getColumnModel().getColumn(0).setCellEditor(editor);
+		instance = this;
+		fileTable = new JTable(new FileListTableModel(files));
 		fileTable.getColumnModel().getColumn(0).setCellRenderer(new TableCellRenderer() {
 			
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 					int row, int column) {
-				// TODO Auto-generated method stub
-				return (Component) value;
+				JLabel iconLabel = (JLabel)value;
+				
+				if(isSelected) {
+					iconLabel.setOpaque(true);
+					iconLabel.setBackground(fileTable.getSelectionBackground());
+				} else {
+						iconLabel.setOpaque(true);
+						iconLabel.setBackground(Color.white);
+				}
+				
+				return (Component) iconLabel;
 			}
 		});
 		
-		add(fileTable);
-	}
-}
+		fileTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 
-class MyCellEditor implements TableCellEditor{
-
-	@Override
-	public Object getCellEditorValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isCellEditable(EventObject anEvent) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean shouldSelectCell(EventObject anEvent) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean stopCellEditing() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void cancelCellEditing() {
-		// TODO Auto-generated method stub
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+//				System.out.println("First:" + e.getFirstIndex());
+//				System.out.println("Last:" + e.getLastIndex());
+//				
+//				int i = fileTable.getSelectedRow();
+//				JLabel iconLabel = (JLabel)fileTable.getValueAt(i, 0);
+//				iconLabel.setOpaque(true);
+//				iconLabel.setBackground(fileTable.getSelectionBackground());
+								
+			}});
 		
-	}
-
-	@Override
-	public void addCellEditorListener(CellEditorListener l) {
-		// TODO Auto-generated method stub
 		
+		setLayout(new BorderLayout());
+		add(fileTable.getTableHeader(),BorderLayout.PAGE_START);
+		add(fileTable,BorderLayout.CENTER);
 	}
-
-	@Override
-	public void removeCellEditorListener(CellEditorListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
