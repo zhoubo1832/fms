@@ -2,8 +2,11 @@ package prd.fms.view;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.tree.TreePath;
@@ -12,6 +15,8 @@ import prd.fms.common.Command;
 import prd.fms.common.CommandManager;
 import prd.fms.common.ISubscriber;
 import prd.fms.controller.BackForwardButtonController;
+import prd.fms.controller.ViewListItemController;
+import prd.fms.model.TreeNodeModel;
 
 /**
  * <p>Tool bar panel.</p>
@@ -32,6 +37,11 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JButton backButton;
 	private JButton forwardButton;
 	
+	private JComboBox<String> viewList;
+
+	private final String[] viewItems = {"Large Icons", "Details"};
+	
+	
 	private static boolean backButtonClicked = false;
 	private static boolean forwardButtonClicked = false;
 	
@@ -51,15 +61,21 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		backButton.setEnabled(false);
 		forwardButton.setEnabled(false);
 		
+		viewList = new JComboBox<String>(viewItems);
+		
 		// add back button
 		toolBar.add(backButton);
 		// add forward button
 		toolBar.add(forwardButton);
 		
+		toolBar.add(viewList);
+		
 		// add action listener for back button
 		backButton.addActionListener(controller);
 		// add action listener for forward button
 		forwardButton.addActionListener(controller);
+		
+		viewList.addItemListener(new ViewListItemController());
 		
 		// add tool bar
 		this.add(toolBar);
@@ -91,6 +107,10 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		ToolbarPanel.forwardButtonClicked = forwardButtonClicked;
 	}
 
+	public JComboBox<String> getViewList() {
+		return viewList;
+	}
+	
 	/**
 	 * <p>When selected tree node is changed, update tool panel and command manager.</p>
 	 * @param treePath  Tree path

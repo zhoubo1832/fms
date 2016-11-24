@@ -7,6 +7,7 @@ import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
 import prd.fms.view.RightPanel;
+import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>Tree node module.</p>
@@ -151,7 +152,11 @@ public class TreeNodeModel {
 		String path = dirNode.getPath();
 		File[] files = TreeNodeModel.getAllNodes(path);
 				
-		RightPanel.instance.show(files);
-//		RightPanel.instance.showList(files);
+		int index = ToolbarPanel.instance.getViewList().getSelectedIndex();
+		if(index == 0) {
+			RightPanel.instance.show(files);
+		} else {
+			RightPanel.instance.showList(files);
+		}
 	}
 }
