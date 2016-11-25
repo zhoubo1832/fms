@@ -43,4 +43,11 @@ public class FileNodeModel {
 			}
 		}
 	}
+	
+	public static void refresh() {
+		TreePath treePath = MainTree.instance.getSelectionPath();
+		if(treePath != null) {
+			TreeNodeModel.displayChildrenFiles(treePath);
+		}
+	}
 }

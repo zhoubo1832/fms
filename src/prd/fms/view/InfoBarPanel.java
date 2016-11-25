@@ -26,6 +26,7 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 	private static final String UPDATE_DATE = "       update date: ";
 	private static final String FILE_SIZE = "       size: ";
 	
+	public static String selectedPath;
 	/**
 	 * <p>InfoBarPanel object itself.</p>
 	 */
@@ -45,6 +46,7 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 	 * @param path  File path
 	 */
 	public void setNodeInfoLabel(String path) {
+		selectedPath = path;
 		if(path == null) {
 			infoLabel.setIcon(null);
 			infoLabel.setText(ViewConstants.INFO_LABEL_DEFAULT_TEXT);
@@ -63,6 +65,7 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 	 * @param path  File path
 	 */
 	public void setFileInfoLabel(String path) {
+		selectedPath = path;
 		if(path == null) {
 			infoLabel.setIcon(null);
 			infoLabel.setText(ViewConstants.INFO_LABEL_DEFAULT_TEXT);

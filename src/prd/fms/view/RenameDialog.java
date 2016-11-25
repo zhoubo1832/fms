@@ -13,7 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import prd.fms.controller.RenameDialogController;
+
 public class RenameDialog extends JDialog{
+	
+	private JTextField newNameTf = new JTextField(20);
+	
 	public RenameDialog(Frame parent, boolean modal) {
 		super(parent, modal);
 		this.setTitle(ViewConstants.RENAME_DIALOG_TITLE);
@@ -33,19 +38,29 @@ public class RenameDialog extends JDialog{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	public JTextField getNewNameTf() {
+		return newNameTf;
+	}
+	
 	private JPanel getTopPanel() {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panel.add(new JLabel(ViewConstants.RENAME_DIALOG_LABEL));
-		panel.add(new JTextField(20));
+		panel.add(newNameTf);
 		
+		//newNameTf.addInputMethodListener(InputMethodListener);
 		return panel;
 	}
 	
 	private JPanel getBottomPanel() {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panel.add(new JButton(ViewConstants.COMMON_BUTTON_OK));
-		panel.add(new JButton(ViewConstants.COMMON_BUTTON_CANCEL));
+		JButton okBtn = new JButton(ViewConstants.COMMON_BUTTON_OK);
+		JButton cancelBtn = new JButton(ViewConstants.COMMON_BUTTON_CANCEL);
+		panel.add(okBtn);
+		panel.add(cancelBtn);
 		
+		RenameDialogController ctl = new RenameDialogController(this);
+		okBtn.addActionListener(ctl);
+		cancelBtn.addActionListener(ctl);
 		return panel;
 	}
 }

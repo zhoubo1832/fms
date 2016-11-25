@@ -20,7 +20,8 @@ public class FileListTableModel extends AbstractTableModel{
 	private String[] columNames = {"Name","Update date","Size"};
 	
 	private File[] files;
-	
+
+
 	public FileListTableModel() {
 		
 	}

@@ -13,6 +13,12 @@ public class FileListPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private JTable fileTable;
+
+	public JTable getFileTable() {
+		return fileTable;
+	}
+
+	public static FileListPanel instance;
 	
 	public FileListPanel(File[] files) {
 		fileTable = new JTable(new FileListTableModel(files));
@@ -36,5 +42,6 @@ public class FileListPanel extends JPanel{
 		setLayout(new BorderLayout());
 		add(fileTable.getTableHeader(),BorderLayout.PAGE_START);
 		add(fileTable,BorderLayout.CENTER);
+		instance = this;
 	}
 }
