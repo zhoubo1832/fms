@@ -1,27 +1,11 @@
 package prd.fms.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Desktop;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.Enumeration;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-
-import prd.fms.bean.DirNode;
 import prd.fms.controller.FileTableMouseController;
 
 public class FileListPanel extends JPanel{
@@ -32,24 +16,7 @@ public class FileListPanel extends JPanel{
 	
 	public FileListPanel(File[] files) {
 		fileTable = new JTable(new FileListTableModel(files));
-		fileTable.getColumnModel().getColumn(0).setCellRenderer(new TableCellRenderer() {
-			
-			@Override
-			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-					int row, int column) {
-				JLabel iconLabel = (JLabel)value;
-				
-				if(isSelected) {
-					iconLabel.setOpaque(true);
-					iconLabel.setBackground(fileTable.getSelectionBackground());
-				} else {
-						iconLabel.setOpaque(true);
-						iconLabel.setBackground(Color.white);
-				}
-				
-				return (Component) iconLabel;
-			}
-		});
+		fileTable.getColumnModel().getColumn(0).setCellRenderer(new FileListTableRender(fileTable));
 		
 		fileTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 

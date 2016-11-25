@@ -14,7 +14,7 @@ import javax.swing.tree.TreePath;
 import prd.fms.common.Command;
 import prd.fms.common.CommandManager;
 import prd.fms.common.ISubscriber;
-import prd.fms.controller.BackForwardButtonController;
+import prd.fms.controller.ToolBarButtonController;
 import prd.fms.controller.ViewListItemController;
 import prd.fms.model.TreeNodeModel;
 
@@ -36,6 +36,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JToolBar toolBar;
 	private JButton backButton;
 	private JButton forwardButton;
+	private JButton renameButton;
 	
 	private JComboBox<String> viewList;
 
@@ -45,7 +46,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private static boolean backButtonClicked = false;
 	private static boolean forwardButtonClicked = false;
 	
-	private ActionListener controller = new BackForwardButtonController();
+	private ActionListener controller = new ToolBarButtonController();
 	
 	public ToolbarPanel() {
 		instance = this;
@@ -61,6 +62,8 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		backButton.setEnabled(false);
 		forwardButton.setEnabled(false);
 		
+		renameButton = new JButton(ViewConstants.TOOLBAR_RENAME_TEXT);
+		
 		viewList = new JComboBox<String>(viewItems);
 		
 		// add back button
@@ -68,13 +71,15 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		// add forward button
 		toolBar.add(forwardButton);
 		
+		toolBar.add(renameButton);
+		
 		toolBar.add(viewList);
 		
 		// add action listener for back button
 		backButton.addActionListener(controller);
 		// add action listener for forward button
 		forwardButton.addActionListener(controller);
-		
+		renameButton.addActionListener(controller);
 		viewList.addItemListener(new ViewListItemController());
 		
 		// add tool bar

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import prd.fms.common.CommandManager;
+import prd.fms.view.MainFrame;
+import prd.fms.view.RenameDialog;
 import prd.fms.view.ToolbarPanel;
 import prd.fms.view.ViewConstants;
 
@@ -15,7 +17,7 @@ import prd.fms.view.ViewConstants;
  * @author zhoubo
  * 
  */
-public class BackForwardButtonController implements ActionListener{
+public class ToolBarButtonController implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -34,6 +36,9 @@ public class BackForwardButtonController implements ActionListener{
 				ToolbarPanel.instance.setForwardButtonEnable(false);
 			}
 			ToolbarPanel.instance.setBackButtonEnable(true);
+		} else if(btn.getText().equals(ViewConstants.TOOLBAR_RENAME_TEXT)) {
+			RenameDialog frm = new RenameDialog(MainFrame.instance, true);
+			
 		}
 	}
 

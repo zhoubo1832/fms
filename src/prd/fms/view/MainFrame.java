@@ -14,7 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	public static MainFrame instance;
+	
 	public MainFrame() {
 		this.setContentPane(new MainPanel());
 		this.setTitle(ViewConstants.MAIN_FRAME_TITLE);
@@ -38,7 +40,7 @@ public class MainFrame extends JFrame{
 				}
 				
 				// create main frame
-				new MainFrame();
+				instance = new MainFrame();
 		}});
 	}
 }
