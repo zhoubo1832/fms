@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.TableRowSorter;
+
 import prd.fms.controller.FileTableMouseController;
 
 /**
@@ -27,7 +29,12 @@ public class FileListPanel extends JPanel{
 	public FileListPanel(File[] files) {
 		
 		// create file table using customized FileListTableModel
-		fileTable = new JTable(new FileListTableModel(files));
+		FileListTableModel model = new FileListTableModel(files);
+		fileTable = new JTable(model);
+		
+		SortedFileListTableModel sortedModel = new SortedFileListTableModel(model);
+		TableRowSorter<SortedFileListTableModel> sorter = new TableRowSorter<SortedFileListTableModel>(sortedModel);
+		fileTable.setRowSorter(sorter);
 		
 		// set cell renderer for first column
 		fileTable.getColumnModel().getColumn(0).setCellRenderer(new FileListTableRender(fileTable));
