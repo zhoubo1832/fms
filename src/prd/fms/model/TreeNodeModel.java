@@ -3,7 +3,6 @@ package prd.fms.model;
 import java.io.File;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
@@ -12,7 +11,7 @@ import prd.fms.view.RightPanel;
 import prd.fms.view.ToolbarPanel;
 
 /**
- * <p>Tree node module.</p>
+ * <p>Tree node model.</p>
  * 
  * @author zhoubo
  * 

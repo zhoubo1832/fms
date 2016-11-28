@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import prd.fms.controller.FileTableMouseController;
 
+/**
+ * <p>File list panel to display icon,file name,updated date and size.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FileListPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -21,24 +25,16 @@ public class FileListPanel extends JPanel{
 	public static FileListPanel instance;
 	
 	public FileListPanel(File[] files) {
+		
+		// create file table using customized FileListTableModel
 		fileTable = new JTable(new FileListTableModel(files));
+		
+		// set cell renderer for first column
 		fileTable.getColumnModel().getColumn(0).setCellRenderer(new FileListTableRender(fileTable));
 		
-		fileTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-//				System.out.println("First:" + e.getFirstIndex());
-//				System.out.println("Last:" + e.getLastIndex());
-//				
-//				int i = fileTable.getSelectedRow();
-//				JLabel iconLabel = (JLabel)fileTable.getValueAt(i, 0);
-//				iconLabel.setOpaque(true);
-//				iconLabel.setBackground(fileTable.getSelectionBackground());
-								
-			}});
-		
+		// add listener
 		fileTable.addMouseListener(new FileTableMouseController(this.fileTable));
+		
 		setLayout(new BorderLayout());
 		add(fileTable.getTableHeader(),BorderLayout.PAGE_START);
 		add(fileTable,BorderLayout.CENTER);

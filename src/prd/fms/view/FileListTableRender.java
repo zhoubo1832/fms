@@ -1,12 +1,17 @@
 package prd.fms.view;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+/**
+ * <p>File list table renderer.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FileListTableRender implements TableCellRenderer{
 	private JTable fileTable;
 	
@@ -24,7 +29,7 @@ public class FileListTableRender implements TableCellRenderer{
 			iconLabel.setBackground(fileTable.getSelectionBackground());
 		} else {
 				iconLabel.setOpaque(true);
-				iconLabel.setBackground(Color.white);
+				iconLabel.setBackground(fileTable.getBackground());
 		}
 		
 		return (Component) iconLabel;

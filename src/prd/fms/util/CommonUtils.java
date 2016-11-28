@@ -11,7 +11,7 @@ import prd.fms.bean.DirNode;
  * @author zhoubo
  * 
  */
-public class TreeUtil {
+public class CommonUtils {
 
 	/**
 	 * <p>Get file path string from treePath.</p>
@@ -29,5 +29,24 @@ public class TreeUtil {
 			return null;
 		}
 		return dirNode.getPath();
+	}
+	
+	/**
+	 * <p>Get size string.</p>
+	 * @param size  File size(byte)
+	 * @return size string(byte/KB/MB/GB)
+	 */
+	public static String getSize(long size) {
+		if(size < 1024) {
+			return size + " byte";
+		} else if(size < 1024*1024) {
+			return size/1024 + " KB";
+		} else if(size < 1024*1024*1024) {
+			return size/1024/1024 + " MB";
+		} else if(size < (1024l*1024l*1024l*1024l)) {
+			return size/1024/1024/1024 + " GB";
+		} else {
+			return size + " byte";
+		}
 	}
 }

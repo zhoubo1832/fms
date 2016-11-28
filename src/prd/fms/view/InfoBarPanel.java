@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.tree.TreePath;
 
 import prd.fms.common.ISubscriber;
-import prd.fms.util.TreeUtil;
+import prd.fms.util.CommonUtils;
 
 /**
  * <p>Information panel.</p>
@@ -77,30 +77,11 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 		Date lastModified = new Date(file.lastModified());
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		if(file.isFile()) {
-			infoLabel.setText(file.getName() + UPDATE_DATE + fmt.format(lastModified) + FILE_SIZE + getSize(file.length())) ;
+			infoLabel.setText(file.getName() + UPDATE_DATE + fmt.format(lastModified) + FILE_SIZE + CommonUtils.getSize(file.length())) ;
 		} else {
 			infoLabel.setText(file.getName() + UPDATE_DATE + fmt.format(lastModified));
 		}
 		
-	}
-	
-	/**
-	 * <p>Get size string.</p>
-	 * @param size  File size(byte)
-	 * @return size string(byte/KB/MB/GB)
-	 */
-	private String getSize(long size) {
-		if(size < 1024) {
-			return size + " byte";
-		} else if(size < 1024*1024) {
-			return size/1024 + " KB";
-		} else if(size < 1024*1024*1024) {
-			return size/1024/1024 + " MB";
-		} else if(size < (1024l*1024l*1024l*1024l)) {
-			return size/1024/1024/1024 + " GB";
-		} else {
-			return size + " byte";
-		}
 	}
 
 	/**
@@ -110,6 +91,6 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 	@Override
 	public void update(TreePath treePath) {
 		// display node's detailed information in information panel
-		InfoBarPanel.instance.setNodeInfoLabel(TreeUtil.getPath(treePath));
+		InfoBarPanel.instance.setNodeInfoLabel(CommonUtils.getPath(treePath));
 	}
 }

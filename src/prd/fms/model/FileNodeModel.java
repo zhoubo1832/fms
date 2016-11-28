@@ -13,7 +13,18 @@ import javax.swing.tree.TreePath;
 import prd.fms.bean.DirNode;
 import prd.fms.view.MainTree;
 
+/**
+ * <p>File node model.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FileNodeModel {
+	
+	/**
+	 * <p>Open folder or file.</p>
+	 * @param file  File/Folder
+	 */
 	public static void openFileNode(File file) {
 		// folder was double clicked
 		if(file.isDirectory()) {
@@ -44,6 +55,9 @@ public class FileNodeModel {
 		}
 	}
 	
+	/**
+	 * <p>Refresh right panel.</p>
+	 */
 	public static void refresh() {
 		TreePath treePath = MainTree.instance.getSelectionPath();
 		if(treePath != null) {

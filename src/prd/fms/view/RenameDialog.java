@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
 import java.io.File;
 
 import javax.swing.JButton;
@@ -15,13 +13,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import prd.fms.controller.RenameDialogController;
 
+/**
+ * <p>Rename dialog.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class RenameDialog extends JDialog{
 	
+	private static final long serialVersionUID = 1L;
+
 	private JTextField newNameTf;
 	
 	private JButton okBtn;
@@ -42,6 +45,7 @@ public class RenameDialog extends JDialog{
 		super(parent, modal);
 		this.setTitle(ViewConstants.RENAME_DIALOG_TITLE);
 		this.setSize(ViewConstants.RENAME_DIALOG_WIDTH, ViewConstants.RENAME_DIALOG_HEIGHT);
+		
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension dim = tk.getScreenSize();
 		int screenWidth = dim.width;
@@ -71,36 +75,10 @@ public class RenameDialog extends JDialog{
 		newNameTf = new JTextField(20);
 		oldText = (new File(InfoBarPanel.selectedPath)).getName();
 		newNameTf.setText(oldText);
-		newNameTf.getDocument().addDocumentListener(new DocumentListener(){
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				String newText = newNameTf.getText();
-				if(newText == null || newText.length() == 0 || oldText.equals(newText)) {
-					okBtn.setEnabled(false);
-				} else {
-					okBtn.setEnabled(true);
-				}
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				String newText = newNameTf.getText();
-				if(newText == null || newText.length() == 0 || oldText.equals(newText)) {
-					okBtn.setEnabled(false);
-				} else {
-					okBtn.setEnabled(true);
-				}
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				System.out.println("ccc	");
-			}});
+		newNameTf.getDocument().addDocumentListener(ctl);
 
 		panel.add(newNameTf);
 		
-		//newNameTf.addInputMethodListener(InputMethodListener);
 		return panel;
 	}
 	

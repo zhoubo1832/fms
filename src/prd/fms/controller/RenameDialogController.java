@@ -14,6 +14,12 @@ import prd.fms.view.InfoBarPanel;
 import prd.fms.view.RenameDialog;
 import prd.fms.view.ViewConstants;
 
+/**
+ * <p>Rename dialog's listener.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class RenameDialogController implements ActionListener, DocumentListener{
 	private RenameDialog dialog;
 	
@@ -28,14 +34,20 @@ public class RenameDialogController implements ActionListener, DocumentListener{
 			String path = InfoBarPanel.selectedPath;
 			String newName = dialog.getNewNameTf().getText();
 			
+			// rename file/folder
 			File oldFile = new File(path);
 			String tmpStr = path.substring(0, path.lastIndexOf("\\") + 1);
 			File newFile = new File(tmpStr + newName);
 			oldFile.renameTo(newFile);
 			dialog.dispose();
 			
+			// refresh right panel
 			FileNodeModel.refresh();
-			TreeNodeModel.refresh();
+			
+			// refresh tree node
+			if(newFile.isDirectory()) {
+				TreeNodeModel.refresh();
+			}
 			
 		} else if(btn.getText().equals(ViewConstants.COMMON_BUTTON_CANCEL) ) {
 			dialog.dispose();

@@ -2,9 +2,6 @@ package prd.fms.view;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -16,7 +13,6 @@ import prd.fms.common.CommandManager;
 import prd.fms.common.ISubscriber;
 import prd.fms.controller.ToolBarButtonController;
 import prd.fms.controller.ViewListItemController;
-import prd.fms.model.TreeNodeModel;
 
 /**
  * <p>Tool bar panel.</p>

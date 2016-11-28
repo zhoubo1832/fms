@@ -43,14 +43,6 @@ public class FilePanel extends JPanel{
         }  
         return null;  
     }  
-	
-//	 private static Icon getSmallIcon(File f) {  
-//	        if (f != null && f.exists()) {  
-//	            FileSystemView fsv = FileSystemView.getFileSystemView();  
-//	            return fsv.getSystemIcon(f);  
-//	        }  
-//	        return null;  
-//	 }  
 	 
 	public FilePanel(File file) {
 		super(new BorderLayout());

@@ -37,7 +37,7 @@ public class ToolBarButtonController implements ActionListener{
 			}
 			ToolbarPanel.instance.setBackButtonEnable(true);
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_RENAME_TEXT)) {
-			RenameDialog frm = new RenameDialog(MainFrame.instance, true);
+			new RenameDialog(MainFrame.instance, true);
 			
 		}
 	}

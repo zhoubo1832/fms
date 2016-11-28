@@ -1,28 +1,14 @@
 package prd.fms.controller;
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.Enumeration;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-
-import prd.fms.bean.DirNode;
 import prd.fms.model.FileNodeModel;
-import prd.fms.model.TreeNodeModel;
 import prd.fms.view.FilePanel;
 import prd.fms.view.InfoBarPanel;
-import prd.fms.view.MainTree;
-import prd.fms.view.RightPanel;
-import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>File panel's mouse listener.</p>

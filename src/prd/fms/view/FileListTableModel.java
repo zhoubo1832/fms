@@ -7,17 +7,25 @@ import java.util.Vector;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.AbstractTableModel;
 
 import prd.fms.bean.FileListItem;
+import prd.fms.util.CommonUtils;
 
+/**
+ * <p>File list table model.</p>
+ * 
+ * @author zhoubo
+ * 
+ */
 public class FileListTableModel extends AbstractTableModel{
 	
+	private static final long serialVersionUID = 1L;
+
 	private Vector<FileListItem> vecData;
 	
-	private String[] columNames = {"Name","Update date","Size"};
+	private final String[] columNames = {"Name","Update date","Size"};
 	
 	private File[] files;
 
@@ -47,7 +55,7 @@ public class FileListTableModel extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return 3;
+		return columNames.length;
 	}
 
 	@Override
@@ -80,11 +88,6 @@ public class FileListTableModel extends AbstractTableModel{
 			return Object.class;
 		}
 	}
-
-//	@Override
-//	public boolean isCellEditable(int rowIndex, int columnIndex) {
-//        return true;
-//    }
 	
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -106,25 +109,6 @@ public class FileListTableModel extends AbstractTableModel{
 	    return null;  
 	}
 	
-	/**
-	 * <p>Get size string.</p>
-	 * @param size  File size(byte)
-	 * @return size string(byte/KB/MB/GB)
-	 */
-	private String getSize(long size) {
-		if(size < 1024) {
-			return size + " byte";
-		} else if(size < 1024*1024) {
-			return size/1024 + " KB";
-		} else if(size < 1024*1024*1024) {
-			return size/1024/1024 + " MB";
-		} else if(size < (1024l*1024l*1024l*1024l)) {
-			return size/1024/1024/1024 + " GB";
-		} else {
-			return size + " byte";
-		}
-	}
-	
 	private JLabel getFileLabel(File file) {
 		JLabel label = new JLabel(file.getName());
 		label.setIcon(getSmallIcon(file));
@@ -139,7 +123,7 @@ public class FileListTableModel extends AbstractTableModel{
 
 	private String getFileSize(File file) {
 		if(file.isFile()) {
-			return getSize(file.length());
+			return CommonUtils.getSize(file.length());
 		} else {
 			return "";
 		}
