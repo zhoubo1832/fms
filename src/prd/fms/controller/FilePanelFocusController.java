@@ -7,6 +7,8 @@ import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import prd.fms.view.ToolbarPanel;
+
 /**
  * <p>File panel's focus listener.</p>
  * 
@@ -20,6 +22,7 @@ public class FilePanelFocusController implements FocusListener{
 		JPanel panel = (JPanel)e.getSource();
 		panel.setBackground(new Color(219,243,146));
 		panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		ToolbarPanel.instance.setRenameButtonEnabled(true);
 	}
 
 	@Override

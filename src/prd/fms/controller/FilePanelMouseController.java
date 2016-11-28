@@ -22,6 +22,7 @@ import prd.fms.view.FilePanel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainTree;
 import prd.fms.view.RightPanel;
+import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>File panel's mouse listener.</p>

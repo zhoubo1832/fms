@@ -8,6 +8,7 @@ import javax.swing.tree.TreePath;
 
 import prd.fms.util.TreeUtil;
 import prd.fms.view.InfoBarPanel;
+import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>Tree node's mouse listener.</p>
@@ -27,6 +28,7 @@ public class TreeNodeMouseController implements MouseListener{
 		String path = TreeUtil.getPath(tp);
 		// display node's detailed information in information panel
 		InfoBarPanel.instance.setNodeInfoLabel(path);
+		ToolbarPanel.instance.setRenameButtonEnabled(false);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import prd.fms.model.FileNodeModel;
 import prd.fms.view.FileListTableModel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainTree;
+import prd.fms.view.ToolbarPanel;
 
 public class FileTableMouseController  implements MouseListener{
 
@@ -35,11 +36,13 @@ public class FileTableMouseController  implements MouseListener{
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			File file = model.getFiles()[rowNum];
 			FileNodeModel.openFileNode(file);
+			ToolbarPanel.instance.setRenameButtonEnabled(false);
 		} else {
 			int rowNum = fileTable.getSelectedRow();
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			String path = (model.getFiles()[rowNum]).getPath();
 			InfoBarPanel.instance.setFileInfoLabel(path);
+			ToolbarPanel.instance.setRenameButtonEnabled(true);
 		}
 	}
 

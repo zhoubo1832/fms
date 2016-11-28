@@ -131,7 +131,7 @@ public class TreeNodeModel {
 				TreeNodeModel.getDirNodes(node);
 			}
 		} else if(childCount > 1) {
-			return;
+			
 		}
 	}
 	

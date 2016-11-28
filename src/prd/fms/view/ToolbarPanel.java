@@ -63,6 +63,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		forwardButton.setEnabled(false);
 		
 		renameButton = new JButton(ViewConstants.TOOLBAR_RENAME_TEXT);
+		renameButton.setEnabled(false);
 		
 		viewList = new JComboBox<String>(viewItems);
 		
@@ -114,6 +115,10 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 
 	public JComboBox<String> getViewList() {
 		return viewList;
+	}
+	
+	public void setRenameButtonEnabled(Boolean enabled) {
+		this.renameButton.setEnabled(enabled);
 	}
 	
 	/**
