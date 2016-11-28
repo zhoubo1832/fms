@@ -9,6 +9,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import prd.fms.model.FileNodeModel;
+import prd.fms.model.TreeNodeModel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.RenameDialog;
 import prd.fms.view.ViewConstants;
@@ -34,6 +35,7 @@ public class RenameDialogController implements ActionListener, DocumentListener{
 			dialog.dispose();
 			
 			FileNodeModel.refresh();
+			TreeNodeModel.refresh();
 			
 		} else if(btn.getText().equals(ViewConstants.COMMON_BUTTON_CANCEL) ) {
 			dialog.dispose();

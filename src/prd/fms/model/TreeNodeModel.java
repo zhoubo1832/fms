@@ -3,9 +3,11 @@ package prd.fms.model;
 import java.io.File;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
+import prd.fms.view.MainTree;
 import prd.fms.view.RightPanel;
 import prd.fms.view.ToolbarPanel;
 
@@ -133,6 +135,22 @@ public class TreeNodeModel {
 		} else if(childCount > 1) {
 			
 		}
+	}
+	
+	public static void refresh() {
+		TreePath path = MainTree.instance.getSelectionPath();
+		
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+		if(node == null) {
+			return;
+		}
+
+		// add all folder nodes
+		DefaultTreeModel model = (DefaultTreeModel)MainTree.instance.getModel();
+		node.removeAllChildren();
+		
+		TreeNodeModel.getDirNodes(node);
+		model.reload(node);
 	}
 	
 	/**
