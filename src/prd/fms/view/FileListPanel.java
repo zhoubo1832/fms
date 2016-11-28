@@ -43,7 +43,7 @@ public class FileListPanel extends JPanel{
 		fileTable.addMouseListener(new FileTableMouseController(this.fileTable));
 		
 		setLayout(new BorderLayout());
-		add(fileTable.getTableHeader(),BorderLayout.PAGE_START);
+		// add table body
 		add(fileTable,BorderLayout.CENTER);
 		instance = this;
 	}

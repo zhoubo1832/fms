@@ -40,8 +40,13 @@ public class RightPanel extends JPanel{
 		
 		this.removeAll();
 		
-		// create scroll pane to contain panel
-	    JScrollPane scrollPane = new JScrollPane(new FileListPanel(files));
+		// create file list panel
+		FileListPanel fileListPanel = new FileListPanel(files);
+		// add table header
+		this.add(fileListPanel.getFileTable().getTableHeader(), BorderLayout.NORTH);
+		
+		// create scroll pane to contain table body
+	    JScrollPane scrollPane = new JScrollPane(fileListPanel);
 	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 		scrollPane.setBorder(null);
 		this.add(scrollPane,BorderLayout.CENTER);
