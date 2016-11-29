@@ -1,5 +1,11 @@
 package prd.fms.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
@@ -49,4 +55,24 @@ public class CommonUtils {
 			return size + " byte";
 		}
 	}
+	
+	public static Icon getSmallIcon(File f) {  
+	    if (f != null && f.exists()) {  
+	        FileSystemView fsv = FileSystemView.getFileSystemView();  
+	        return fsv.getSystemIcon(f);  
+	    }  
+	    return null;  
+	}
+	
+	public static Icon getBigIcon(File f) {  
+        if (f!=null && f.exists()) {  
+            try {  
+                sun.awt.shell.ShellFolder sf = sun.awt.shell.ShellFolder.getShellFolder(f);  
+                return new ImageIcon(sf.getIcon(true));  
+            } catch (FileNotFoundException e) {  
+                e.printStackTrace();  
+            }  
+        }  
+        return null;  
+    }
 }

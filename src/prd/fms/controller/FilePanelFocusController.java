@@ -27,9 +27,13 @@ public class FilePanelFocusController implements FocusListener{
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		JPanel panel = (JPanel)e.getSource();
-		panel.setBorder(null);
-		panel.setBackground(null);
+		boolean flgControl = FilePanelKeyController.controlKeyPressed;
+		boolean flgShift = FilePanelKeyController.shiftKeyPressed;
+		if( !flgControl && !flgShift) {
+			JPanel panel = (JPanel)e.getSource();
+			panel.setBorder(null);
+			panel.setBackground(null);
+		}
 	}
 
 }

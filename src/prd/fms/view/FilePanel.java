@@ -3,6 +3,8 @@ package prd.fms.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -12,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import prd.fms.controller.FilePanelFocusController;
+import prd.fms.controller.FilePanelKeyController;
 import prd.fms.controller.FilePanelMouseController;
+import prd.fms.util.CommonUtils;
 
 /**
  * <p>File panel to display icon and file name.</p>
@@ -26,23 +30,12 @@ public class FilePanel extends JPanel{
 	
 	private static FilePanelMouseController filePanelMouseController = new FilePanelMouseController();
 	private static FilePanelFocusController filePanelFocusController = new FilePanelFocusController();
+	private static FilePanelKeyController filePanelKeyController = new FilePanelKeyController();
 	
 	/**
 	 * <p>File object.</p>
 	 */
-	private File file;
-	
-	public static Icon getBigIcon(File f) {  
-        if (f!=null && f.exists()) {  
-            try {  
-                sun.awt.shell.ShellFolder sf = sun.awt.shell.ShellFolder.getShellFolder(f);  
-                return new ImageIcon(sf.getIcon(true));  
-            } catch (FileNotFoundException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-        return null;  
-    }  
+	private File file;  
 	 
 	public FilePanel(File file) {
 		super(new BorderLayout());
@@ -51,7 +44,7 @@ public class FilePanel extends JPanel{
 		
 		// create icon label
 		JLabel iconLabel = new JLabel("",SwingConstants.CENTER);
-		iconLabel.setIcon(getBigIcon(file));
+		iconLabel.setIcon(CommonUtils.getBigIcon(file));
 		add(iconLabel,BorderLayout.NORTH);
 		
 		// create file name label
@@ -64,6 +57,8 @@ public class FilePanel extends JPanel{
 		addMouseListener(filePanelMouseController);
 		// add focus listener
 		addFocusListener(filePanelFocusController);
+		
+		addKeyListener(filePanelKeyController);
 
 	}
 

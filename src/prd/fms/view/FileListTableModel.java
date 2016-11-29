@@ -101,17 +101,9 @@ public class FileListTableModel extends AbstractTableModel{
 		}
     }
 	
-	private static Icon getSmallIcon(File f) {  
-	    if (f != null && f.exists()) {  
-	        FileSystemView fsv = FileSystemView.getFileSystemView();  
-	        return fsv.getSystemIcon(f);  
-	    }  
-	    return null;  
-	}
-	
 	private JLabel getFileLabel(File file) {
 		JLabel label = new JLabel(file.getName());
-		label.setIcon(getSmallIcon(file));
+		label.setIcon(CommonUtils.getSmallIcon(file));
 		return label;
 	}
 	

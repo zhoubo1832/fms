@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import prd.fms.model.FileNodeModel;
@@ -19,6 +21,8 @@ import prd.fms.view.ToolbarPanel;
  */
 public class FilePanelMouseController implements MouseListener{
 
+	private ArrayList<FilePanel> panelList = new ArrayList<FilePanel>();
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int n = e.getClickCount();
@@ -28,9 +32,19 @@ public class FilePanelMouseController implements MouseListener{
 			File file = panel.getFile();
 			FileNodeModel.openFileNode(file);
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
+			panelList.clear();
 		} else {
 		// one click	
 			FilePanel panel = (FilePanel)e.getSource();
+			boolean flgControl = FilePanelKeyController.controlKeyPressed;
+			if(!flgControl) {
+				for(FilePanel p : panelList) {
+					p.setBorder(null);
+					p.setBackground(null);
+				}
+				panelList.clear();
+			}
+			panelList.add(panel);
 			// request focus for file panel, and focusGained method will be called automatically
 			panel.requestFocus();
 			// display file detailed information in information panel

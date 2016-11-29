@@ -54,7 +54,7 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 		}
 		
 		File file = new File(path);
-		infoLabel.setIcon(FilePanel.getBigIcon(file));
+		infoLabel.setIcon(CommonUtils.getBigIcon(file));
 		
 		infoLabel.setText(String.valueOf(file.list().length) + ITEMS);
 		
@@ -73,7 +73,7 @@ public class InfoBarPanel extends JPanel implements ISubscriber{
 		}
 		
 		File file = new File(path);
-		infoLabel.setIcon(FilePanel.getBigIcon(file));
+		infoLabel.setIcon(CommonUtils.getBigIcon(file));
 		Date lastModified = new Date(file.lastModified());
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		if(file.isFile()) {
