@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import prd.fms.model.FileNodeModel;
 import prd.fms.view.FilePanel;
 import prd.fms.view.InfoBarPanel;
+import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>File panel's mouse listener.</p>
@@ -26,6 +27,7 @@ public class FilePanelMouseController implements MouseListener{
 			FilePanel panel = (FilePanel)e.getSource();
 			File file = panel.getFile();
 			FileNodeModel.openFileNode(file);
+			ToolbarPanel.instance.setRenameButtonEnabled(false);
 		} else {
 		// one click	
 			FilePanel panel = (FilePanel)e.getSource();
