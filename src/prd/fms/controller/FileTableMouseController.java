@@ -29,6 +29,7 @@ public class FileTableMouseController  implements MouseListener{
 		// double click
 		if( n == 2) {
 			int rowNum = fileTable.getSelectedRow();
+			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			File file = model.getFiles()[rowNum];
 			FileNodeModel.openFileNode(file);
@@ -36,6 +37,7 @@ public class FileTableMouseController  implements MouseListener{
 		} else {
 		// one click	
 			int rowNum = fileTable.getSelectedRow();
+			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			String path = (model.getFiles()[rowNum]).getPath();
 			InfoBarPanel.instance.setFileInfoLabel(path);

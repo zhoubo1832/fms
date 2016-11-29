@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import prd.fms.common.CommandManager;
 import prd.fms.view.MainFrame;
+import prd.fms.view.NewfolderDialog;
 import prd.fms.view.RenameDialog;
 import prd.fms.view.ToolbarPanel;
 import prd.fms.view.ViewConstants;
@@ -38,7 +39,8 @@ public class ToolBarButtonController implements ActionListener{
 			ToolbarPanel.instance.setBackButtonEnable(true);
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_RENAME_TEXT)) {
 			new RenameDialog(MainFrame.instance, true);
-			
+		} else if(btn.getText().equals(ViewConstants.TOOLBAR_NEWFOLDER_TEXT)) {
+			new NewfolderDialog(MainFrame.instance, true);
 		}
 	}
 

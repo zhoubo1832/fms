@@ -29,6 +29,8 @@ public class TreeNodeMouseController implements MouseListener{
 		// display node's detailed information in information panel
 		InfoBarPanel.instance.setNodeInfoLabel(path);
 		ToolbarPanel.instance.setRenameButtonEnabled(false);
+		ToolbarPanel.instance.setNewfolderButtonEnabled(true);
+		
 	}
 
 	@Override

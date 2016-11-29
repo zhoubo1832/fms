@@ -33,6 +33,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JButton backButton;
 	private JButton forwardButton;
 	private JButton renameButton;
+	private JButton newFolderButton;
 	
 	private JComboBox<String> viewList;
 
@@ -61,6 +62,9 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		renameButton = new JButton(ViewConstants.TOOLBAR_RENAME_TEXT);
 		renameButton.setEnabled(false);
 		
+		newFolderButton = new JButton(ViewConstants.TOOLBAR_NEWFOLDER_TEXT);
+		newFolderButton.setEnabled(false);
+		
 		viewList = new JComboBox<String>(viewItems);
 		
 		// add back button
@@ -69,6 +73,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		toolBar.add(forwardButton);
 		
 		toolBar.add(renameButton);
+		toolBar.add(newFolderButton);
 		
 		toolBar.add(viewList);
 		
@@ -77,6 +82,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		// add action listener for forward button
 		forwardButton.addActionListener(controller);
 		renameButton.addActionListener(controller);
+		newFolderButton.addActionListener(controller);
 		viewList.addItemListener(new ViewListItemController());
 		
 		// add tool bar
@@ -115,6 +121,10 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	
 	public void setRenameButtonEnabled(Boolean enabled) {
 		this.renameButton.setEnabled(enabled);
+	}
+	
+	public void setNewfolderButtonEnabled(Boolean enabled) {
+		this.newFolderButton.setEnabled(enabled);
 	}
 	
 	/**
