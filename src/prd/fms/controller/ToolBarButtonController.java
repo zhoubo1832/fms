@@ -2,10 +2,15 @@ package prd.fms.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JTable;
 
 import prd.fms.common.CommandManager;
+import prd.fms.view.FileListPanel;
+import prd.fms.view.FileListTableModel;
+import prd.fms.view.FilePanel;
 import prd.fms.view.MainFrame;
 import prd.fms.view.NewfolderDialog;
 import prd.fms.view.RenameDialog;
@@ -41,6 +46,25 @@ public class ToolBarButtonController implements ActionListener{
 			new RenameDialog(MainFrame.instance, true);
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_NEWFOLDER_TEXT)) {
 			new NewfolderDialog(MainFrame.instance, true);
+		} else if(btn.getText().equals(ViewConstants.TOOLBAR_COPY_TEXT)) {
+			int selectedIndex = ToolbarPanel.instance.getViewList().getSelectedIndex();
+			if(selectedIndex == 0) {
+				ArrayList<FilePanel> list = FilePanelMouseController.panelList;
+				for( FilePanel panel : list) {
+					System.out.println(panel.getFile().getPath());
+				}
+			} else {
+				JTable fileTable = FileListPanel.instance.getFileTable();
+				int[] selectedRows = fileTable.getSelectedRows();
+				
+				for(int rowNum : selectedRows) {
+					rowNum = fileTable.convertRowIndexToModel(rowNum);
+					FileListTableModel model = (FileListTableModel)fileTable.getModel();
+					String path = (model.getFiles()[rowNum]).getPath();
+					System.out.println("list:" + path);
+				}
+			}
+			
 		}
 	}
 

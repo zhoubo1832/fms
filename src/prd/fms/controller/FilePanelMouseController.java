@@ -21,7 +21,7 @@ import prd.fms.view.ToolbarPanel;
  */
 public class FilePanelMouseController implements MouseListener{
 
-	private ArrayList<FilePanel> panelList = new ArrayList<FilePanel>();
+	public static ArrayList<FilePanel> panelList = new ArrayList<FilePanel>();
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
