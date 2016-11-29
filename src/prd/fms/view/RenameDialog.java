@@ -27,6 +27,8 @@ public class RenameDialog extends JDialog{
 
 	private JTextField newNameTf;
 	
+	private JLabel msgLabel;
+
 	private JButton okBtn;
 	
 	public JButton getOkBtn() {
@@ -64,6 +66,10 @@ public class RenameDialog extends JDialog{
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
+	public JLabel getMsgLabel() {
+		return msgLabel;
+	}
+	
 	public JTextField getNewNameTf() {
 		return newNameTf;
 	}
@@ -84,10 +90,14 @@ public class RenameDialog extends JDialog{
 	
 	private JPanel getBottomPanel() {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
+		msgLabel = new JLabel();
+		
 		okBtn = new JButton(ViewConstants.COMMON_BUTTON_OK);
 		okBtn.setEnabled(false);
 		
 		JButton cancelBtn = new JButton(ViewConstants.COMMON_BUTTON_CANCEL);
+		panel.add(msgLabel);
 		panel.add(okBtn);
 		panel.add(cancelBtn);
 		

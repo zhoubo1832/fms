@@ -9,6 +9,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import prd.fms.model.FileNodeModel;
+import prd.fms.model.FileSystemModel;
 import prd.fms.model.TreeNodeModel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.RenameDialog;
@@ -34,18 +35,21 @@ public class RenameDialogController implements ActionListener, DocumentListener{
 			String path = InfoBarPanel.selectedPath;
 			String newName = dialog.getNewNameTf().getText();
 			
+			boolean isDir = new File(path).isDirectory();
 			// rename file/folder
-			File oldFile = new File(path);
-			String tmpStr = path.substring(0, path.lastIndexOf("\\") + 1);
-			File newFile = new File(tmpStr + newName);
-			oldFile.renameTo(newFile);
+			int retCode = FileSystemModel.rename(path, newName);
+			if(retCode == 1) {
+				dialog.getMsgLabel().setText(ViewConstants.RENAME_EXIST_MSG);
+				return;
+			}
+			
 			dialog.dispose();
 			
 			// refresh right panel
 			FileNodeModel.refresh();
 			
 			// refresh tree node
-			if(newFile.isDirectory()) {
+			if(isDir) {
 				TreeNodeModel.refresh();
 			}
 			
@@ -67,6 +71,7 @@ public class RenameDialogController implements ActionListener, DocumentListener{
 	}
 
 	private void setOkBtnEnable() {
+		dialog.getMsgLabel().setText("");
 		String newText = dialog.getNewNameTf().getText();
 		if(newText == null || newText.length() == 0 || dialog.getOldText().equals(newText)) {
 			dialog.getOkBtn().setEnabled(false);

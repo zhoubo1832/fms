@@ -11,9 +11,11 @@ public class ViewConstants {
 	public static final String MAIN_FRAME_TITLE = "File Manage System";
 	public static final String RENAME_DIALOG_TITLE = "Rename";
 	public static final String RENAME_DIALOG_LABEL = "New name:";
+	public static final String RENAME_EXIST_MSG = "Input file/folder has existed.";
 	public static final String NEWFOLDER_DIALOG_TITLE = "New folder";
 	public static final String NEWFOLDER_DIALOG_LABEL = "Folder name:";
 	public static final String NEWFOLDER_FOLDER_EXIST_MSG = "Input folder has existed.";
+	
 	
 	public static final String MAIN_TREE_ROOT_NODE = "Root";
 	public static final String MAIN_TREE_DUMMY_NODE = "Dummy";
