@@ -3,8 +3,6 @@ package prd.fms.controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -51,20 +49,19 @@ public class ToolBarButtonController implements ActionListener{
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_NEWFOLDER_TEXT)) {
 			new NewfolderDialog(MainFrame.instance, true);
 		} else if(btn.getText().equals(ViewConstants.TOOLBAR_COPY_TEXT)) {
+			SelectedFileList.getInstance().clear();
+			
 			int selectedIndex = ToolbarPanel.instance.getViewList().getSelectedIndex();
 			if(selectedIndex == 0) {
-//				ArrayList<FilePanel> list = SelectedFileList.getInstance().getPanelList();
 				JPanel panel = RightPanel.instance.getParentFilePanel();
 				
 				for( Component p : panel.getComponents()) {
 					FilePanel fPanel = (FilePanel) p;
 					if(fPanel.getBorder() != null) {
-						System.out.println(fPanel.getFile().getPath());
+						SelectedFileList.getInstance().addPath(fPanel.getFile().getPath());
 					}
-//					System.out.println(panel.getFile().getPath());
 				}
 			} else {
-				SelectedFileList.getInstance().clear();
 				JTable fileTable = FileListPanel.instance.getFileTable();
 				int[] selectedRows = fileTable.getSelectedRows();
 				

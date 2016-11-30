@@ -6,8 +6,6 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -34,7 +32,10 @@ public class FilePanelMouseController implements MouseListener{
 			FilePanel panel = (FilePanel)e.getSource();
 			File file = panel.getFile();
 			FileNodeModel.openFileNode(file);
+			
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
+			ToolbarPanel.instance.setCopyButtonEnabled(false);
+			
 			SelectedFileList.getInstance().clear();
 		} else {
 		// one click	
@@ -59,7 +60,10 @@ public class FilePanelMouseController implements MouseListener{
 			panel.requestFocus();
 			panel.setBackground(new Color(219,243,146));
 			panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+			
 			ToolbarPanel.instance.setRenameButtonEnabled(true);
+			ToolbarPanel.instance.setCopyButtonEnabled(true);
+			
 			// display file detailed information in information panel
 			InfoBarPanel.instance.setFileInfoLabel(panel.getFile().getPath());
 		}

@@ -1,14 +1,7 @@
 package prd.fms.controller;
 
-import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-import prd.fms.common.SelectedFileList;
-import prd.fms.view.ToolbarPanel;
 
 /**
  * <p>File panel's focus listener.</p>

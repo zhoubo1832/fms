@@ -67,6 +67,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		newFolderButton.setEnabled(false);
 		
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
+		copyButton.setEnabled(false);
 		
 		viewList = new JComboBox<String>(viewItems);
 		
@@ -131,6 +132,10 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		this.newFolderButton.setEnabled(enabled);
 	}
 	
+	public void setCopyButtonEnabled(Boolean enabled) {
+		this.copyButton.setEnabled(enabled);
+	}
+	
 	/**
 	 * <p>When selected tree node is changed, update tool panel and command manager.</p>
 	 * @param treePath  Tree path
@@ -149,6 +154,6 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 				
 		ToolbarPanel.instance.setBackButtonClicked(false);
 		ToolbarPanel.instance.setForwardButtonClicked(false);
-		
+		ToolbarPanel.instance.setCopyButtonEnabled(false);
 	}
 }

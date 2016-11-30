@@ -5,9 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-import javax.swing.Icon;
 import javax.swing.JLabel;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.AbstractTableModel;
 
 import prd.fms.bean.FileListItem;

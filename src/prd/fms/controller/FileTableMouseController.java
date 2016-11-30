@@ -34,6 +34,7 @@ public class FileTableMouseController  implements MouseListener{
 			File file = model.getFiles()[rowNum];
 			FileNodeModel.openFileNode(file);
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
+			ToolbarPanel.instance.setCopyButtonEnabled(false);
 		} else {
 		// one click	
 			int rowNum = fileTable.getSelectedRow();
@@ -42,6 +43,7 @@ public class FileTableMouseController  implements MouseListener{
 			String path = (model.getFiles()[rowNum]).getPath();
 			InfoBarPanel.instance.setFileInfoLabel(path);
 			ToolbarPanel.instance.setRenameButtonEnabled(true);
+			ToolbarPanel.instance.setCopyButtonEnabled(true);
 		}
 	}
 
