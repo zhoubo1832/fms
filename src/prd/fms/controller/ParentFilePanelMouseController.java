@@ -23,7 +23,6 @@ public class ParentFilePanelMouseController implements MouseListener{
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("parent panel click.");
 		JPanel panel = RightPanel.instance.getParentFilePanel();
 		
 		for( Component p : panel.getComponents()) {

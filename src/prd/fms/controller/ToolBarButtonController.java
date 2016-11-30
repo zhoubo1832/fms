@@ -3,16 +3,21 @@ package prd.fms.controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import prd.fms.common.CommandManager;
 import prd.fms.common.SelectedFileList;
+import prd.fms.model.FileSystemModel;
+import prd.fms.util.CommonUtils;
 import prd.fms.view.FileListPanel;
 import prd.fms.view.FileListTableModel;
 import prd.fms.view.FilePanel;
 import prd.fms.view.MainFrame;
+import prd.fms.view.MainTree;
 import prd.fms.view.NewfolderDialog;
 import prd.fms.view.RenameDialog;
 import prd.fms.view.RightPanel;
@@ -70,9 +75,16 @@ public class ToolBarButtonController implements ActionListener{
 					FileListTableModel model = (FileListTableModel)fileTable.getModel();
 					String path = (model.getFiles()[rowNum]).getPath();
 					SelectedFileList.getInstance().addPath(path);
-					System.out.println("list:" + path);
 				}
 			}
+			ToolbarPanel.instance.setPasteButtonEnabled(true);
+			
+		} else if(btn.getText().equals(ViewConstants.TOOLBAR_PASTE_TEXT)) {
+			String desPath = CommonUtils.getPath(MainTree.instance.getSelectionPath());
+			ArrayList<String> list = SelectedFileList.getInstance().getPathList();
+			String[] srcPathArray = new String[list.size()];
+			list.toArray(srcPathArray);
+			FileSystemModel.copyFiles(srcPathArray, desPath);
 			
 		}
 	}

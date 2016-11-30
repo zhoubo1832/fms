@@ -34,6 +34,7 @@ public class ViewConstants {
 	public static final String TOOLBAR_RENAME_TEXT = "Rename";
 	public static final String TOOLBAR_NEWFOLDER_TEXT = "New folder";
 	public static final String TOOLBAR_COPY_TEXT = "Copy";
+	public static final String TOOLBAR_PASTE_TEXT = "Paste";
 	
 	public static final String INFO_LABEL_DEFAULT_TEXT = " ";
 	public static final String COMMON_BUTTON_OK = "OK";

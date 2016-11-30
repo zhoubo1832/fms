@@ -37,7 +37,7 @@ public class FileSystemModel {
 	 */
 	public static int newFolder(String path, String newName) {
 		File file = new File(path + "\\" + newName);
-		if( file.exists() && file.isDirectory() ) {
+		if( file.exists() ) {
 			return 1;
 		}
 		
@@ -45,5 +45,45 @@ public class FileSystemModel {
 			return 0;
 		}
 		return -1;
+	}
+	
+	public static int copyFiles(String[] srcPathArray, String desPath) {
+		for(String file : srcPathArray) {
+			if(new File(file).isDirectory()) {
+				copyDir(file, desPath);
+			} else {
+				copyFile(file, desPath);
+			}
+		}
+		return -1;
+	}
+	
+	private static void copyDir(String srcPath, String desPath) {
+		int pos = srcPath.lastIndexOf("\\");
+		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
+		if(file.exists()) {
+			return;
+		}
+		
+		//file.mkdirs();
+		System.out.println("Copy folder:" + srcPath + " --> " + file.getPath());
+		
+		File[] files = new File(srcPath).listFiles();
+		for(File f : files) {
+			if(f.isDirectory()) {
+				copyDir(f.getPath(), file.getPath());
+			} else {
+				copyFile(f.getPath(), file.getPath());
+			}
+		}
+	}
+	
+	private static void copyFile(String srcPath, String desPath) {
+		int pos = srcPath.lastIndexOf("\\");
+		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
+		if(file.exists()) {
+			return;
+		}
+		System.out.println("Copy file:" + srcPath + " --> " + file.getPath());
 	}
 }

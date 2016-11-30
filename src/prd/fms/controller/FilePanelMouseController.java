@@ -36,7 +36,6 @@ public class FilePanelMouseController implements MouseListener{
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
 			ToolbarPanel.instance.setCopyButtonEnabled(false);
 			
-			SelectedFileList.getInstance().clear();
 		} else {
 		// one click	
 			FilePanel panel = (FilePanel)e.getSource();
@@ -49,13 +48,8 @@ public class FilePanelMouseController implements MouseListener{
 						p.setBackground(null);
 					}
 				}
-//				for(FilePanel p : SelectedFileList.getInstance().getPanelList()) {
-//					p.setBorder(null);
-//					p.setBackground(null);
-//				}
-//				SelectedFileList.getInstance().clear();
+
 			}
-//			SelectedFileList.getInstance().addPanel(panel);
 			// request focus for file panel, and focusGained method will be called automatically
 			panel.requestFocus();
 			panel.setBackground(new Color(219,243,146));
@@ -86,7 +80,7 @@ public class FilePanelMouseController implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 
 		JPanel panel = (JPanel)e.getSource();
-		if(!panel.isFocusOwner()) {
+		if(panel.getBorder() == null) {
 			panel.setBackground(new Color(232,255,232));
 			panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		}
@@ -95,7 +89,7 @@ public class FilePanelMouseController implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent e) {
 		JPanel panel = (JPanel)e.getSource();
-		if(!panel.isFocusOwner()) {
+		if(panel.getBackground().equals(new Color(232,255,232))) {
 			panel.setBorder(null);
 			panel.setBackground(null);
 		}
