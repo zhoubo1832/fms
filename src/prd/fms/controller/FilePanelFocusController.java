@@ -7,6 +7,7 @@ import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import prd.fms.common.SelectedFileList;
 import prd.fms.view.ToolbarPanel;
 
 /**
@@ -19,21 +20,21 @@ public class FilePanelFocusController implements FocusListener{
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		JPanel panel = (JPanel)e.getSource();
-		panel.setBackground(new Color(219,243,146));
-		panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
-		ToolbarPanel.instance.setRenameButtonEnabled(true);
+//		JPanel panel = (JPanel)e.getSource();
+//		panel.setBackground(new Color(219,243,146));
+//		panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+//		ToolbarPanel.instance.setRenameButtonEnabled(true);
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		boolean flgControl = FilePanelKeyController.controlKeyPressed;
-		boolean flgShift = FilePanelKeyController.shiftKeyPressed;
-		if( !flgControl && !flgShift) {
-			JPanel panel = (JPanel)e.getSource();
-			panel.setBorder(null);
-			panel.setBackground(null);
-		}
+//		boolean flgControl = FilePanelKeyController.controlKeyPressed;
+//		boolean flgShift = FilePanelKeyController.shiftKeyPressed;
+//		if( !flgControl && !flgShift) {
+//			JPanel panel = (JPanel)e.getSource();
+//			panel.setBorder(null);
+//			panel.setBackground(null);
+//		}
 	}
 
 }

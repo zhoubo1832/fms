@@ -18,6 +18,9 @@ public class RightPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
+	private JPanel parentFilePanel;
+
+
 	/**
 	 * <p>RightPanel object itself.</p>
 	 */
@@ -71,18 +74,18 @@ public class RightPanel extends JPanel{
 		this.removeAll();
 		
 		// create panel to contain all file panels
-	    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
-	    panel.setBackground(Color.WHITE);
-	    panel.setPreferredSize(computePreferredSize(files.length));
+	    parentFilePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
+	    parentFilePanel.setBackground(Color.WHITE);
+	    parentFilePanel.setPreferredSize(computePreferredSize(files.length));
 	    
 	    for(File file : files) {
 	    	// create file panel
 	    	FilePanel fp = new FilePanel(file);
-	    	panel.add(fp);
+	    	parentFilePanel.add(fp);
 	    }
 	    
 	    // create scroll pane to contain panel
-	    JScrollPane scrollPane = new JScrollPane(panel);
+	    JScrollPane scrollPane = new JScrollPane(parentFilePanel);
 	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 		scrollPane.setBorder(null);
 		this.add(scrollPane,BorderLayout.CENTER);
@@ -91,6 +94,10 @@ public class RightPanel extends JPanel{
 		this.repaint();
 	}
 
+	public JPanel getParentFilePanel() {
+		return parentFilePanel;
+	}
+	
 	/**
 	 * <p>Compute preferred size.</p>
 	 * @param fileNum  Number of files
