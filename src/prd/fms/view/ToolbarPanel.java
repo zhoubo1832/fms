@@ -11,9 +11,13 @@ import javax.swing.tree.TreePath;
 import prd.fms.common.Command;
 import prd.fms.common.CommandManager;
 import prd.fms.common.ISubscriber;
+import prd.fms.controller.BackExecutor;
+import prd.fms.controller.CopyExecutor;
+import prd.fms.controller.ForwardExecutor;
+import prd.fms.controller.NewfolderExecutor;
+import prd.fms.controller.PasteExecutor;
 import prd.fms.controller.RenameExecutor;
-import prd.fms.controller.ToolBarButtonController;
-import prd.fms.controller.ViewListItemController;
+import prd.fms.controller.ViewlistExecutor;
 
 /**
  * <p>Tool bar panel.</p>
@@ -34,7 +38,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JButton backButton;
 	private JButton forwardButton;
 	private JButton renameButton;
-	private JButton newFolderButton;
+	private JButton newfolderButton;
 	private JButton copyButton;
 	private JButton pasteButton;
 	
@@ -46,8 +50,12 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private static boolean backButtonClicked = false;
 	private static boolean forwardButtonClicked = false;
 	
-	private ActionListener controller = new ToolBarButtonController();
 	private ActionListener renameController = new RenameExecutor();
+	private ActionListener newfolderController = new NewfolderExecutor();
+	private ActionListener backController = new BackExecutor();
+	private ActionListener forwardController = new ForwardExecutor();
+	private ActionListener copyController = new CopyExecutor();
+	private ActionListener pasteController = new PasteExecutor();
 	
 	public ToolbarPanel() {
 		instance = this;
@@ -70,7 +78,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		// create forward button
 		forwardButton = new JButton(ViewConstants.TOOLBAR_FORWARD_TEXT);
 		renameButton = new JButton(ViewConstants.TOOLBAR_RENAME_TEXT);
-		newFolderButton = new JButton(ViewConstants.TOOLBAR_NEWFOLDER_TEXT);
+		newfolderButton = new JButton(ViewConstants.TOOLBAR_NEWFOLDER_TEXT);
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
 		viewList = new JComboBox<String>(viewItems);
@@ -81,7 +89,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		backButton.setEnabled(false);
 		forwardButton.setEnabled(false);
 		renameButton.setEnabled(false);
-		newFolderButton.setEnabled(false);
+		newfolderButton.setEnabled(false);
 		copyButton.setEnabled(false);
 		pasteButton.setEnabled(false);
 		
@@ -89,14 +97,14 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	
 	private void addListener() {
 		// add action listener for back button
-		backButton.addActionListener(controller);
+		backButton.addActionListener(backController);
 		// add action listener for forward button
-		forwardButton.addActionListener(controller);
+		forwardButton.addActionListener(forwardController);
 		renameButton.addActionListener(renameController);
-		newFolderButton.addActionListener(controller);
-		copyButton.addActionListener(controller);
-		pasteButton.addActionListener(controller);
-		viewList.addItemListener(new ViewListItemController());
+		newfolderButton.addActionListener(newfolderController);
+		copyButton.addActionListener(copyController);
+		pasteButton.addActionListener(pasteController);
+		viewList.addItemListener(new ViewlistExecutor());
 	}
 	
 	private void addWidget() {
@@ -106,7 +114,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		toolBar.add(forwardButton);
 		
 		toolBar.add(renameButton);
-		toolBar.add(newFolderButton);
+		toolBar.add(newfolderButton);
 		toolBar.add(copyButton);
 		toolBar.add(pasteButton);
 		toolBar.add(viewList);
@@ -147,7 +155,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	}
 	
 	public void setNewfolderButtonEnabled(Boolean enabled) {
-		this.newFolderButton.setEnabled(enabled);
+		this.newfolderButton.setEnabled(enabled);
 	}
 	
 	public void setCopyButtonEnabled(Boolean enabled) {
