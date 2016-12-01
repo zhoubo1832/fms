@@ -29,6 +29,9 @@ public class ViewConstants {
 	public static final int RENAME_DIALOG_WIDTH = 400;
 	public static final int RENAME_DIALOG_HEIGHT = 100;
 	
+	public static final int NEWFOLDER_DIALOG_WIDTH = 400;
+	public static final int NEWFOLDER_DIALOG_HEIGHT = 100;
+	
 	public static final int PASTE_DIALOG_WIDTH = 400;
 	public static final int PASTE_DIALOG_HEIGHT = 150;
 	
@@ -43,8 +46,8 @@ public class ViewConstants {
 	public static final String COMMON_BUTTON_OK = "OK";
 	public static final String COMMON_BUTTON_CANCEL = "Cancel";
 	
-	public static final String COMMON_ALERT_DIALOG_TITLE = "Information";
-	public static final String COMMON_ALERT_MESSAGE_01 = "Same name's folder has existed.";
-	public static final String COMMON_ALERT_MESSAGE_02 = "Same name's file has existed.";
+	public static final String PASTE_ALERT_DIALOG_TITLE = "Information";
+	public static final String PASTE_ALERT_MESSAGE_01 = "Same name's folder has existed.";
+	public static final String PASTE_ALERT_MESSAGE_02 = "Same name's file has existed.";
 	
 }

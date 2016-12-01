@@ -35,7 +35,7 @@ public class NewfolderDialog extends JDialog {
 	public NewfolderDialog(Frame parent, boolean modal) {
 		super(parent, modal);
 		this.setTitle(ViewConstants.NEWFOLDER_DIALOG_TITLE);
-		this.setSize(ViewConstants.RENAME_DIALOG_WIDTH, ViewConstants.RENAME_DIALOG_HEIGHT);
+		this.setSize(ViewConstants.NEWFOLDER_DIALOG_WIDTH, ViewConstants.NEWFOLDER_DIALOG_HEIGHT);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension dim = tk.getScreenSize();

@@ -14,7 +14,7 @@ import prd.fms.common.CommandManager;
 import prd.fms.common.SelectedFileList;
 import prd.fms.model.FileSystemModel;
 import prd.fms.util.CommonUtils;
-import prd.fms.view.AlertDialog;
+import prd.fms.view.PasteAlertDialog;
 import prd.fms.view.FileListPanel;
 import prd.fms.view.FileListTableModel;
 import prd.fms.view.FilePanel;
@@ -93,14 +93,13 @@ public class ToolBarButtonController implements ActionListener{
 					File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
 					if(fileDest.exists()) {
 						if(fileDest.isDirectory()) {
-							new AlertDialog(MainFrame.instance, true, ViewConstants.COMMON_ALERT_MESSAGE_01, file);
+							new PasteAlertDialog(MainFrame.instance, true, ViewConstants.PASTE_ALERT_MESSAGE_01, file);
 						} else {
-							new AlertDialog(MainFrame.instance, true, ViewConstants.COMMON_ALERT_MESSAGE_02, file);
+							new PasteAlertDialog(MainFrame.instance, true, ViewConstants.PASTE_ALERT_MESSAGE_02, file);
 						}
-						return;
+					} else {
+						FileSystemModel.copyDir(file, desPath);
 					}
-					
-					FileSystemModel.copyDir(file, desPath);
 				} else {
 					File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
 					if(fileDest.exists()) {

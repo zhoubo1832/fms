@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * <p>Alert dialog.</p>
+ * <p>Paste alert dialog.</p>
  * 
  * @author zhoubo
  * 
  */
-public class AlertDialog extends JDialog{
+public class PasteAlertDialog extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,8 +30,8 @@ public class AlertDialog extends JDialog{
 
 	private JButton okBtn;
 	
-	public AlertDialog(Frame parent, boolean modal, String msg, String file) {
-		this.setTitle(ViewConstants.COMMON_ALERT_DIALOG_TITLE);
+	public PasteAlertDialog(Frame parent, boolean modal, String msg, String file) {
+		this.setTitle(ViewConstants.PASTE_ALERT_DIALOG_TITLE);
 		this.setSize(ViewConstants.PASTE_DIALOG_WIDTH, ViewConstants.PASTE_DIALOG_HEIGHT);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
