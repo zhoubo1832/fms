@@ -51,30 +51,53 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		instance = this;
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
+		this.createWidget();
+		this.setEnable();
+		this.addListener();
+		this.addWidget();
+		
+		// subscribe tree node selection change event
+		MainTree.instance.getTreeNodeSelectionController().add(this);
+	}
+	
+	private void createWidget() {
 		// create tool bar
 		toolBar = new JToolBar();
 		// create back button
 		backButton = new JButton(ViewConstants.TOOLBAR_BACK_TEXT);
 		// create forward button
 		forwardButton = new JButton(ViewConstants.TOOLBAR_FORWARD_TEXT);
-		
-		backButton.setEnabled(false);
-		forwardButton.setEnabled(false);
-		
 		renameButton = new JButton(ViewConstants.TOOLBAR_RENAME_TEXT);
-		renameButton.setEnabled(false);
-		
 		newFolderButton = new JButton(ViewConstants.TOOLBAR_NEWFOLDER_TEXT);
-		newFolderButton.setEnabled(false);
-		
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
-		copyButton.setEnabled(false);
-		
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
-		pasteButton.setEnabled(false);
-		
 		viewList = new JComboBox<String>(viewItems);
 		
+	}
+	
+	private void setEnable() {
+		backButton.setEnabled(false);
+		forwardButton.setEnabled(false);
+		renameButton.setEnabled(false);
+		newFolderButton.setEnabled(false);
+		copyButton.setEnabled(false);
+		pasteButton.setEnabled(false);
+		
+	}
+	
+	private void addListener() {
+		// add action listener for back button
+		backButton.addActionListener(controller);
+		// add action listener for forward button
+		forwardButton.addActionListener(controller);
+		renameButton.addActionListener(controller);
+		newFolderButton.addActionListener(controller);
+		copyButton.addActionListener(controller);
+		pasteButton.addActionListener(controller);
+		viewList.addItemListener(new ViewListItemController());
+	}
+	
+	private void addWidget() {
 		// add back button
 		toolBar.add(backButton);
 		// add forward button
@@ -85,21 +108,8 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		toolBar.add(copyButton);
 		toolBar.add(pasteButton);
 		toolBar.add(viewList);
-		
-		// add action listener for back button
-		backButton.addActionListener(controller);
-		// add action listener for forward button
-		forwardButton.addActionListener(controller);
-		renameButton.addActionListener(controller);
-		newFolderButton.addActionListener(controller);
-		copyButton.addActionListener(controller);
-		pasteButton.addActionListener(controller);
-		viewList.addItemListener(new ViewListItemController());
-		
 		// add tool bar
 		this.add(toolBar);
-		// subscribe tree node selection change event
-		MainTree.instance.getTreeNodeSelectionController().add(this);
 	}
 	
 	public void setBackButtonEnable(boolean status) {
