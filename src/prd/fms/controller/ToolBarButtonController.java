@@ -3,6 +3,7 @@ package prd.fms.controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import prd.fms.common.CommandManager;
 import prd.fms.common.SelectedFileList;
 import prd.fms.model.FileSystemModel;
 import prd.fms.util.CommonUtils;
+import prd.fms.view.AlertDialog;
 import prd.fms.view.FileListPanel;
 import prd.fms.view.FileListTableModel;
 import prd.fms.view.FilePanel;
@@ -84,7 +86,29 @@ public class ToolBarButtonController implements ActionListener{
 			ArrayList<String> list = SelectedFileList.getInstance().getPathList();
 			String[] srcPathArray = new String[list.size()];
 			list.toArray(srcPathArray);
-			FileSystemModel.copyFiles(srcPathArray, desPath);
+//			FileSystemModel.copyFiles(srcPathArray, desPath);
+			
+			for(String file : srcPathArray) {
+				if(new File(file).isDirectory()) {
+					File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
+					if(fileDest.exists()) {
+						if(fileDest.isDirectory()) {
+							new AlertDialog(MainFrame.instance, true, ViewConstants.COMMON_ALERT_MESSAGE_01, file);
+						} else {
+							new AlertDialog(MainFrame.instance, true, ViewConstants.COMMON_ALERT_MESSAGE_02, file);
+						}
+						return;
+					}
+					
+					FileSystemModel.copyDir(file, desPath);
+				} else {
+					File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
+					if(fileDest.exists()) {
+						return;
+					}
+					FileSystemModel.copyFile(file, desPath);
+				}
+			}
 			
 		}
 	}

@@ -58,14 +58,14 @@ public class FileSystemModel {
 		return -1;
 	}
 	
-	private static void copyDir(String srcPath, String desPath) {
+	public static void copyDir(String srcPath, String desPath) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
-		if(file.exists()) {
-			return;
-		}
+//		if(file.exists()) {
+//			return;
+//		}
 		
-		//file.mkdirs();
+//		file.mkdirs();
 		System.out.println("Copy folder:" + srcPath + " --> " + file.getPath());
 		
 		File[] files = new File(srcPath).listFiles();
@@ -78,12 +78,17 @@ public class FileSystemModel {
 		}
 	}
 	
-	private static void copyFile(String srcPath, String desPath) {
+	public static void copyFile(String srcPath, String desPath) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
-		if(file.exists()) {
-			return;
-		}
+//		if(file.exists()) {
+//			return;
+//		}
 		System.out.println("Copy file:" + srcPath + " --> " + file.getPath());
+	}
+	
+	public static String getDestPath(String file, String desPath) {
+		int pos = file.lastIndexOf("\\");
+		return desPath + "\\" + file.substring(pos+1);
 	}
 }
