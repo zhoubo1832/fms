@@ -11,6 +11,7 @@ import javax.swing.tree.TreePath;
 import prd.fms.common.Command;
 import prd.fms.common.CommandManager;
 import prd.fms.common.ISubscriber;
+import prd.fms.controller.RenameExecutor;
 import prd.fms.controller.ToolBarButtonController;
 import prd.fms.controller.ViewListItemController;
 
@@ -46,6 +47,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private static boolean forwardButtonClicked = false;
 	
 	private ActionListener controller = new ToolBarButtonController();
+	private ActionListener renameController = new RenameExecutor();
 	
 	public ToolbarPanel() {
 		instance = this;
@@ -90,7 +92,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		backButton.addActionListener(controller);
 		// add action listener for forward button
 		forwardButton.addActionListener(controller);
-		renameButton.addActionListener(controller);
+		renameButton.addActionListener(renameController);
 		newFolderButton.addActionListener(controller);
 		copyButton.addActionListener(controller);
 		pasteButton.addActionListener(controller);
