@@ -1,20 +1,14 @@
 package prd.fms.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.LayoutManager;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  * <p>Paste alert dialog.</p>
@@ -22,7 +16,7 @@ import javax.swing.JTextField;
  * @author zhoubo
  * 
  */
-public class PasteAlertDialog extends JDialog{
+public class PasteAlertDialog extends CommonDialog{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,15 +24,26 @@ public class PasteAlertDialog extends JDialog{
 
 	private JButton okBtn;
 	
-	public PasteAlertDialog(Frame parent, boolean modal, String msg, String file) {
-		this.setTitle(ViewConstants.PASTE_ALERT_DIALOG_TITLE);
-		this.setSize(ViewConstants.PASTE_DIALOG_WIDTH, ViewConstants.PASTE_DIALOG_HEIGHT);
+	private static String msg;
+	
+	public static void setMsg(String msg) {
+		PasteAlertDialog.msg = msg;
+	}
+
+	private static String fileName;
+	
+	public static void setFileName(String fileName) {
+		PasteAlertDialog.fileName = fileName;
+	}
+
+	public PasteAlertDialog(Frame parent, boolean modal) {
+		super(parent, ViewConstants.PASTE_ALERT_DIALOG_TITLE, modal);
 		
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dim = tk.getScreenSize();
-		int screenWidth = dim.width;
-		int screenHeight = dim.height;
-		this.setLocation(screenWidth/2 - this.getWidth()/2, screenHeight/2 - this.getHeight()/2);
+	}
+
+	@Override
+	protected void setUI() {
+		this.setSize(ViewConstants.PASTE_DIALOG_WIDTH, ViewConstants.PASTE_DIALOG_HEIGHT);
 		
 		this.setLayout(new BorderLayout());
 		
@@ -46,7 +51,7 @@ public class PasteAlertDialog extends JDialog{
 		JPanel msgPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		msgPanel.add(msgLabel);
 		
-		JLabel fileLabel = new JLabel(file);
+		JLabel fileLabel = new JLabel(fileName);
 		JPanel filePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		filePanel.add(fileLabel);
 		
@@ -66,11 +71,5 @@ public class PasteAlertDialog extends JDialog{
 		add(msgPanel, BorderLayout.NORTH);
 		add(filePanel, BorderLayout.CENTER);
 		add(okPanel, BorderLayout.SOUTH);
-		
-		this.setAlwaysOnTop(true);
-		this.requestFocus();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
 	}
 }

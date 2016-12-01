@@ -93,9 +93,13 @@ public class ToolBarButtonController implements ActionListener{
 					File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
 					if(fileDest.exists()) {
 						if(fileDest.isDirectory()) {
-							new PasteAlertDialog(MainFrame.instance, true, ViewConstants.PASTE_ALERT_MESSAGE_01, file);
+							PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_01);
+							PasteAlertDialog.setFileName(file);
+							new PasteAlertDialog(MainFrame.instance, true);
 						} else {
-							new PasteAlertDialog(MainFrame.instance, true, ViewConstants.PASTE_ALERT_MESSAGE_02, file);
+							PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_02);
+							PasteAlertDialog.setFileName(file);
+							new PasteAlertDialog(MainFrame.instance, true);
 						}
 					} else {
 						FileSystemModel.copyDir(file, desPath);

@@ -20,7 +20,7 @@ import prd.fms.controller.NewfolderDialogController;
  * @author zhoubo
  * 
  */
-public class NewfolderDialog extends JDialog {
+public class NewfolderDialog extends CommonDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,26 +33,8 @@ public class NewfolderDialog extends JDialog {
 	private NewfolderDialogController ctl;
 	
 	public NewfolderDialog(Frame parent, boolean modal) {
-		super(parent, modal);
-		this.setTitle(ViewConstants.NEWFOLDER_DIALOG_TITLE);
-		this.setSize(ViewConstants.NEWFOLDER_DIALOG_WIDTH, ViewConstants.NEWFOLDER_DIALOG_HEIGHT);
+		super(parent, ViewConstants.NEWFOLDER_DIALOG_TITLE, modal);
 		
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dim = tk.getScreenSize();
-		int screenWidth = dim.width;
-		int screenHeight = dim.height;
-		this.setLocation(screenWidth/2 - this.getWidth()/2, screenHeight/2 - this.getHeight()/2);
-		
-		this.setLayout(new BorderLayout());
-		
-		ctl = new NewfolderDialogController(this);
-		
-		this.add(getTopPanel(), BorderLayout.NORTH);
-		this.add(getBottomPanel(), BorderLayout.SOUTH);
-		this.setAlwaysOnTop(true);
-		this.requestFocus();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	public JTextField getNewNameTf() {
@@ -97,5 +79,19 @@ public class NewfolderDialog extends JDialog {
 		okBtn.addActionListener(ctl);
 		cancelBtn.addActionListener(ctl);
 		return panel;
+	}
+
+	@Override
+	protected void setUI() {
+		this.setSize(ViewConstants.NEWFOLDER_DIALOG_WIDTH, ViewConstants.NEWFOLDER_DIALOG_HEIGHT);
+		
+//		this.setScreenCenter();
+		
+		this.setLayout(new BorderLayout());
+		
+		ctl = new NewfolderDialogController(this);
+		
+		this.add(getTopPanel(), BorderLayout.NORTH);
+		this.add(getBottomPanel(), BorderLayout.SOUTH);		
 	}
 }

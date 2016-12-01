@@ -1,15 +1,11 @@
 package prd.fms.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Toolkit;
 import java.io.File;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,7 +17,7 @@ import prd.fms.controller.RenameDialogController;
  * @author zhoubo
  * 
  */
-public class RenameDialog extends JDialog{
+public class RenameDialog extends CommonDialog{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -44,26 +40,8 @@ public class RenameDialog extends JDialog{
 	private RenameDialogController ctl;
 	
 	public RenameDialog(Frame parent, boolean modal) {
-		super(parent, modal);
-		this.setTitle(ViewConstants.RENAME_DIALOG_TITLE);
-		this.setSize(ViewConstants.RENAME_DIALOG_WIDTH, ViewConstants.RENAME_DIALOG_HEIGHT);
+		super(parent, ViewConstants.RENAME_DIALOG_TITLE, modal);
 		
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dim = tk.getScreenSize();
-		int screenWidth = dim.width;
-		int screenHeight = dim.height;
-		this.setLocation(screenWidth/2 - this.getWidth()/2, screenHeight/2 - this.getHeight()/2);
-		
-		this.setLayout(new BorderLayout());
-		
-		ctl = new RenameDialogController(this);
-		
-		this.add(getTopPanel(), BorderLayout.NORTH);
-		this.add(getBottomPanel(), BorderLayout.SOUTH);
-		this.setAlwaysOnTop(true);
-		this.requestFocus();
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	public JLabel getMsgLabel() {
@@ -104,5 +82,19 @@ public class RenameDialog extends JDialog{
 		okBtn.addActionListener(ctl);
 		cancelBtn.addActionListener(ctl);
 		return panel;
+	}
+
+	@Override
+	protected void setUI() {
+		this.setSize(ViewConstants.RENAME_DIALOG_WIDTH, ViewConstants.RENAME_DIALOG_HEIGHT);
+		
+//		this.setScreenCenter();
+		
+		this.setLayout(new BorderLayout());
+		
+		ctl = new RenameDialogController(this);
+		
+		this.add(getTopPanel(), BorderLayout.NORTH);
+		this.add(getBottomPanel(), BorderLayout.SOUTH);		
 	}
 }
