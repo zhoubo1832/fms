@@ -1,25 +1,26 @@
-package prd.fms.controller;
+package prd.fms.executor;
 
 import javax.swing.event.DocumentEvent;
 
-import prd.fms.view.NewfolderDialog;
+import prd.fms.controller.BaseDocumentListener;
+import prd.fms.view.RenameDialog;
 
-public class NewfolderDialogDocumentExecutor extends BaseDocumentListener{
+public class RenameDialogDocumentExecutor extends BaseDocumentListener{
 
-	private NewfolderDialog dialog;
+	private RenameDialog dialog;
 	
-	public NewfolderDialogDocumentExecutor(NewfolderDialog dialog) {
+	public RenameDialogDocumentExecutor(RenameDialog dialog) {
 		this.dialog = dialog;
 	}
 	
 	@Override
 	protected void executeInsert(DocumentEvent e) {
-		setOkBtnEnable();			
+		setOkBtnEnable();		
 	}
 
 	@Override
 	protected void executeRemove(DocumentEvent e) {
-		setOkBtnEnable();			
+		setOkBtnEnable();		
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class NewfolderDialogDocumentExecutor extends BaseDocumentListener{
 	private void setOkBtnEnable() {
 		dialog.getMsgLabel().setText("");
 		String newText = dialog.getNewNameTf().getText();
-		if(newText == null || newText.length() == 0) {
+		if(newText == null || newText.length() == 0 || dialog.getOldText().equals(newText)) {
 			dialog.getOkBtn().setEnabled(false);
 		} else {
 			dialog.getOkBtn().setEnabled(true);

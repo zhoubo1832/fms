@@ -1,11 +1,10 @@
-package prd.fms.controller;
+package prd.fms.executor;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
+import javax.swing.JButton;
+
+import prd.fms.controller.BaseActionListener;
 import prd.fms.model.FileNodeModel;
 import prd.fms.model.FileSystemModel;
 import prd.fms.model.TreeNodeModel;
@@ -14,32 +13,16 @@ import prd.fms.view.MainTree;
 import prd.fms.view.NewfolderDialog;
 import prd.fms.view.ViewConstants;
 
-public class NewfolderDialogController implements ActionListener, DocumentListener{
-
+public class NewfolderDialogActionExecutor extends BaseActionListener{
+	
 	private NewfolderDialog dialog;
 	
-	public NewfolderDialogController(NewfolderDialog dialog) {
+	public NewfolderDialogActionExecutor(NewfolderDialog dialog) {
 		this.dialog = dialog;
 	}
 	
 	@Override
-	public void insertUpdate(DocumentEvent e) {
-		setOkBtnEnable();		
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e) {
-		setOkBtnEnable();		
-	}
-
-	@Override
-	public void changedUpdate(DocumentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	protected void execute(ActionEvent e) {
 		JButton btn = (JButton)e.getSource();
 		if(btn.getText().equals(ViewConstants.COMMON_BUTTON_OK) ) {
 			String path = CommonUtils.getPath(MainTree.instance.getSelectionPath());
@@ -62,16 +45,7 @@ public class NewfolderDialogController implements ActionListener, DocumentListen
 			
 		} else if(btn.getText().equals(ViewConstants.COMMON_BUTTON_CANCEL) ) {
 			dialog.dispose();
-		}
+		}		
 	}
 
-	private void setOkBtnEnable() {
-		dialog.getMsgLabel().setText("");
-		String newText = dialog.getNewNameTf().getText();
-		if(newText == null || newText.length() == 0) {
-			dialog.getOkBtn().setEnabled(false);
-		} else {
-			dialog.getOkBtn().setEnabled(true);
-		}
-	}
 }

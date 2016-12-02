@@ -7,7 +7,6 @@ import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import prd.fms.controller.FilePanelFocusController;
 import prd.fms.controller.FilePanelKeyController;
 import prd.fms.controller.FilePanelMouseController;
 import prd.fms.util.CommonUtils;
@@ -23,7 +22,6 @@ public class FilePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private static FilePanelMouseController filePanelMouseController = new FilePanelMouseController();
-	private static FilePanelFocusController filePanelFocusController = new FilePanelFocusController();
 	private static FilePanelKeyController filePanelKeyController = new FilePanelKeyController();
 	
 	/**
@@ -49,8 +47,6 @@ public class FilePanel extends JPanel{
 		setPreferredSize(new Dimension(ViewConstants.FILE_PANEL_WIDTH,ViewConstants.FILE_PANEL_HEIGHT));
 		// add mouse listener
 		addMouseListener(filePanelMouseController);
-		// add focus listener
-		addFocusListener(filePanelFocusController);
 		
 		addKeyListener(filePanelKeyController);
 

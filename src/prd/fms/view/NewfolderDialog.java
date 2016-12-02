@@ -12,9 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import prd.fms.controller.NewfolderDialogActionExecutor;
-import prd.fms.controller.NewfolderDialogController;
-import prd.fms.controller.NewfolderDialogDocumentExecutor;
+import prd.fms.executor.NewfolderDialogActionExecutor;
+import prd.fms.executor.NewfolderDialogDocumentExecutor;
 
 /**
  * <p>New folder dialog.</p>

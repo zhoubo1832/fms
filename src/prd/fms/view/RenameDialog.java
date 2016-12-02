@@ -10,9 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import prd.fms.controller.RenameDialogActionExecutor;
-import prd.fms.controller.RenameDialogController;
-import prd.fms.controller.RenameDialogDocumentExecutor;
+import prd.fms.executor.RenameDialogActionExecutor;
+import prd.fms.executor.RenameDialogDocumentExecutor;
 
 /**
  * <p>Rename dialog.</p>
