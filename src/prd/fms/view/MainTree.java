@@ -3,9 +3,9 @@ package prd.fms.view;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
 
-import prd.fms.controller.TreeNodeSelectionController;
-import prd.fms.controller.TreeNodeWillExpandController;
 import prd.fms.executor.TreeNodeMouseExecutor;
+import prd.fms.executor.TreeNodeTreeSelectionExecutor;
+import prd.fms.executor.TreeNodeTreeWillExpandExecutor;
 import prd.fms.model.TreeNodeModel;
 
 /**
@@ -18,7 +18,7 @@ public class MainTree extends JTree{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private TreeNodeSelectionController treeNodeSelectionController;
+	private TreeNodeTreeSelectionExecutor treeNodeSelectionController;
 	
 	/**
 	 * <p>MainTree object itself.</p>
@@ -39,16 +39,16 @@ public class MainTree extends JTree{
 		this.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
 		// add selected node change listener
-		treeNodeSelectionController = new TreeNodeSelectionController();
+		treeNodeSelectionController = new TreeNodeTreeSelectionExecutor();
 		this.addTreeSelectionListener(treeNodeSelectionController);
 		// add node expand listener
-		this.addTreeWillExpandListener(new TreeNodeWillExpandController());
+		this.addTreeWillExpandListener(new TreeNodeTreeWillExpandExecutor());
 		// add mouse listener
 		this.addMouseListener(new TreeNodeMouseExecutor());
 		MainTree.instance = this;
 	}
 	
-	public TreeNodeSelectionController getTreeNodeSelectionController() {
+	public TreeNodeTreeSelectionExecutor getTreeNodeSelectionController() {
 		return treeNodeSelectionController;
 	}
 }
