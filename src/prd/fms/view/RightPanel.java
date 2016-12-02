@@ -3,12 +3,11 @@ package prd.fms.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import prd.fms.executor.ParentFilePanelMouseExecutor;
+import prd.fms.common.PanelFactory;
 
 /**
  * <p>Right panel to display all folders and files.</p>
@@ -35,31 +34,6 @@ public class RightPanel extends JPanel{
 		
 	}
 	
-	public void showList(File[] files) {
-		if(files.length == 0 ) {
-			this.removeAll();
-			this.revalidate();
-			this.repaint();
-			return;
-		}
-		
-		this.removeAll();
-		
-		// create file list panel
-		FileListPanel fileListPanel = new FileListPanel(files);
-		// add table header
-		this.add(fileListPanel.getFileTable().getTableHeader(), BorderLayout.NORTH);
-		
-		// create scroll pane to contain table body
-	    JScrollPane scrollPane = new JScrollPane(fileListPanel);
-	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
-		scrollPane.setBorder(null);
-		this.add(scrollPane,BorderLayout.CENTER);
-	
-		this.revalidate();
-		this.repaint();
-	}
-	
 	/**
 	 * <p>Display all folders and files.</p>
 	 * @param files
@@ -74,20 +48,10 @@ public class RightPanel extends JPanel{
 		}
 		
 		this.removeAll();
-		
-		// create panel to contain all file panels
-	    parentFilePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
-	    parentFilePanel.setBackground(Color.WHITE);
-	    parentFilePanel.setPreferredSize(computePreferredSize(files.length));
-	    parentFilePanel.addMouseListener(new ParentFilePanelMouseExecutor());
-	    
-	    for(File file : files) {
-	    	// create file panel
-	    	FilePanel fp = new FilePanel(file);
-	    	parentFilePanel.add(fp);
-	    }
-	    
-	    // create scroll pane to contain panel
+
+		// create panel that contains all files and folders
+		parentFilePanel = PanelFactory.getPanel(this, files);
+		// create scroll pane to contain panel
 	    JScrollPane scrollPane = new JScrollPane(parentFilePanel);
 	    scrollPane.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
 		scrollPane.setBorder(null);
@@ -100,24 +64,5 @@ public class RightPanel extends JPanel{
 	public JPanel getParentFilePanel() {
 		return parentFilePanel;
 	}
-	
-	/**
-	 * <p>Compute preferred size.</p>
-	 * @param fileNum  Number of files
-	 * @return Width and height
-	 */
-	private Dimension computePreferredSize(int fileNum) {
-		final int fw = ViewConstants.FILE_PANEL_WIDTH;
-		final int fh = ViewConstants.FILE_PANEL_HEIGHT;
-		
-		final int hgap = ViewConstants.RIGHT_PANEL_HGAP;
-		final int vgap = ViewConstants.RIGHT_PANEL_VGAP;
-		
-		int w = this.getWidth();	    
-	    int colNum = (w - (w/fw + 1) * hgap)/fw;
-	    int rowNum = (int) Math.ceil(fileNum/colNum);
-	    int height = (rowNum*fh)+(rowNum+1)*vgap;
-	    
-		return new Dimension(this.getWidth(), height);
-	}
+
 }
