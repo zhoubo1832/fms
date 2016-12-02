@@ -16,7 +16,7 @@ public abstract class BaseTreeWillExpandListener implements TreeWillExpandListen
 		executeCollapse(event);		
 	}
 	
-	protected abstract void executeExpand(TreeExpansionEvent event);
-	protected abstract void executeCollapse(TreeExpansionEvent event);
+	protected void executeExpand(TreeExpansionEvent event){}
+	protected void executeCollapse(TreeExpansionEvent event){}
 
 }

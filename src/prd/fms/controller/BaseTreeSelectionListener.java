@@ -10,6 +10,6 @@ public abstract class BaseTreeSelectionListener implements TreeSelectionListener
 		execute(e);
 	}
 	
-	protected abstract void execute(TreeSelectionEvent e);
+	protected void execute(TreeSelectionEvent e){}
 
 }

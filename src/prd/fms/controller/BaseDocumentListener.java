@@ -20,10 +20,10 @@ public abstract class BaseDocumentListener implements DocumentListener{
 		executeChange(e);		
 	}
 	
-	protected abstract void executeInsert(DocumentEvent e);
+	protected void executeInsert(DocumentEvent e){}
 	
-	protected abstract void executeRemove(DocumentEvent e);
+	protected void executeRemove(DocumentEvent e){}
 	
-	protected abstract void executeChange(DocumentEvent e);
+	protected void executeChange(DocumentEvent e){}
 
 }

@@ -15,10 +15,4 @@ public class TreeNodeTreeWillExpandExecutor extends BaseTreeWillExpandListener{
 		TreeNodeModel.addChildrenDirNode(path);		
 	}
 
-	@Override
-	protected void executeCollapse(TreeExpansionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -19,9 +19,9 @@ public abstract class BaseKeyListener implements KeyListener{
 		executeReleased(e);
 	}
 	
-	protected abstract void executeTyped(KeyEvent e);
+	protected void executeTyped(KeyEvent e){}
 	
-	protected abstract void executePressed(KeyEvent e);
+	protected void executePressed(KeyEvent e){}
 	
-	protected abstract void executeReleased(KeyEvent e);
+	protected void executeReleased(KeyEvent e){}
 }

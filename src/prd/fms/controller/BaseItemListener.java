@@ -9,5 +9,5 @@ public abstract class BaseItemListener implements ItemListener{
 		execute();
 	}
 	
-	protected abstract void execute();
+	protected void execute(){}
 }

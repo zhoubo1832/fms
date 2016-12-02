@@ -16,12 +16,6 @@ import prd.fms.view.ToolbarPanel;
 public class ParentFilePanelMouseExecutor extends BaseMouseListener{
 
 	@Override
-	protected void executeClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void executePressed(MouseEvent e) {
 		JPanel panel = RightPanel.instance.getParentFilePanel();
 		
@@ -35,24 +29,6 @@ public class ParentFilePanelMouseExecutor extends BaseMouseListener{
 		
 		String path = CommonUtils.getPath(MainTree.instance.getSelectionPath());
 		InfoBarPanel.instance.setNodeInfoLabel(path);		
-	}
-
-	@Override
-	protected void executeReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void executeEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void executeExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

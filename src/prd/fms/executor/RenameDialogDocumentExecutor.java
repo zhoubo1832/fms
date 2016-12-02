@@ -23,11 +23,6 @@ public class RenameDialogDocumentExecutor extends BaseDocumentListener{
 		setOkBtnEnable();		
 	}
 
-	@Override
-	protected void executeChange(DocumentEvent e) {
-		
-	}
-
 	private void setOkBtnEnable() {
 		dialog.getMsgLabel().setText("");
 		String newText = dialog.getNewNameTf().getText();

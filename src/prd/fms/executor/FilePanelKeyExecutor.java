@@ -8,11 +8,6 @@ public class FilePanelKeyExecutor extends BaseKeyListener{
 
 	public static boolean controlKeyPressed = false;
 	public static boolean shiftKeyPressed = false;
-	
-	@Override
-	protected void executeTyped(KeyEvent e) {
-		
-	}
 
 	@Override
 	protected void executePressed(KeyEvent e) {
