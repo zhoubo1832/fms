@@ -1,25 +1,19 @@
-package prd.fms.controller;
+package prd.fms.executor;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
+import prd.fms.controller.BaseMouseListener;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.ToolbarPanel;
 
-/**
- * <p>Tree node's mouse listener.</p>
- * 
- * @author zhoubo
- * 
- */
-public class TreeNodeMouseController implements MouseListener{
+public class TreeNodeMouseExecutor extends BaseMouseListener{
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	protected void executeClicked(MouseEvent e) {
 		JTree jtree = (JTree)e.getSource();
 		TreePath tp = jtree.getPathForLocation(e.getX(), e.getY());
 		if(tp == null) {
@@ -30,29 +24,29 @@ public class TreeNodeMouseController implements MouseListener{
 		InfoBarPanel.instance.setNodeInfoLabel(path);
 		
 		ToolbarPanel.instance.setRenameButtonEnabled(false);
-		ToolbarPanel.instance.setNewfolderButtonEnabled(true);
+		ToolbarPanel.instance.setNewfolderButtonEnabled(true);		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	protected void executePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	protected void executeReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	protected void executeEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	protected void executeExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

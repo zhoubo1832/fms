@@ -8,7 +8,7 @@ import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import prd.fms.controller.ParentFilePanelMouseController;
+import prd.fms.executor.ParentFilePanelMouseExecutor;
 
 /**
  * <p>Right panel to display all folders and files.</p>
@@ -79,7 +79,7 @@ public class RightPanel extends JPanel{
 	    parentFilePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,ViewConstants.RIGHT_PANEL_HGAP,ViewConstants.RIGHT_PANEL_VGAP));
 	    parentFilePanel.setBackground(Color.WHITE);
 	    parentFilePanel.setPreferredSize(computePreferredSize(files.length));
-	    parentFilePanel.addMouseListener(new ParentFilePanelMouseController());
+	    parentFilePanel.addMouseListener(new ParentFilePanelMouseExecutor());
 	    
 	    for(File file : files) {
 	    	// create file panel

@@ -7,8 +7,8 @@ import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import prd.fms.controller.FilePanelKeyController;
-import prd.fms.controller.FilePanelMouseController;
+import prd.fms.executor.FilePanelKeyExecutor;
+import prd.fms.executor.FilePanelMouseExecutor;
 import prd.fms.util.CommonUtils;
 
 /**
@@ -21,8 +21,8 @@ public class FilePanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static FilePanelMouseController filePanelMouseController = new FilePanelMouseController();
-	private static FilePanelKeyController filePanelKeyController = new FilePanelKeyController();
+	private static FilePanelMouseExecutor filePanelMouseController = new FilePanelMouseExecutor();
+	private static FilePanelKeyExecutor filePanelKeyController = new FilePanelKeyExecutor();
 	
 	/**
 	 * <p>File object.</p>

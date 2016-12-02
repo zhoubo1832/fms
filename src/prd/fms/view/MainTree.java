@@ -3,9 +3,9 @@ package prd.fms.view;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
 
-import prd.fms.controller.TreeNodeMouseController;
 import prd.fms.controller.TreeNodeSelectionController;
 import prd.fms.controller.TreeNodeWillExpandController;
+import prd.fms.executor.TreeNodeMouseExecutor;
 import prd.fms.model.TreeNodeModel;
 
 /**
@@ -44,7 +44,7 @@ public class MainTree extends JTree{
 		// add node expand listener
 		this.addTreeWillExpandListener(new TreeNodeWillExpandController());
 		// add mouse listener
-		this.addMouseListener(new TreeNodeMouseController());
+		this.addMouseListener(new TreeNodeMouseExecutor());
 		MainTree.instance = this;
 	}
 	

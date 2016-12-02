@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableRowSorter;
 
-import prd.fms.controller.FileTableMouseController;
+import prd.fms.executor.FileTableMouseExecutor;
 
 /**
  * <p>File list panel to display icon,file name,updated date and size.</p>
@@ -40,7 +40,7 @@ public class FileListPanel extends JPanel{
 		fileTable.getColumnModel().getColumn(0).setCellRenderer(new FileListTableRender(fileTable));
 		
 		// add listener
-		fileTable.addMouseListener(new FileTableMouseController(this.fileTable));
+		fileTable.addMouseListener(new FileTableMouseExecutor(this.fileTable));
 		
 		setLayout(new BorderLayout());
 		// add table body

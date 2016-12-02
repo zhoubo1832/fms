@@ -1,11 +1,11 @@
-package prd.fms.controller;
+package prd.fms.executor;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import prd.fms.controller.BaseMouseListener;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.FilePanel;
 import prd.fms.view.InfoBarPanel;
@@ -13,16 +13,16 @@ import prd.fms.view.MainTree;
 import prd.fms.view.RightPanel;
 import prd.fms.view.ToolbarPanel;
 
-public class ParentFilePanelMouseController implements MouseListener{
+public class ParentFilePanelMouseExecutor extends BaseMouseListener{
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	protected void executeClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void mousePressed(MouseEvent e) {
+	protected void executePressed(MouseEvent e) {
 		JPanel panel = RightPanel.instance.getParentFilePanel();
 		
 		for( Component p : panel.getComponents()) {
@@ -34,24 +34,26 @@ public class ParentFilePanelMouseController implements MouseListener{
 		ToolbarPanel.instance.setCopyButtonEnabled(false);
 		
 		String path = CommonUtils.getPath(MainTree.instance.getSelectionPath());
-		InfoBarPanel.instance.setNodeInfoLabel(path);
+		InfoBarPanel.instance.setNodeInfoLabel(path);		
 	}
-	
+
 	@Override
-	public void mouseExited(MouseEvent e) {
+	protected void executeReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	protected void executeEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	protected void executeExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
+

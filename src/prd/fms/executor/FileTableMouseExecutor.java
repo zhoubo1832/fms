@@ -1,30 +1,26 @@
-package prd.fms.controller;
+package prd.fms.executor;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
+
 import javax.swing.JTable;
+
+import prd.fms.controller.BaseMouseListener;
 import prd.fms.model.FileNodeModel;
 import prd.fms.view.FileListTableModel;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.ToolbarPanel;
 
-/**
- * <p>File table's mouse listener.</p>
- * 
- * @author zhoubo
- * 
- */
-public class FileTableMouseController  implements MouseListener{
+public class FileTableMouseExecutor extends BaseMouseListener{
 
 	private JTable fileTable;
 	
-	public FileTableMouseController(JTable fileTable) {
+	public FileTableMouseExecutor(JTable fileTable) {
 		this.fileTable = fileTable;
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	protected void executeClicked(MouseEvent e) {
 		int n = e.getClickCount();
 		// double click
 		if( n == 2) {
@@ -44,29 +40,29 @@ public class FileTableMouseController  implements MouseListener{
 			InfoBarPanel.instance.setFileInfoLabel(path);
 			ToolbarPanel.instance.setRenameButtonEnabled(true);
 			ToolbarPanel.instance.setCopyButtonEnabled(true);
-		}
+		}		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	protected void executePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	protected void executeReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	protected void executeEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	protected void executeExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
