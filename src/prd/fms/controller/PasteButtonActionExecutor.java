@@ -1,5 +1,6 @@
 package prd.fms.controller;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -11,10 +12,10 @@ import prd.fms.view.MainTree;
 import prd.fms.view.PasteAlertDialog;
 import prd.fms.view.ViewConstants;
 
-public class PasteExecutor extends BaseController{
+public class PasteButtonActionExecutor extends BaseActionListener{
 
 	@Override
-	protected void execute() {
+	protected void execute(ActionEvent e) {
 		String desPath = CommonUtils.getPath(MainTree.instance.getSelectionPath());
 		ArrayList<String> list = SelectedFileList.getInstance().getPathList();
 		String[] srcPathArray = new String[list.size()];

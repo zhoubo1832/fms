@@ -7,17 +7,12 @@ import java.awt.event.ItemListener;
 
 import prd.fms.model.FileNodeModel;
 
-public abstract class BaseController implements ActionListener, ItemListener{
+public abstract class BaseActionListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		execute();
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		execute();
+		execute(e);
 	}
 	
-	protected abstract void execute();
+	protected abstract void execute(ActionEvent e);
 }

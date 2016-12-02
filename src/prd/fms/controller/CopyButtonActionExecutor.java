@@ -1,6 +1,7 @@
 package prd.fms.controller;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -12,10 +13,10 @@ import prd.fms.view.FilePanel;
 import prd.fms.view.RightPanel;
 import prd.fms.view.ToolbarPanel;
 
-public class CopyExecutor extends BaseController{
+public class CopyButtonActionExecutor extends BaseActionListener{
 
 	@Override
-	protected void execute() {
+	protected void execute(ActionEvent e) {
 		SelectedFileList.getInstance().clear();
 		
 		int selectedIndex = ToolbarPanel.instance.getViewList().getSelectedIndex();

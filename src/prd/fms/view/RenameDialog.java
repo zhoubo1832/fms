@@ -9,7 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import prd.fms.controller.RenameDialogActionExecutor;
 import prd.fms.controller.RenameDialogController;
+import prd.fms.controller.RenameDialogDocumentExecutor;
 
 /**
  * <p>Rename dialog.</p>
@@ -37,7 +40,9 @@ public class RenameDialog extends CommonDialog{
 		return oldText;
 	}
 
-	private RenameDialogController ctl;
+	private RenameDialogActionExecutor ctlAction;
+	
+	private RenameDialogDocumentExecutor ctlDocument;
 	
 	public RenameDialog(Frame parent, boolean modal) {
 		super(parent, ViewConstants.RENAME_DIALOG_TITLE, modal);
@@ -59,7 +64,7 @@ public class RenameDialog extends CommonDialog{
 		newNameTf = new JTextField(20);
 		oldText = (new File(InfoBarPanel.selectedPath)).getName();
 		newNameTf.setText(oldText);
-		newNameTf.getDocument().addDocumentListener(ctl);
+		newNameTf.getDocument().addDocumentListener(ctlDocument);
 
 		panel.add(newNameTf);
 		
@@ -79,8 +84,8 @@ public class RenameDialog extends CommonDialog{
 		panel.add(okBtn);
 		panel.add(cancelBtn);
 		
-		okBtn.addActionListener(ctl);
-		cancelBtn.addActionListener(ctl);
+		okBtn.addActionListener(ctlAction);
+		cancelBtn.addActionListener(ctlAction);
 		return panel;
 	}
 
@@ -92,7 +97,8 @@ public class RenameDialog extends CommonDialog{
 		
 		this.setLayout(new BorderLayout());
 		
-		ctl = new RenameDialogController(this);
+		ctlAction = new RenameDialogActionExecutor(this);
+		ctlDocument = new RenameDialogDocumentExecutor(this);
 		
 		this.add(getTopPanel(), BorderLayout.NORTH);
 		this.add(getBottomPanel(), BorderLayout.SOUTH);		

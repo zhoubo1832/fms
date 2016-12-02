@@ -1,12 +1,14 @@
 package prd.fms.controller;
 
+import java.awt.event.ActionEvent;
+
 import prd.fms.common.CommandManager;
 import prd.fms.view.ToolbarPanel;
 
-public class ForwardExecutor extends BaseController{
+public class ForwardButtonActionExecutor extends BaseActionListener{
 
 	@Override
-	protected void execute() {
+	protected void execute(ActionEvent e) {
 		ToolbarPanel.instance.setForwardButtonClicked(true);
 		CommandManager.forward();
 		if(!CommandManager.isCanForward()) {

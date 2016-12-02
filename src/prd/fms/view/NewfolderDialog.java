@@ -12,7 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import prd.fms.controller.NewfolderDialogActionExecutor;
 import prd.fms.controller.NewfolderDialogController;
+import prd.fms.controller.NewfolderDialogDocumentExecutor;
 
 /**
  * <p>New folder dialog.</p>
@@ -30,7 +32,9 @@ public class NewfolderDialog extends CommonDialog {
 
 	private JButton okBtn;
 	
-	private NewfolderDialogController ctl;
+	private NewfolderDialogActionExecutor ctlAction;
+	
+	private NewfolderDialogDocumentExecutor ctlDocument;
 	
 	public NewfolderDialog(Frame parent, boolean modal) {
 		super(parent, ViewConstants.NEWFOLDER_DIALOG_TITLE, modal);
@@ -55,7 +59,7 @@ public class NewfolderDialog extends CommonDialog {
 		
 		newNameTf = new JTextField(20);
 		
-		newNameTf.getDocument().addDocumentListener(ctl);
+		newNameTf.getDocument().addDocumentListener(ctlDocument);
 
 		panel.add(newNameTf);
 		
@@ -76,8 +80,8 @@ public class NewfolderDialog extends CommonDialog {
 		panel.add(okBtn);
 		panel.add(cancelBtn);
 		
-		okBtn.addActionListener(ctl);
-		cancelBtn.addActionListener(ctl);
+		okBtn.addActionListener(ctlAction);
+		cancelBtn.addActionListener(ctlAction);
 		return panel;
 	}
 
@@ -89,7 +93,8 @@ public class NewfolderDialog extends CommonDialog {
 		
 		this.setLayout(new BorderLayout());
 		
-		ctl = new NewfolderDialogController(this);
+		ctlAction = new NewfolderDialogActionExecutor(this);
+		ctlDocument = new NewfolderDialogDocumentExecutor(this);
 		
 		this.add(getTopPanel(), BorderLayout.NORTH);
 		this.add(getBottomPanel(), BorderLayout.SOUTH);		
