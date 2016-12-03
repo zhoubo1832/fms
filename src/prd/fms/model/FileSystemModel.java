@@ -36,14 +36,31 @@ public class FileSystemModel {
 				for(File file : oldFile.listFiles()) {
 					if(file.isDirectory()) {
 						copyDir(file.getPath(), newFile.getPath());
+						deleteDir(file.getPath());
 					} else {
 						copyFile(file.getPath(), newFile.getPath());
+						file.delete();
 					}
 				}
+				
+				oldFile.delete();
 				return 0;
 			}
+
 		}
 		return -1;
+	}
+	
+	public static void deleteDir(String path) {
+		File file = new File(path);
+		for(File f : file.listFiles()) {
+			if(f.isDirectory()) {
+				deleteDir(f.getPath());
+			} else {
+				f.delete();
+			}
+		}
+		file.delete();
 	}
 	
 	/**
