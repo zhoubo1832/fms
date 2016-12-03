@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import prd.fms.common.SelectedFileList;
 import prd.fms.controller.BaseActionListener;
+import prd.fms.model.FileNodeModel;
 import prd.fms.model.FileSystemModel;
+import prd.fms.model.TreeNodeModel;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.MainFrame;
 import prd.fms.view.MainTree;
@@ -47,7 +49,12 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 				FileSystemModel.copyFile(file, desPath);
 			}
 		}
-				
+		
+		// refresh right panel
+		FileNodeModel.refresh();
+		
+		// refresh tree node
+		TreeNodeModel.refresh();
 	}
 
 }
