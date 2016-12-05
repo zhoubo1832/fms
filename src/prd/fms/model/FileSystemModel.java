@@ -5,6 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.swing.SwingUtilities;
+
+import prd.fms.view.ProgressBarFrame;
 
 /**
  * <p>File system model.</p>
@@ -35,10 +40,10 @@ public class FileSystemModel {
 				newFile.mkdirs();
 				for(File file : oldFile.listFiles()) {
 					if(file.isDirectory()) {
-						copyDir(file.getPath(), newFile.getPath());
+						copyDir(file.getPath(), newFile.getPath(), null);
 						deleteDir(file.getPath());
 					} else {
-						copyFile(file.getPath(), newFile.getPath());
+						copyFile(file.getPath(), newFile.getPath(), null);
 						file.delete();
 					}
 				}
@@ -81,18 +86,38 @@ public class FileSystemModel {
 		return -1;
 	}
 	
-	public static int copyFiles(String[] srcPathArray, String desPath) {
+	public static int fileCount(String[] srcPathArray) {
+		int fileCount = 0;
 		for(String file : srcPathArray) {
 			if(new File(file).isDirectory()) {
-				copyDir(file, desPath);
+				fileCount++;
+				File[] files = new File(file).listFiles();
+				String[] strFiles = new String[files.length];
+				int i=0;
+				for(File f : files) {
+					strFiles[i] = f.getPath();
+					i++;
+				}
+				fileCount += fileCount(strFiles);
 			} else {
-				copyFile(file, desPath);
+				fileCount++;
 			}
 		}
-		return -1;
+		return fileCount;
 	}
 	
-	public static void copyDir(String srcPath, String desPath) {
+//	public static int copyFiles(String[] srcPathArray, String desPath) {
+//		for(String file : srcPathArray) {
+//			if(new File(file).isDirectory()) {
+//				copyDir(file, desPath);
+//			} else {
+//				copyFile(file, desPath);
+//			}
+//		}
+//		return -1;
+//	}
+	
+	public static void copyDir(String srcPath, String desPath, final ProgressBarFrame progressBar) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
 //		if(file.exists()) {
@@ -100,19 +125,39 @@ public class FileSystemModel {
 //		}
 		
 		file.mkdirs();
+		
+		if(progressBar != null) {
+			try {
+				SwingUtilities.invokeAndWait(new Runnable(){
+
+					@Override
+					public void run() {
+						progressBar.updateProgress();							
+					}
+					
+				});
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		System.out.println("Copy folder:" + srcPath + " --> " + file.getPath());
 		
 		File[] files = new File(srcPath).listFiles();
 		for(File f : files) {
 			if(f.isDirectory()) {
-				copyDir(f.getPath(), file.getPath());
+				copyDir(f.getPath(), file.getPath(), progressBar);
 			} else {
-				copyFile(f.getPath(), file.getPath());
+				copyFile(f.getPath(), file.getPath(), progressBar);
 			}
 		}
 	}
 	
-	public static void copyFile(String srcPath, String desPath) {
+	public static void copyFile(String srcPath, String desPath, final ProgressBarFrame progressBar) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
 //		if(file.exists()) {
@@ -150,6 +195,25 @@ public class FileSystemModel {
 				try {
 					outputStream.close();
 				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(progressBar != null) {
+				try {
+					SwingUtilities.invokeAndWait(new Runnable(){
+
+						@Override
+						public void run() {
+							progressBar.updateProgress();							
+						}
+						
+					});
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

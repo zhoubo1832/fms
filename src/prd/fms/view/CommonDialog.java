@@ -1,11 +1,10 @@
 package prd.fms.view;
 
-import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Toolkit;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+
+import prd.fms.util.CommonUtils;
 
 public abstract class CommonDialog extends JDialog{
 
@@ -20,18 +19,10 @@ public abstract class CommonDialog extends JDialog{
 	
 	private void init() {
 		setUI();
-		setScreenCenter();
+		CommonUtils.setScreenCenter(this);
 		this.setAlwaysOnTop(true);
 		this.requestFocus();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	}
-	
-	private void setScreenCenter() {
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension dim = tk.getScreenSize();
-		int screenWidth = dim.width;
-		int screenHeight = dim.height;
-		this.setLocation(screenWidth/2 - this.getWidth()/2, screenHeight/2 - this.getHeight()/2);
 	}
 }

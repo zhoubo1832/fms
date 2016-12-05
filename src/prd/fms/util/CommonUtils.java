@@ -1,5 +1,8 @@
 package prd.fms.util;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -75,4 +78,12 @@ public class CommonUtils {
         }  
         return null;  
     }
+	
+	public static void setScreenCenter(Window win) {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension dim = tk.getScreenSize();
+		int screenWidth = dim.width;
+		int screenHeight = dim.height;
+		win.setLocation(screenWidth/2 - win.getWidth()/2, screenHeight/2 - win.getHeight()/2);
+	}
 }
