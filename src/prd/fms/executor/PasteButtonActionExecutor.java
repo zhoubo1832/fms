@@ -115,11 +115,20 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 					}
 					
 				}
+				
+				try {
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				try {
 					SwingUtilities.invokeAndWait(new Runnable(){
 
 						@Override
 						public void run() {
+							progressBar.dispose();
 							// refresh right panel
 							FileNodeModel.refresh();
 							

@@ -41,15 +41,15 @@ public class ProgressBarFrame extends JFrame{
 			curValue = max;
 		}
 		progressBar.setValue(curValue);
-		if(curValue == max) {
-			try {
-				Thread.currentThread().sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			this.dispose();
-		}
+//		if(curValue == max) {
+//			try {
+//				Thread.currentThread().sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			this.dispose();
+//		}
 	}
 }
