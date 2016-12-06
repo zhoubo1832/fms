@@ -1,5 +1,7 @@
 package prd.fms.bean;
 
+import java.io.File;
+
 /**
  * <p>Dir node definition.</p>
  * 
@@ -29,10 +31,10 @@ public class DirNode {
 		this.isEmpty = isEmpty;
 		
 		this.name = path;
-		if(path.endsWith("\\")) {
+		if(path.endsWith(File.separator)) {
 			name = path.substring(0, path.length()-1);
 		} else {
-			int pos = path.lastIndexOf("\\");
+			int pos = path.lastIndexOf(File.separator);
 			name = path.substring(pos+1);
 		}
 	}

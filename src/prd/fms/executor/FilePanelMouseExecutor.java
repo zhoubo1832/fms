@@ -70,9 +70,6 @@ public class FilePanelMouseExecutor extends BaseMouseListener{
 					j = i;
 				}
 				
-				System.out.println("i=" + i);
-				System.out.println("j=" + j);
-				
 				int begin=i;
 				int end=j;
 				if(i > j) {
@@ -92,12 +89,6 @@ public class FilePanelMouseExecutor extends BaseMouseListener{
 				panel.setBackground(new Color(219,243,146));
 				panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 			}
-//			Container container = panel.getParent();
-//			container.get
-			// request focus for file panel, and focusGained method will be called automatically
-//			panel.requestFocus();
-//			panel.setBackground(new Color(219,243,146));
-//			panel.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 			
 			ToolbarPanel.instance.setRenameButtonEnabled(true);
 			ToolbarPanel.instance.setCopyButtonEnabled(true);

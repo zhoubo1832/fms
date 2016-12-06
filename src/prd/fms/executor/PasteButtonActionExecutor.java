@@ -29,9 +29,6 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 		final String[] srcPathArray = new String[list.size()];
 		list.toArray(srcPathArray);
 		final int fileNum = FileSystemModel.fileCount(srcPathArray);
-//		FileSystemModel.copyFiles(srcPathArray, desPath);
-		
-		
 		
 		Runnable task = new Runnable(){
 
@@ -46,51 +43,47 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 						File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
 						if(fileDest.exists()) {
 							if(fileDest.isDirectory()) {
-							try {
-								SwingUtilities.invokeAndWait(new Runnable(){
-
-									@Override
-									public void run() {
-										PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_01);
-										PasteAlertDialog.setFileName(file);
-										new PasteAlertDialog(MainFrame.instance, true);
+								try {
+									SwingUtilities.invokeAndWait(new Runnable(){
+	
+										@Override
+										public void run() {
+											PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_01);
+											PasteAlertDialog.setFileName(file);
+											new PasteAlertDialog(MainFrame.instance, true);
+											
+										}
 										
-									}
-									
-								});
-							} catch (InvocationTargetException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}	
-//								PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_01);
-//								PasteAlertDialog.setFileName(file);
-//								new PasteAlertDialog(MainFrame.instance, true);
+									});
+								} catch (InvocationTargetException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}	
+
 							} else {
-							try {
-								SwingUtilities.invokeAndWait(new Runnable(){
-
-									@Override
-									public void run() {
-										PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_02);
-										PasteAlertDialog.setFileName(file);
-										new PasteAlertDialog(MainFrame.instance, true);
+								try {
+									SwingUtilities.invokeAndWait(new Runnable(){
+	
+										@Override
+										public void run() {
+											PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_02);
+											PasteAlertDialog.setFileName(file);
+											new PasteAlertDialog(MainFrame.instance, true);
+											
+										}
 										
-									}
-									
-								});
-							} catch (InvocationTargetException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-//								PasteAlertDialog.setMsg(ViewConstants.PASTE_ALERT_MESSAGE_02);
-//								PasteAlertDialog.setFileName(file);
-//								new PasteAlertDialog(MainFrame.instance, true);
+									});
+								} catch (InvocationTargetException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+
 							}
 						} else {
 							FileSystemModelProxy.copyDir(file, desPath);
@@ -101,34 +94,29 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 							return;
 						}
 						FileSystemModelProxy.copyFile(file, desPath);
-					}					
-				}
-								
-				try {
-					SwingUtilities.invokeAndWait(new Runnable(){
+					}
+					
+					try {
+						SwingUtilities.invokeAndWait(new Runnable(){
 
-						@Override
-						public void run() {
-							// refresh right panel
-							FileNodeModel.refresh();
+							@Override
+							public void run() {
+								// refresh right panel
+								FileNodeModel.refresh();
+								
+								// refresh tree node
+								TreeNodeModel.refresh();
+							}
 							
-							// refresh tree node
-							TreeNodeModel.refresh();
-						}
-						
-					});
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						});
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-//				// refresh right panel
-//				FileNodeModel.refresh();
-//				
-//				// refresh tree node
-//				TreeNodeModel.refresh();
 			}
 			
 		};

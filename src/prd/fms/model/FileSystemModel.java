@@ -5,12 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.SwingUtilities;
-
 import prd.fms.common.FileSystemModelProxy;
-import prd.fms.view.ProgressBarFrame;
 
 /**
  * <p>File system model.</p>
@@ -28,7 +23,7 @@ public class FileSystemModel {
 	 */
 	public static int rename(String path, String newName) {
 		File oldFile = new File(path);
-		String tmpStr = path.substring(0, path.lastIndexOf("\\") + 1);
+		String tmpStr = path.substring(0, path.lastIndexOf(File.separator) + 1);
 		File newFile = new File(tmpStr + newName);
 		if(newFile.exists()) {
 			return 1;
@@ -76,7 +71,7 @@ public class FileSystemModel {
 	 * @return 0:success 1:exist -1:fail
 	 */
 	public static int newFolder(String path, String newName) {
-		File file = new File(path + "\\" + newName);
+		File file = new File(path + File.separator + newName);
 		if( file.exists() ) {
 			return 1;
 		}
@@ -107,27 +102,11 @@ public class FileSystemModel {
 		return fileCount;
 	}
 	
-//	public static int copyFiles(String[] srcPathArray, String desPath) {
-//		for(String file : srcPathArray) {
-//			if(new File(file).isDirectory()) {
-//				copyDir(file, desPath);
-//			} else {
-//				copyFile(file, desPath);
-//			}
-//		}
-//		return -1;
-//	}
-	
 	public static void copyDir(String srcPath, String desPath) {
-		int pos = srcPath.lastIndexOf("\\");
-		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
-//		if(file.exists()) {
-//			return;
-//		}
+		int pos = srcPath.lastIndexOf(File.separator);
+		File file = new File(desPath + File.separator + srcPath.substring(pos+1));
 		
 		file.mkdirs();
-		
-		System.out.println("Copy folder:" + srcPath + " --> " + file.getPath());
 		
 		File[] files = new File(srcPath).listFiles();
 		for(File f : files) {
@@ -140,13 +119,9 @@ public class FileSystemModel {
 	}
 	
 	public static void copyFile(String srcPath, String desPath) {
-		int pos = srcPath.lastIndexOf("\\");
-		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
-//		if(file.exists()) {
-//			return;
-//		}
-		System.out.println("Copy file:" + srcPath + " --> " + file.getPath());
-		
+		int pos = srcPath.lastIndexOf(File.separator);
+		File file = new File(desPath + File.separator + srcPath.substring(pos+1));
+
 		FileInputStream inputStream = null;
 		byte[] buffer = new byte[1024];
 		int readNum = 0;
@@ -185,7 +160,7 @@ public class FileSystemModel {
 	}
 	
 	public static String getDestPath(String file, String desPath) {
-		int pos = file.lastIndexOf("\\");
-		return desPath + "\\" + file.substring(pos+1);
+		int pos = file.lastIndexOf(File.separator);
+		return desPath + File.separator + file.substring(pos+1);
 	}
 }
