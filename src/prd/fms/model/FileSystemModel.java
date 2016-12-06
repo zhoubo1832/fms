@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import prd.fms.common.FileSystemModelProxy;
 
 /**
@@ -162,5 +165,38 @@ public class FileSystemModel {
 	public static String getDestPath(String file, String desPath) {
 		int pos = file.lastIndexOf(File.separator);
 		return desPath + File.separator + file.substring(pos+1);
+	}
+	
+	public static List<File> searchFile(String key, String path) {
+		List<File> list = new ArrayList<File>();
+		searchFile(key, path, list);
+		
+		for(File f : list) {
+			System.out.println(f.getPath());
+		}
+		return list;
+	}
+	
+	public static List<File> searchFile(String key, String path, List<File> list) {
+		File root = new File(path);
+		for(File f : root.listFiles()) {
+			String filePath = f.getPath();
+			System.out.println(">>>>>>>>>>>>>>>>");
+			System.out.println(f.getAbsolutePath());
+			System.out.println(f.getPath());
+			System.out.println(f.getName());
+			System.out.println(">>>>>>>>>>>>>>>>");
+			if(filePath.substring(path.length()).contains(key)) {
+				list.add(f);
+			}
+			if(f.isDirectory()) {
+				searchFile(key, filePath, list);
+			}
+		}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		searchFile("t","C:\\test\\z3");
 	}
 }

@@ -13,6 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import prd.fms.bean.DirNode;
+import prd.fms.view.MainTree;
 
 /**
  * <p>Tree utilization definition.</p>
@@ -38,6 +39,19 @@ public class CommonUtils {
 			return null;
 		}
 		return dirNode.getPath();
+	}
+	
+	/**
+	 * <p>Get current path.</p>
+	 * @return String Current path
+	 */
+	public static String getCurrentPath() {
+		String path = null;
+		TreePath treePath = MainTree.instance.getSelectionPath();
+		if(treePath != null) {
+			path = getPath(treePath);
+		}
+		return path;
 	}
 	
 	/**

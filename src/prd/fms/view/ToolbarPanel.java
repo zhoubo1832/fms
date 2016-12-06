@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.tree.TreePath;
 
@@ -17,6 +18,7 @@ import prd.fms.executor.ForwardButtonActionExecutor;
 import prd.fms.executor.NewfolderButtonActionExecutor;
 import prd.fms.executor.PasteButtonActionExecutor;
 import prd.fms.executor.RenameButtonActionExecutor;
+import prd.fms.executor.SearchTextFieldDocumentExecutor;
 import prd.fms.executor.ViewlistItemExecutor;
 
 /**
@@ -43,6 +45,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JButton pasteButton;
 	
 	private JComboBox<String> viewList;
+	private JTextField searchTextField;
 
 	private final String[] viewItems = {"Large Icons", "Details"};
 	
@@ -82,6 +85,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
 		viewList = new JComboBox<String>(viewItems);
+		searchTextField = new JTextField(20);
 		
 	}
 	
@@ -105,6 +109,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		copyButton.addActionListener(copyController);
 		pasteButton.addActionListener(pasteController);
 		viewList.addItemListener(new ViewlistItemExecutor());
+		searchTextField.getDocument().addDocumentListener(new SearchTextFieldDocumentExecutor());
 	}
 	
 	private void addWidget() {
@@ -118,6 +123,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		toolBar.add(copyButton);
 		toolBar.add(pasteButton);
 		toolBar.add(viewList);
+		toolBar.add(searchTextField);
 		// add tool bar
 		this.add(toolBar);
 	}
