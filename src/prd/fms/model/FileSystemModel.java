@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
+import prd.fms.common.FileSystemModelProxy;
 import prd.fms.view.ProgressBarFrame;
 
 /**
@@ -40,10 +41,10 @@ public class FileSystemModel {
 				newFile.mkdirs();
 				for(File file : oldFile.listFiles()) {
 					if(file.isDirectory()) {
-						copyDir(file.getPath(), newFile.getPath(), null);
+						copyDir(file.getPath(), newFile.getPath());
 						deleteDir(file.getPath());
 					} else {
-						copyFile(file.getPath(), newFile.getPath(), null);
+						copyFile(file.getPath(), newFile.getPath());
 						file.delete();
 					}
 				}
@@ -117,7 +118,7 @@ public class FileSystemModel {
 //		return -1;
 //	}
 	
-	public static void copyDir(String srcPath, String desPath, final ProgressBarFrame progressBar) {
+	public static void copyDir(String srcPath, String desPath) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
 //		if(file.exists()) {
@@ -126,38 +127,19 @@ public class FileSystemModel {
 		
 		file.mkdirs();
 		
-		if(progressBar != null) {
-			try {
-				SwingUtilities.invokeAndWait(new Runnable(){
-
-					@Override
-					public void run() {
-						progressBar.updateProgress();							
-					}
-					
-				});
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
 		System.out.println("Copy folder:" + srcPath + " --> " + file.getPath());
 		
 		File[] files = new File(srcPath).listFiles();
 		for(File f : files) {
 			if(f.isDirectory()) {
-				copyDir(f.getPath(), file.getPath(), progressBar);
+				FileSystemModelProxy.copyDir(f.getPath(), file.getPath());
 			} else {
-				copyFile(f.getPath(), file.getPath(), progressBar);
+				FileSystemModelProxy.copyFile(f.getPath(), file.getPath());
 			}
 		}
 	}
 	
-	public static void copyFile(String srcPath, String desPath, final ProgressBarFrame progressBar) {
+	public static void copyFile(String srcPath, String desPath) {
 		int pos = srcPath.lastIndexOf("\\");
 		File file = new File(desPath + "\\" + srcPath.substring(pos+1));
 //		if(file.exists()) {
@@ -195,25 +177,6 @@ public class FileSystemModel {
 				try {
 					outputStream.close();
 				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if(progressBar != null) {
-				try {
-					SwingUtilities.invokeAndWait(new Runnable(){
-
-						@Override
-						public void run() {
-							progressBar.updateProgress();							
-						}
-						
-					});
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

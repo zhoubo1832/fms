@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
+import prd.fms.common.FileSystemModelProxy;
 import prd.fms.common.SelectedFileList;
 import prd.fms.controller.BaseActionListener;
 import prd.fms.model.FileNodeModel;
@@ -27,15 +28,19 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 		ArrayList<String> list = SelectedFileList.getInstance().getPathList();
 		final String[] srcPathArray = new String[list.size()];
 		list.toArray(srcPathArray);
-		int fileNum = FileSystemModel.fileCount(srcPathArray);
+		final int fileNum = FileSystemModel.fileCount(srcPathArray);
 //		FileSystemModel.copyFiles(srcPathArray, desPath);
 		
-		final ProgressBarFrame progressBar = new ProgressBarFrame(0, fileNum);
+		
 		
 		Runnable task = new Runnable(){
 
 			@Override
 			public void run() {
+				ProgressBarFrame progressBar = new ProgressBarFrame(0, fileNum);
+				
+				FileSystemModelProxy.setProgressBar(progressBar);
+				
 				for(final String file : srcPathArray) {
 					if(new File(file).isDirectory()) {
 						File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
@@ -88,47 +93,22 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 //								new PasteAlertDialog(MainFrame.instance, true);
 							}
 						} else {
-							FileSystemModel.copyDir(file, desPath, progressBar);
+							FileSystemModelProxy.copyDir(file, desPath);
 						}
 					} else {
 						File fileDest = new File(FileSystemModel.getDestPath(file, desPath));
 						if(fileDest.exists()) {
 							return;
 						}
-						FileSystemModel.copyFile(file, desPath, progressBar);
-					}
-					try {
-						SwingUtilities.invokeAndWait(new Runnable(){
-
-							@Override
-							public void run() {
-								progressBar.updateProgress();							
-							}
-							
-						});
-					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
+						FileSystemModelProxy.copyFile(file, desPath);
+					}					
 				}
-				
-				try {
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+								
 				try {
 					SwingUtilities.invokeAndWait(new Runnable(){
 
 						@Override
 						public void run() {
-							progressBar.dispose();
 							// refresh right panel
 							FileNodeModel.refresh();
 							
