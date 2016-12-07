@@ -50,4 +50,6 @@ public class ViewConstants {
 	public static final String PASTE_ALERT_MESSAGE_01 = "Same name's folder has existed.";
 	public static final String PASTE_ALERT_MESSAGE_02 = "Same name's file has existed.";
 	
+	public static final String SEARCH_HINT = "Search";
+	
 }

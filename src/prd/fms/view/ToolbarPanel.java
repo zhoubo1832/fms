@@ -86,7 +86,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
 		viewList = new JComboBox<String>(viewItems);
-		searchTextField = new JTextField("Search", 20);
+		searchTextField = new JTextField(ViewConstants.SEARCH_HINT, 20);
 		
 	}
 	
