@@ -3,14 +3,12 @@ package prd.fms.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import prd.fms.common.PanelFactory;
-import prd.fms.model.FileNodeModel;
+import prd.fms.executor.RightPanelComponentExecutor;
 
 /**
  * <p>Right panel to display all folders and files.</p>
@@ -34,33 +32,7 @@ public class RightPanel extends JPanel{
 		instance = this;
 		this.setBackground(Color.white);
 		this.setLayout(new BorderLayout());
-		this.addComponentListener(new ComponentListener(){
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				FileNodeModel.refresh();
-				
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		this.addComponentListener(new RightPanelComponentExecutor());
 	}
 	
 	/**

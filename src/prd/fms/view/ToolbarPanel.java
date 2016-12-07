@@ -19,6 +19,7 @@ import prd.fms.executor.NewfolderButtonActionExecutor;
 import prd.fms.executor.PasteButtonActionExecutor;
 import prd.fms.executor.RenameButtonActionExecutor;
 import prd.fms.executor.SearchTextFieldDocumentExecutor;
+import prd.fms.executor.SearchTextFieldFocusExecutor;
 import prd.fms.executor.ViewlistItemExecutor;
 
 /**
@@ -85,7 +86,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		copyButton = new JButton(ViewConstants.TOOLBAR_COPY_TEXT);
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
 		viewList = new JComboBox<String>(viewItems);
-		searchTextField = new JTextField(20);
+		searchTextField = new JTextField("Search", 20);
 		
 	}
 	
@@ -109,7 +110,8 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		copyButton.addActionListener(copyController);
 		pasteButton.addActionListener(pasteController);
 		viewList.addItemListener(new ViewlistItemExecutor());
-		searchTextField.getDocument().addDocumentListener(new SearchTextFieldDocumentExecutor());
+		searchTextField.getDocument().addDocumentListener(new SearchTextFieldDocumentExecutor(searchTextField));
+		searchTextField.addFocusListener(new SearchTextFieldFocusExecutor());
 	}
 	
 	private void addWidget() {

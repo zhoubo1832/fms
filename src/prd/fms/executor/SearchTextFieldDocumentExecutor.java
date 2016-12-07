@@ -3,6 +3,7 @@ package prd.fms.executor;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -15,8 +16,18 @@ import prd.fms.view.RightPanel;
 
 public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 
+	private JTextField jtf;
+	
+	public SearchTextFieldDocumentExecutor(JTextField jtf) {
+		this.jtf = jtf;
+	}
+	
 	@Override
 	protected void executeInsert(DocumentEvent e) {
+		if(!jtf.hasFocus()) {
+			return;
+		}
+		
 		if(CommonUtils.getCurrentPath() == null) {
 			return;
 		}
@@ -32,6 +43,10 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 
 	@Override
 	protected void executeRemove(DocumentEvent e) {
+		if(!jtf.hasFocus()) {
+			return;
+		}
+		
 		if(CommonUtils.getCurrentPath() == null) {
 			return;
 		}
@@ -52,7 +67,10 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 		if(len > 0) {
 			try {
 				String key = doc.getText(0, len);
-				list = FileSystemModel.searchFile(key, CommonUtils.getCurrentPath());
+				key = key.trim();
+				if(key.length() > 0) {
+					list = FileSystemModel.searchFile(key, CommonUtils.getCurrentPath());
+				}
 			} catch (BadLocationException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
