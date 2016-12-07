@@ -25,6 +25,9 @@ public class FileTableMouseExecutor extends BaseMouseListener{
 		// double click
 		if( n == 2) {
 			int rowNum = fileTable.getSelectedRow();
+			if(rowNum == -1) {
+				return;
+			}
 			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			File file = model.getFiles()[rowNum];
@@ -34,6 +37,9 @@ public class FileTableMouseExecutor extends BaseMouseListener{
 		} else {
 		// one click	
 			int rowNum = fileTable.getSelectedRow();
+			if(rowNum == -1) {
+				return;
+			}
 			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
 			String path = (model.getFiles()[rowNum]).getPath();
