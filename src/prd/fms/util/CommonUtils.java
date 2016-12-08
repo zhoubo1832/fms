@@ -1,6 +1,7 @@
 package prd.fms.util;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.File;
@@ -84,8 +85,12 @@ public class CommonUtils {
 	public static Icon getBigIcon(File f) {  
         if (f!=null && f.exists()) {  
             try {  
-                sun.awt.shell.ShellFolder sf = sun.awt.shell.ShellFolder.getShellFolder(f);  
-                return new ImageIcon(sf.getIcon(true));  
+                sun.awt.shell.ShellFolder sf = sun.awt.shell.ShellFolder.getShellFolder(f);
+                Image img = sf.getIcon(true);
+                if(img != null) {
+                	return new ImageIcon(sf.getIcon(true));
+                }
+                System.out.println("no image:" + f.getAbsolutePath());
             } catch (FileNotFoundException e) {  
                 e.printStackTrace();  
             }  

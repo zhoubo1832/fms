@@ -186,33 +186,27 @@ public class FileSystemModel {
 	public static List<File> searchFile(String key, String path) {
 		List<File> list = new ArrayList<File>();
 		searchFile(key, path, list);
-		
-		for(File f : list) {
-			System.out.println(f.getPath());
-		}
+
 		return list;
 	}
 	
 	public static List<File> searchFile(String key, String path, List<File> list) {
+		System.out.println("path:" + path);
 		File root = new File(path);
-		for(File f : root.listFiles()) {
-			String filePath = f.getPath();
-			System.out.println(">>>>>>>>>>>>>>>>");
-			System.out.println(f.getAbsolutePath());
-			System.out.println(f.getPath());
-			System.out.println(f.getName());
-			System.out.println(">>>>>>>>>>>>>>>>");
-			if(filePath.substring(path.length()).contains(key)) {
-				list.add(f);
-			}
-			if(f.isDirectory()) {
-				searchFile(key, filePath, list);
+		File[] listFile = root.listFiles();
+		if(listFile != null) {	
+			for(File f : listFile) {
+				String filePath = f.getPath();
+				if(filePath.substring(path.length()).contains(key)) {
+					list.add(f);
+				}
+				
+				if(f.isDirectory()) {
+					searchFile(key, filePath, list);
+				}
 			}
 		}
 		return list;
 	}
-	
-	public static void main(String[] args) {
-		searchFile("t","C:\\test\\z3");
-	}
+
 }
