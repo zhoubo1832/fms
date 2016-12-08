@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import prd.fms.executor.ProgressBarFrameWindowExecutor;
 import prd.fms.util.CommonUtils;
 
 public class ProgressBarFrame extends JFrame{
@@ -23,70 +24,16 @@ public class ProgressBarFrame extends JFrame{
 	private Thread thread;
 	
 	private ProgressBarFrame instance;
-	
-	public Thread getThread() {
-		return thread;
-	}
-
-	private boolean isCancelled = false;
-	
-	public boolean isCancelled() {
-		return isCancelled;
-	}
 
 	public ProgressBarFrame(int min, int max, final Thread thread){
 		this.instance = this;
 		this.curValue = min;
 		this.max = max;
 		this.thread = thread;
-//		this.setUndecorated(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		this.addWindowListener(new WindowListener(){
-
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-				thread.interrupt();
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-//		super(new BorderLayout());
+		this.addWindowListener(new ProgressBarFrameWindowExecutor(thread));
+		
 		progressBar = new JProgressBar(min, max);
 		progressBar.setValue(min);
 		progressBar.setStringPainted(true);
@@ -96,8 +43,6 @@ public class ProgressBarFrame extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				isCancelled = true;
-				thread.interrupt();
 				instance.dispose();
 			}
 			
@@ -109,7 +54,6 @@ public class ProgressBarFrame extends JFrame{
 		add(progressBar,BorderLayout.CENTER);
 		add(cancelPanel,BorderLayout.SOUTH);
 		
-//		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(200, 100);
 		CommonUtils.setScreenCenter(this);
 		this.setVisible(true);

@@ -133,6 +133,7 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 							
 							// refresh tree node
 							TreeNodeModel.refresh();
+							System.out.println("end...");
 						}
 						
 					});
