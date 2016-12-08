@@ -39,7 +39,7 @@ public class FileSystemModel {
 				newFile.mkdirs();
 				for(File file : oldFile.listFiles()) {
 					if(file.isDirectory()) {
-						copyDir(file.getPath(), newFile.getPath());
+						copyDirForRename(file.getPath(), newFile.getPath());
 						deleteDir(file.getPath());
 					} else {
 						copyFile(file.getPath(), newFile.getPath());
@@ -105,7 +105,7 @@ public class FileSystemModel {
 		return fileCount;
 	}
 	
-	public static void copyDir(String srcPath, String desPath) {
+	public static void copyDir(String srcPath, String desPath) throws InterruptedException {
 		int pos = srcPath.lastIndexOf(File.separator);
 		File file = new File(desPath + File.separator + srcPath.substring(pos+1));
 		
@@ -117,6 +117,22 @@ public class FileSystemModel {
 				FileSystemModelProxy.copyDir(f.getPath(), file.getPath());
 			} else {
 				FileSystemModelProxy.copyFile(f.getPath(), file.getPath());
+			}
+		}
+	}
+	
+	public static void copyDirForRename(String srcPath, String desPath) {
+		int pos = srcPath.lastIndexOf(File.separator);
+		File file = new File(desPath + File.separator + srcPath.substring(pos+1));
+		
+		file.mkdirs();
+		
+		File[] files = new File(srcPath).listFiles();
+		for(File f : files) {
+			if(f.isDirectory()) {
+				copyDirForRename(f.getPath(), file.getPath());
+			} else {
+				copyFile(f.getPath(), file.getPath());
 			}
 		}
 	}

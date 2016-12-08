@@ -11,13 +11,13 @@ public class FileSystemModelProxy {
 	
 	private static ThreadLocal<ProgressBarFrame> progressBar = new ThreadLocal<ProgressBarFrame>();
 	
-	public static void copyDir(String srcPath, String desPath) {
+	public static void copyDir(String srcPath, String desPath) throws InterruptedException {
 		updateProgress();
 		FileSystemModel.copyDir(srcPath, desPath);
 		
 	}
 	
-	public static void copyFile(String srcPath, String desPath) {
+	public static void copyFile(String srcPath, String desPath) throws InterruptedException {
 		FileSystemModel.copyFile(srcPath, desPath);
 		updateProgress();
 	}
@@ -26,7 +26,7 @@ public class FileSystemModelProxy {
 		FileSystemModelProxy.progressBar.set(progressBar);
 	}
 	
-	private static void updateProgress() {
+	private static void updateProgress() throws InterruptedException {
 		final ProgressBarFrame bar = progressBar.get();
 		try {
 			SwingUtilities.invokeAndWait(new Runnable(){
@@ -43,6 +43,7 @@ public class FileSystemModelProxy {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 	}
 }

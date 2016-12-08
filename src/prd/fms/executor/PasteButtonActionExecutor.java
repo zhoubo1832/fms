@@ -34,7 +34,10 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 
 			@Override
 			public void run() {
-				ProgressBarFrame progressBar = new ProgressBarFrame(0, fileNum);
+				
+				try{
+				
+				ProgressBarFrame progressBar = new ProgressBarFrame(0, fileNum, Thread.currentThread());
 				
 				FileSystemModelProxy.setProgressBar(progressBar);
 				
@@ -115,8 +118,32 @@ public class PasteButtonActionExecutor extends BaseActionListener{
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						throw e;
 					}
 				}
+			} catch(InterruptedException ex){
+				
+				try {
+					SwingUtilities.invokeAndWait(new Runnable(){
+
+						@Override
+						public void run() {
+							// refresh right panel
+							FileNodeModel.refresh();
+							
+							// refresh tree node
+							TreeNodeModel.refresh();
+						}
+						
+					});
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			}
 			
 		};
