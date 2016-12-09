@@ -104,13 +104,15 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 					
 					Thread t = new Thread(runnable);
 					t.start();
+				} else {
+					FileNodeModel.refresh();
 				}
 			} catch (BadLocationException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} else {
+			FileNodeModel.refresh();
 		}
-		
-		
 	}
 }

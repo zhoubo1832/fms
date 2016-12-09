@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,6 +24,10 @@ import prd.fms.view.MainTree;
  * 
  */
 public class CommonUtils {
+	
+	private static HashMap<String, Icon> bigMap = new HashMap<String, Icon>();
+	private static HashMap<String, Icon> smallMap = new HashMap<String, Icon>();
+	
 
 	/**
 	 * <p>Get file path string from treePath.</p>
@@ -82,13 +87,31 @@ public class CommonUtils {
 	    return null;  
 	}
 	
-	public static Icon getBigIcon(File f) {  
+	public static Icon getBigIcon(File f) {
+		String suffix = null;
+		
+		String filePath = f.getPath();
+		if(f.isFile()) {
+			int pos = filePath.lastIndexOf(".");
+			if(pos != -1) {
+				suffix = filePath.substring(pos);
+				Icon icon = bigMap.get(suffix);
+				if(icon != null) {
+					return icon; 
+				}
+			}
+		}
+		
         if (f!=null && f.exists()) {  
             try {  
                 sun.awt.shell.ShellFolder sf = sun.awt.shell.ShellFolder.getShellFolder(f);
                 Image img = sf.getIcon(true);
                 if(img != null) {
-                	return new ImageIcon(sf.getIcon(true));
+                	Icon imgIcon = new ImageIcon(sf.getIcon(true));
+                	if(f.isFile() && imgIcon != null) {
+                		bigMap.put(suffix, imgIcon);
+                	}
+                	return imgIcon;
                 }
                 System.out.println("no image:" + f.getAbsolutePath());
             } catch (FileNotFoundException e) {  
