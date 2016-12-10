@@ -46,7 +46,7 @@ public class PanelFactory {
 	 * @param fileNum  Number of files
 	 * @return Width and height
 	 */
-	private static Dimension computePreferredSize(JPanel panel, int fileNum) {
+	public static Dimension computePreferredSize(JPanel panel, int fileNum) {
 		final int fw = ViewConstants.FILE_PANEL_WIDTH;
 		final int fh = ViewConstants.FILE_PANEL_HEIGHT;
 		

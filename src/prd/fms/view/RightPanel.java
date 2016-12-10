@@ -66,4 +66,10 @@ public class RightPanel extends JPanel{
 		return parentFilePanel;
 	}
 
+	public void addFilePanel(File f) {
+		parentFilePanel.setPreferredSize(PanelFactory.computePreferredSize(this, parentFilePanel.getComponentCount()+1));
+		parentFilePanel.add(new FilePanel(f));
+		this.revalidate();
+		this.repaint();
+	}
 }

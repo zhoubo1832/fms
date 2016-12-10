@@ -8,7 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import prd.fms.common.FileSystemModelProxy;
+import prd.fms.view.FilePanel;
+import prd.fms.view.RightPanel;
 
 /**
  * <p>File system model.</p>
@@ -195,10 +200,18 @@ public class FileSystemModel {
 		File root = new File(path);
 		File[] listFile = root.listFiles();
 		if(listFile != null) {	
-			for(File f : listFile) {
+			for(final File f : listFile) {
 				String filePath = f.getPath();
 				if(filePath.substring(path.length()).contains(key)) {
 					list.add(f);
+					SwingUtilities.invokeLater(new Runnable(){
+
+						@Override
+						public void run() {
+							RightPanel.instance.addFilePanel(f);
+						}
+						
+					});
 				}
 				
 				if(f.isDirectory()) {

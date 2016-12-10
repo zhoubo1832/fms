@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -15,6 +16,7 @@ import prd.fms.model.FileNodeModel;
 import prd.fms.model.FileSystemModel;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.RightPanel;
+import prd.fms.view.ToolbarPanel;
 
 public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 
@@ -50,6 +52,9 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 				final String key = doc.getText(0, len).trim();
 				
 				if(key.length() > 0) {
+					JPanel parentPanel = RightPanel.instance.getParentFilePanel();
+					parentPanel.removeAll();
+					
 					final String currentPath = CommonUtils.getCurrentPath();
 					Runnable runnable = new Runnable(){
 
@@ -77,25 +82,25 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 								}
 								
 							} else {
-								final File[] files = new File[list.size()];
-								list.toArray(files);
-								try {
-									SwingUtilities.invokeAndWait(new Runnable(){
-
-										@Override
-										public void run() {
-											RightPanel.instance.show(files);
-											
-										}
-										
-									});
-								} catch (InvocationTargetException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+//								final File[] files = new File[list.size()];
+//								list.toArray(files);
+//								try {
+//									SwingUtilities.invokeAndWait(new Runnable(){
+//
+//										@Override
+//										public void run() {
+//											RightPanel.instance.show(files);
+//											
+//										}
+//										
+//									});
+//								} catch (InvocationTargetException e) {
+//									// TODO Auto-generated catch block
+//									e.printStackTrace();
+//								} catch (InterruptedException e) {
+//									// TODO Auto-generated catch block
+//									e.printStackTrace();
+//								}
 								
 							}
 						}
