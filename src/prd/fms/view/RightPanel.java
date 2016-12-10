@@ -82,6 +82,8 @@ public class RightPanel extends JPanel{
 		int index = ToolbarPanel.instance.getViewList().getSelectedIndex();
 		if(index == 0) {
 			parentFilePanel.removeAll();
+			this.revalidate();
+			this.repaint();
 		} else {
 			FileListPanel.instance.clearTable();
 			

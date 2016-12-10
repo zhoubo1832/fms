@@ -1,12 +1,6 @@
 package prd.fms.executor;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -16,7 +10,6 @@ import prd.fms.model.FileNodeModel;
 import prd.fms.model.FileSystemModel;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.RightPanel;
-import prd.fms.view.ToolbarPanel;
 
 public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 
@@ -52,8 +45,6 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 				final String key = doc.getText(0, len).trim();
 				
 				if(key.length() > 0) {
-//					JPanel parentPanel = RightPanel.instance.getParentFilePanel();
-//					parentPanel.removeAll();
 					RightPanel.instance.clearContents();
 					
 					final String currentPath = CommonUtils.getCurrentPath();
@@ -61,49 +52,8 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 
 						@Override
 						public void run() {
-							List<File> list = null;
-							list = FileSystemModel.searchFile(key, currentPath);
+							FileSystemModel.searchFile(key, currentPath);
 							
-							if(list == null) {
-								try {
-									SwingUtilities.invokeAndWait(new Runnable(){
-
-										@Override
-										public void run() {
-											FileNodeModel.refresh();										
-										}
-										
-									});
-								} catch (InvocationTargetException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								
-							} else {
-//								final File[] files = new File[list.size()];
-//								list.toArray(files);
-//								try {
-//									SwingUtilities.invokeAndWait(new Runnable(){
-//
-//										@Override
-//										public void run() {
-//											RightPanel.instance.show(files);
-//											
-//										}
-//										
-//									});
-//								} catch (InvocationTargetException e) {
-//									// TODO Auto-generated catch block
-//									e.printStackTrace();
-//								} catch (InterruptedException e) {
-//									// TODO Auto-generated catch block
-//									e.printStackTrace();
-//								}
-								
-							}
 						}
 						
 					};
@@ -114,7 +64,6 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 					FileNodeModel.refresh();
 				}
 			} catch (BadLocationException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		} else {

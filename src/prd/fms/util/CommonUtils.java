@@ -79,10 +79,32 @@ public class CommonUtils {
 		}
 	}
 	
-	public static Icon getSmallIcon(File f) {  
+	public static Icon getSmallIcon(File f) {
+		String suffix = null;
+		
+		String filePath = f.getPath();
+		if(f.isFile()) {
+			int pos = filePath.lastIndexOf(".");
+			if(pos != -1) {
+				suffix = filePath.substring(pos);
+				Icon icon = smallMap.get(suffix);
+				if(icon != null) {
+					return icon; 
+				}
+			}
+		}
+		
 	    if (f != null && f.exists()) {  
-	        FileSystemView fsv = FileSystemView.getFileSystemView();  
-	        return fsv.getSystemIcon(f);  
+	        FileSystemView fsv = FileSystemView.getFileSystemView();
+	        if(fsv != null) {
+	        	Icon imgIcon = fsv.getSystemIcon(f);
+	        	if(f.isFile() && imgIcon != null) {
+            		smallMap.put(suffix, imgIcon);
+            	}
+            	return imgIcon;
+	        } else {
+	        	System.out.println("no image:" + f.getAbsolutePath());
+	        }
 	    }  
 	    return null;  
 	}

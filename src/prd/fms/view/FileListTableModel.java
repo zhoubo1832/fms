@@ -24,9 +24,7 @@ public class FileListTableModel extends AbstractTableModel{
 	private Vector<FileListItem> vecData;
 	
 	private final String[] columNames = {"Name","Update date","Size"};
-	
-//	private File[] files;
-	
+		
 	private Vector<File> files; 
 
 
@@ -42,13 +40,17 @@ public class FileListTableModel extends AbstractTableModel{
 		
 		vecData = new Vector<FileListItem>();
 		for(File file : files) {
-			FileListItem item = new FileListItem();
-			item.setFileLabel(this.getFileLabel(file));
-			item.setFileUpdateDate(this.getFileUpdateDate(file));
-			item.setFileSize(this.getFileSize(file));
-			
-			this.vecData.add(item);
+			addItem(file);
 		}
+	}
+
+	private void addItem(File file) {
+		FileListItem item = new FileListItem();
+		item.setFileLabel(this.getFileLabel(file));
+		item.setFileUpdateDate(this.getFileUpdateDate(file));
+		item.setFileSize(this.getFileSize(file));
+		
+		this.vecData.add(item);
 	}
 	
 	
@@ -138,12 +140,7 @@ public class FileListTableModel extends AbstractTableModel{
 	public void insertRow(File file) {
 		int rowNum = files.size();
 		files.addElement(file);
-		FileListItem item = new FileListItem();
-		item.setFileLabel(this.getFileLabel(file));
-		item.setFileUpdateDate(this.getFileUpdateDate(file));
-		item.setFileSize(this.getFileSize(file));
-		
-		this.vecData.add(item);
+		addItem(file);
 		
 		this.fireTableRowsInserted(rowNum, rowNum);
 	}

@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import prd.fms.common.FileSystemModelProxy;
-import prd.fms.view.FilePanel;
 import prd.fms.view.RightPanel;
 
 /**

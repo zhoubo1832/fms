@@ -4,9 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +18,6 @@ public class ProgressBarFrame extends JFrame{
 	private JButton cancelButton;
 	private int curValue;
 	private int max;
-	private Thread thread;
 	
 	private ProgressBarFrame instance;
 
@@ -29,7 +25,6 @@ public class ProgressBarFrame extends JFrame{
 		this.instance = this;
 		this.curValue = min;
 		this.max = max;
-		this.thread = thread;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		this.addWindowListener(new ProgressBarFrameWindowExecutor(thread));
