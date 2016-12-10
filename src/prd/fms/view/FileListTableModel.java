@@ -136,6 +136,7 @@ public class FileListTableModel extends AbstractTableModel{
 	}
 	
 	public void insertRow(File file) {
+		int rowNum = files.size();
 		files.addElement(file);
 		FileListItem item = new FileListItem();
 		item.setFileLabel(this.getFileLabel(file));
@@ -143,6 +144,7 @@ public class FileListTableModel extends AbstractTableModel{
 		item.setFileSize(this.getFileSize(file));
 		
 		this.vecData.add(item);
-		this.fireTableDataChanged();
+		
+		this.fireTableRowsInserted(rowNum, rowNum);
 	}
 }
