@@ -41,15 +41,15 @@ public class SortedFileListTableModel extends AbstractTableModel{
 		
 		try{
 			if(columnIndex == 0) {
-				obj = model.getFiles()[rowIndex].getName();
+				obj = model.getFiles().get(rowIndex).getName();
 			} else if(columnIndex == 1) {
 				obj = model.getValueAt(rowIndex, columnIndex);
 			} else {
-				File tmpFile = model.getFiles()[rowIndex];
+				File tmpFile = model.getFiles().get(rowIndex);
 				if(tmpFile.isDirectory()) {
 					obj = 0l;
 				} else {
-					obj = model.getFiles()[rowIndex].length();
+					obj = model.getFiles().get(rowIndex).length();
 				}
 			}
 		} catch (ArrayIndexOutOfBoundsException  e) {

@@ -52,8 +52,9 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 				final String key = doc.getText(0, len).trim();
 				
 				if(key.length() > 0) {
-					JPanel parentPanel = RightPanel.instance.getParentFilePanel();
-					parentPanel.removeAll();
+//					JPanel parentPanel = RightPanel.instance.getParentFilePanel();
+//					parentPanel.removeAll();
+					RightPanel.instance.clearContents();
 					
 					final String currentPath = CommonUtils.getCurrentPath();
 					Runnable runnable = new Runnable(){

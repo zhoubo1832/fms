@@ -47,4 +47,12 @@ public class FileListPanel extends JPanel{
 		add(fileTable,BorderLayout.CENTER);
 		instance = this;
 	}
+	
+	public void clearTable(){
+		((FileListTableModel)fileTable.getModel()).clear();
+	}
+	
+	public void insertRow(File f) {
+		((FileListTableModel)fileTable.getModel()).insertRow(f);
+	}
 }

@@ -67,9 +67,24 @@ public class RightPanel extends JPanel{
 	}
 
 	public void addFilePanel(File f) {
-		parentFilePanel.setPreferredSize(PanelFactory.computePreferredSize(this, parentFilePanel.getComponentCount()+1));
-		parentFilePanel.add(new FilePanel(f));
-		this.revalidate();
-		this.repaint();
+		int index = ToolbarPanel.instance.getViewList().getSelectedIndex();
+		if(index == 0) {
+			parentFilePanel.setPreferredSize(PanelFactory.computePreferredSize(this, parentFilePanel.getComponentCount()+1));
+			parentFilePanel.add(new FilePanel(f));
+			this.revalidate();
+			this.repaint();
+		} else {
+			FileListPanel.instance.insertRow(f);
+		}
+	}
+	
+	public void clearContents() {
+		int index = ToolbarPanel.instance.getViewList().getSelectedIndex();
+		if(index == 0) {
+			parentFilePanel.removeAll();
+		} else {
+			FileListPanel.instance.clearTable();
+			
+		}
 	}
 }

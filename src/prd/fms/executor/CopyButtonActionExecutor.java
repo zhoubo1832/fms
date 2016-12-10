@@ -37,7 +37,7 @@ public class CopyButtonActionExecutor extends BaseActionListener{
 			for(int rowNum : selectedRows) {
 				rowNum = fileTable.convertRowIndexToModel(rowNum);
 				FileListTableModel model = (FileListTableModel)fileTable.getModel();
-				String path = (model.getFiles()[rowNum]).getPath();
+				String path = (model.getFiles().get(rowNum)).getPath();
 				SelectedFileList.getInstance().addPath(path);
 			}
 		}

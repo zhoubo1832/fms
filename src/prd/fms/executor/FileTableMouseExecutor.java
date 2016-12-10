@@ -30,7 +30,7 @@ public class FileTableMouseExecutor extends BaseMouseListener{
 			}
 			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
-			File file = model.getFiles()[rowNum];
+			File file = model.getFiles().get(rowNum);
 			FileNodeModel.openFileNode(file);
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
 			ToolbarPanel.instance.setCopyButtonEnabled(false);
@@ -42,7 +42,7 @@ public class FileTableMouseExecutor extends BaseMouseListener{
 			}
 			rowNum = fileTable.convertRowIndexToModel(rowNum);
 			FileListTableModel model = (FileListTableModel)fileTable.getModel();
-			String path = (model.getFiles()[rowNum]).getPath();
+			String path = (model.getFiles().get(rowNum)).getPath();
 			InfoBarPanel.instance.setFileInfoLabel(path);
 			ToolbarPanel.instance.setRenameButtonEnabled(true);
 			ToolbarPanel.instance.setCopyButtonEnabled(true);
