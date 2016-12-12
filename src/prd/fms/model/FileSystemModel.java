@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import prd.fms.common.FileSystemModelProxy;
+import prd.fms.thread.SearchFileThread;
 import prd.fms.view.RightPanel;
 
 /**
@@ -194,11 +195,17 @@ public class FileSystemModel {
 	}
 	
 	public static List<File> searchFile(String key, String path, List<File> list) {
-		System.out.println("path:" + path);
+		if(SearchFileThread.stopFlag) {
+			return null;
+		}
+		
 		File root = new File(path);
 		File[] listFile = root.listFiles();
 		if(listFile != null) {	
 			for(final File f : listFile) {
+				if(SearchFileThread.stopFlag) {
+					return null;
+				}
 				String filePath = f.getPath();
 				if(filePath.substring(path.length()).contains(key)) {
 					list.add(f);
@@ -206,7 +213,9 @@ public class FileSystemModel {
 
 						@Override
 						public void run() {
-							RightPanel.instance.addFilePanel(f);
+							if(!SearchFileThread.stopFlag) {
+								RightPanel.instance.addFilePanel(f);
+							}
 						}
 						
 					});

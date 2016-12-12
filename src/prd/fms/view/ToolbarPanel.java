@@ -1,6 +1,7 @@
 package prd.fms.view;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,6 +22,7 @@ import prd.fms.executor.RenameButtonActionExecutor;
 import prd.fms.executor.SearchTextFieldDocumentExecutor;
 import prd.fms.executor.SearchTextFieldFocusExecutor;
 import prd.fms.executor.ViewlistItemExecutor;
+import prd.fms.thread.SearchFileThread;
 
 /**
  * <p>Tool bar panel.</p>
@@ -44,6 +46,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 	private JButton newfolderButton;
 	private JButton copyButton;
 	private JButton pasteButton;
+	private JButton stopSearchButton;
 	
 	private JComboBox<String> viewList;
 	private JTextField searchTextField;
@@ -87,7 +90,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		pasteButton = new JButton(ViewConstants.TOOLBAR_PASTE_TEXT);
 		viewList = new JComboBox<String>(viewItems);
 		searchTextField = new JTextField(ViewConstants.SEARCH_HINT, 20);
-		
+		stopSearchButton = new JButton("Stop");
 	}
 	
 	private void setEnable() {
@@ -112,6 +115,14 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		viewList.addItemListener(new ViewlistItemExecutor());
 		searchTextField.getDocument().addDocumentListener(new SearchTextFieldDocumentExecutor(searchTextField));
 		searchTextField.addFocusListener(new SearchTextFieldFocusExecutor());
+		stopSearchButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SearchFileThread.stopFlag = true;
+			}
+			
+		});
 	}
 	
 	private void addWidget() {
@@ -126,6 +137,7 @@ public class ToolbarPanel extends JPanel implements ISubscriber{
 		toolBar.add(pasteButton);
 		toolBar.add(viewList);
 		toolBar.add(searchTextField);
+		toolBar.add(stopSearchButton);
 		// add tool bar
 		this.add(toolBar);
 	}

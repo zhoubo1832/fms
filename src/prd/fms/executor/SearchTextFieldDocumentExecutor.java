@@ -7,7 +7,7 @@ import javax.swing.text.Document;
 
 import prd.fms.controller.BaseDocumentListener;
 import prd.fms.model.FileNodeModel;
-import prd.fms.model.FileSystemModel;
+import prd.fms.thread.SearchFileThread;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.RightPanel;
 
@@ -48,18 +48,9 @@ public class SearchTextFieldDocumentExecutor extends BaseDocumentListener{
 					RightPanel.instance.clearContents();
 					
 					final String currentPath = CommonUtils.getCurrentPath();
-					Runnable runnable = new Runnable(){
+					SearchFileThread thread = new SearchFileThread(key, currentPath);
+					thread.start();
 
-						@Override
-						public void run() {
-							FileSystemModel.searchFile(key, currentPath);
-							
-						}
-						
-					};
-					
-					Thread t = new Thread(runnable);
-					t.start();
 				} else {
 					FileNodeModel.refresh();
 				}
