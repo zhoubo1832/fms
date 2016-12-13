@@ -8,6 +8,9 @@ import javax.swing.tree.TreePath;
 import prd.fms.controller.BaseMouseListener;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.InfoBarPanel;
+import prd.fms.view.MainFrame;
+import prd.fms.view.MainTree;
+import prd.fms.view.TagDialog;
 import prd.fms.view.ToolbarPanel;
 
 public class TreeNodeMouseExecutor extends BaseMouseListener{
@@ -21,13 +24,18 @@ public class TreeNodeMouseExecutor extends BaseMouseListener{
 		if(tp == null) {
 			return;
 		}
-		String path = CommonUtils.getPath(tp);
-		// display node's detailed information in information panel
-		InfoBarPanel.instance.setNodeInfoLabel(path);
 		
-		ToolbarPanel.instance.setRenameButtonEnabled(false);
-		ToolbarPanel.instance.setNewfolderButtonEnabled(true);
-
+		if(e.getButton() == 1) {
+			String path = CommonUtils.getPath(tp);
+			// display node's detailed information in information panel
+			InfoBarPanel.instance.setNodeInfoLabel(path);
+			
+			ToolbarPanel.instance.setRenameButtonEnabled(false);
+			ToolbarPanel.instance.setNewfolderButtonEnabled(true);
+		} else if(e.getButton() == 3) {
+			MainTree.instance.setSelectionPath(tp);
+			new TagDialog(MainFrame.instance, "Tags", true);
+		}
 
 	}
 
