@@ -1,11 +1,14 @@
 package prd.fms.executor;
 
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreePath;
 
+import prd.fms.bean.TagBean;
 import prd.fms.controller.BaseMouseListener;
+import prd.fms.model.TagModel;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainFrame;
@@ -33,8 +36,9 @@ public class TreeNodeMouseExecutor extends BaseMouseListener{
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
 			ToolbarPanel.instance.setNewfolderButtonEnabled(true);
 		} else if(e.getButton() == 3) {
+			List<Object> list = TagModel.getFileTags(CommonUtils.getPath(tp));
 			MainTree.instance.setSelectionPath(tp);
-			new TagDialog(MainFrame.instance, "Tags", true);
+			new TagDialog(MainFrame.instance, "Tags", true, list);
 		}
 
 	}
