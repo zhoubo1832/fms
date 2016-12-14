@@ -1,8 +1,12 @@
 package prd.fms.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import prd.fms.bean.DirNode;
 import prd.fms.bean.TagBean;
 import prd.fms.util.DbUtils;
 
@@ -23,5 +27,23 @@ public class TagModel {
 			tagBeanList.add(bean);
 		}
 		return tagBeanList;
+	}
+	
+	public static List<String> getAllTags() {
+		return new DbUtils().selectAllTags();
+	}
+	
+	public static DefaultMutableTreeNode getTagNodes() {
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Tags");
+		List<String> tagList = new DbUtils().selectAllTags();
+		for(String s : tagList) {
+			top.add(new DefaultMutableTreeNode(s));
+		}
+		
+		return top;
+	}
+	
+	public static List<String> getTagFiles(String tagName) {
+		return new DbUtils().selectTagFiles(tagName);
 	}
 }

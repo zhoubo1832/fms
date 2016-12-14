@@ -77,6 +77,39 @@ public class DbUtils {
 		return list;
 	}
 	
+	public List<String> selectTagFiles(String tagName) {
+		List<String> list = new ArrayList<String>();
+		Connection conn = getConnection();
+		if(conn != null) {
+			Statement stat = null;
+			ResultSet rs = null;
+			try {
+				stat = conn.createStatement();
+				rs = stat.executeQuery("select file_path from t_file_tags where tag_name = '" + tagName + "';");
+				while (rs.next()) {
+					list.add(rs.getString("file_path"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs != null) {
+						rs.close();
+					}
+					
+					if(conn != null) {
+						conn.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+	
+		return list;
+	}
+	
 	public List<String> selectAllTags() {
 		List<String> list = new ArrayList<String>();
 		Connection conn = getConnection();
