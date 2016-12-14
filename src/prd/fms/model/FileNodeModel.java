@@ -36,11 +36,13 @@ public class FileNodeModel {
 			// get and select current tree node
 			String path = file.getPath();
 			TreePath currentTreePath = MainTree.instance.getSelectionPath();
-			String currentPath = CommonUtils.getPath(currentTreePath);
-			if(path.equals(currentPath)) {
-				// display all folders and files in right panel
-				TreeNodeModel.displayChildrenFiles(currentTreePath);
-				return;
+			if(currentTreePath != null) {
+				String currentPath = CommonUtils.getPath(currentTreePath);
+				if(path.equals(currentPath)) {
+					// display all folders and files in right panel
+					TreeNodeModel.displayChildrenFiles(currentTreePath);
+					return;
+				}
 			}
 			
 			TreePath selectedTreePath = new TreePath(MainTree.instance.getModel().getRoot());

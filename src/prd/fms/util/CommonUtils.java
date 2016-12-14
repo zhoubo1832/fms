@@ -7,6 +7,8 @@ import java.awt.Window;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -149,5 +151,29 @@ public class CommonUtils {
 		int screenWidth = dim.width;
 		int screenHeight = dim.height;
 		win.setLocation(screenWidth/2 - win.getWidth()/2, screenHeight/2 - win.getHeight()/2);
+	}
+	
+	public static File[] convertToFileArray(List<String> fileList) {
+		int numFiles = fileList.size();
+		if(numFiles == 0 ) {
+			return null;
+		}
+		Iterator<String> it = fileList.iterator();
+		while(it.hasNext()) {
+			if(new File(it.next()).exists() == false) {
+				it.remove();
+			}
+		}
+		
+		numFiles = fileList.size();
+		if(numFiles == 0 ) {
+			return null;
+		}
+		
+		File[] files = new File[numFiles];
+		for(int i=0; i< numFiles; i++) {
+			files[i] = new File(fileList.get(i));
+		}
+		return files;
 	}
 }
