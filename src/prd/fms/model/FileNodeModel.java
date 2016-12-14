@@ -31,20 +31,26 @@ public class FileNodeModel {
 		// folder was double clicked
 		if(file.isDirectory()) {
 			// get and select current tree node
-			String path = file.getPath();
-			TreePath selectedTreePath = MainTree.instance.getSelectionPath();
-			String selectedPath = CommonUtils.getPath(selectedTreePath);
+//			String path = file.getPath();
+//			TreePath selectedTreePath = MainTree.instance.getSelectionPath();
+//			String selectedPath = CommonUtils.getPath(selectedTreePath);
 			
-			String partPath = path.substring(selectedPath.length());
-			StringTokenizer token = new StringTokenizer(partPath,File.separator,false);
+			TreePath selectedTreePath = new TreePath(MainTree.instance.getModel().getRoot());
+			String selectedPath = "";
+			
+//			String partPath = path.substring(selectedPath.length());
+			StringTokenizer token = new StringTokenizer(file.getPath(),File.separator,false);
 			while(token.hasMoreElements()) {
 				String dirName = (String)token.nextElement();
-				if(selectedPath.endsWith(File.separator)) {
-					selectedPath = selectedPath + dirName;
+				if("".equals(selectedPath)) {
+					selectedPath = dirName + File.separator;
 				} else {
-					selectedPath = selectedPath + File.separator + dirName;
+					if(selectedPath.endsWith(File.separator)) {
+						selectedPath = selectedPath + dirName;
+					} else {
+						selectedPath = selectedPath + File.separator + dirName;
+					}
 				}
-				
 				selectedTreePath = getTreePath(selectedPath, selectedTreePath);
 				if(selectedTreePath != null && token.hasMoreElements()) {
 					TreeNodeModel.addChildrenDirNode(selectedTreePath);
