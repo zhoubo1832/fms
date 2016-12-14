@@ -11,6 +11,7 @@ import javax.swing.tree.TreePath;
 import prd.fms.controller.BaseMouseListener;
 import prd.fms.model.TagModel;
 import prd.fms.view.RightPanel;
+import prd.fms.view.TagTree;
 
 public class TagTreeMouseExecutor extends BaseMouseListener{
 
@@ -26,6 +27,8 @@ public class TagTreeMouseExecutor extends BaseMouseListener{
 		if(node == null) {
 			return;
 		}
+		
+		TagTree.tagClicked = true;
 		
 		String tagName = (String)node.getUserObject();
 		List<String> fileList = TagModel.getTagFiles(tagName);

@@ -9,11 +9,13 @@ import javax.swing.tree.TreePath;
 import prd.fms.bean.TagBean;
 import prd.fms.controller.BaseMouseListener;
 import prd.fms.model.TagModel;
+import prd.fms.model.TreeNodeModel;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.InfoBarPanel;
 import prd.fms.view.MainFrame;
 import prd.fms.view.MainTree;
 import prd.fms.view.TagDialog;
+import prd.fms.view.TagTree;
 import prd.fms.view.ToolbarPanel;
 
 public class TreeNodeMouseExecutor extends BaseMouseListener{
@@ -29,7 +31,17 @@ public class TreeNodeMouseExecutor extends BaseMouseListener{
 		}
 		
 		if(e.getButton() == 1) {
+			TagTree.tagClicked = false;
+			
 			String path = CommonUtils.getPath(tp);
+			
+			TreePath currentTreePath = MainTree.instance.getSelectionPath();
+			String currentPath = CommonUtils.getPath(currentTreePath);
+			if(path.equals(currentPath)) {
+				// display all folders and files in right panel
+				TreeNodeModel.displayChildrenFiles(currentTreePath);
+			}
+			
 			// display node's detailed information in information panel
 			InfoBarPanel.instance.setNodeInfoLabel(path);
 			

@@ -10,6 +10,7 @@ import prd.fms.common.IPublisher;
 import prd.fms.common.ISubscriber;
 import prd.fms.controller.BaseTreeSelectionListener;
 import prd.fms.model.TreeNodeModel;
+import prd.fms.view.TagTree;
 
 public class TreeNodeTreeSelectionExecutor extends BaseTreeSelectionListener implements IPublisher{
 
@@ -19,6 +20,8 @@ public class TreeNodeTreeSelectionExecutor extends BaseTreeSelectionListener imp
 	
 	@Override
 	protected void execute(TreeSelectionEvent e) {
+		TagTree.tagClicked = false;
+		
 		treePath = e.getPath();
 		// display all folders and files in right panel
 		TreeNodeModel.displayChildrenFiles(treePath);

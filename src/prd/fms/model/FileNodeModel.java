@@ -14,6 +14,7 @@ import javax.swing.tree.TreePath;
 import prd.fms.bean.DirNode;
 import prd.fms.util.CommonUtils;
 import prd.fms.view.MainTree;
+import prd.fms.view.TagTree;
 
 /**
  * <p>File node model.</p>
@@ -30,10 +31,17 @@ public class FileNodeModel {
 	public static void openFileNode(File file) {
 		// folder was double clicked
 		if(file.isDirectory()) {
+			TagTree.tagClicked = false;
+			
 			// get and select current tree node
-//			String path = file.getPath();
-//			TreePath selectedTreePath = MainTree.instance.getSelectionPath();
-//			String selectedPath = CommonUtils.getPath(selectedTreePath);
+			String path = file.getPath();
+			TreePath currentTreePath = MainTree.instance.getSelectionPath();
+			String currentPath = CommonUtils.getPath(currentTreePath);
+			if(path.equals(currentPath)) {
+				// display all folders and files in right panel
+				TreeNodeModel.displayChildrenFiles(currentTreePath);
+				return;
+			}
 			
 			TreePath selectedTreePath = new TreePath(MainTree.instance.getModel().getRoot());
 			String selectedPath = "";
