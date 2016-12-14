@@ -55,8 +55,8 @@ public class TagDialog extends CommonDialog{
 		return tagPanel;
 	}
 	
-	public TagDialog(Frame owner, String title, boolean modal, List<Object> list) {
-		super(owner, title, modal, list);
+	public TagDialog(Frame owner, String title, boolean modal, String filePath, List<Object> list) {
+		super(owner, title, modal, filePath, list);
 		
 	}
 
@@ -75,6 +75,10 @@ public class TagDialog extends CommonDialog{
 
 	public JPanel getTagPanel() {
 		return tagPanel;
+	}
+
+	public String getFilePath() {
+		return filePath;
 	}
 
 }

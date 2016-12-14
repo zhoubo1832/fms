@@ -12,6 +12,7 @@ public abstract class CommonDialog extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	
+	protected String filePath;
 	protected List<Object> list;
 
 	public CommonDialog(Frame owner, String title, boolean modal) {
@@ -19,8 +20,9 @@ public abstract class CommonDialog extends JDialog{
 		init();
 	}
 	
-	public CommonDialog(Frame owner, String title, boolean modal, List<Object> list) {
+	public CommonDialog(Frame owner, String title, boolean modal, String filePath, List<Object> list) {
 		super(owner, title, modal);
+		this.filePath = filePath;
 		this.list = list;
 		init();
 	}

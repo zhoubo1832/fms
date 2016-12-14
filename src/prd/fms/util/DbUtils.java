@@ -44,7 +44,7 @@ public class DbUtils {
 		return conn;
 	}
 	
-	public List<String> getFileTags(String filePath) {
+	public List<String> selectFileTags(String filePath) {
 		List<String> list = new ArrayList<String>();
 		Connection conn = getConnection();
 		if(conn != null) {
@@ -77,7 +77,7 @@ public class DbUtils {
 		return list;
 	}
 	
-	public List<String> getAllTags() {
+	public List<String> selectAllTags() {
 		List<String> list = new ArrayList<String>();
 		Connection conn = getConnection();
 		if(conn != null) {
@@ -120,13 +120,15 @@ public class DbUtils {
 				stat.setString(1, filePath);
 				stat.executeUpdate();
 
-				stat = conn.prepareStatement("insert into t_file_tags(file_path,tag_name) values(?,?);");				
-				for(String s : list) {
-					stat.setString(1, filePath);
-					stat.setString(2, s);
-					stat.addBatch();
+				if(list.size() > 0) {
+					stat = conn.prepareStatement("insert into t_file_tags(file_path,tag_name) values(?,?);");				
+					for(String s : list) {
+						stat.setString(1, filePath);
+						stat.setString(2, s);
+						stat.addBatch();
+					}
+					stat.executeBatch();
 				}
-				stat.executeBatch();
 				conn.commit();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -158,7 +160,7 @@ public class DbUtils {
 		
 		String filePath = "C:\\test\\b2";
 		db.updateFileTags(filePath, list);
-		List<String> tagList = db.getFileTags(filePath);
+		List<String> tagList = db.selectFileTags(filePath);
 		for(String s : tagList) {
 			System.out.println(s);
 		}

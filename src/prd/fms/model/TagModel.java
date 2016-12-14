@@ -11,8 +11,8 @@ public class TagModel {
 	public static List<Object> getFileTags(String filePath) {
 		List<Object> tagBeanList = new ArrayList<Object>();
 		DbUtils db = new DbUtils();
-		List<String> fileTagList = db.getFileTags(filePath);
-		List<String> allTagList = db.getAllTags();
+		List<String> fileTagList = db.selectFileTags(filePath);
+		List<String> allTagList = db.selectAllTags();
 		for(String s1 : allTagList) {
 			TagBean bean = new TagBean();
 			bean.setFilePath(filePath);

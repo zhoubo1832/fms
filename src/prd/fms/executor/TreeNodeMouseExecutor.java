@@ -36,9 +36,10 @@ public class TreeNodeMouseExecutor extends BaseMouseListener{
 			ToolbarPanel.instance.setRenameButtonEnabled(false);
 			ToolbarPanel.instance.setNewfolderButtonEnabled(true);
 		} else if(e.getButton() == 3) {
-			List<Object> list = TagModel.getFileTags(CommonUtils.getPath(tp));
+			String filePath = CommonUtils.getPath(tp);
+			List<Object> list = TagModel.getFileTags(filePath);
 			MainTree.instance.setSelectionPath(tp);
-			new TagDialog(MainFrame.instance, "Tags", true, list);
+			new TagDialog(MainFrame.instance, "Tags", true, filePath, list);
 		}
 
 	}
