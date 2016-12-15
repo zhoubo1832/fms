@@ -184,6 +184,71 @@ public class DbUtils {
 		return;
 	}
 	
+	public void deleteTaggedFile(String filePath) {
+		Connection conn = getConnection();
+		if(conn != null) {
+			PreparedStatement stat = null;
+
+			try {
+				stat = conn.prepareStatement("delete from t_file_tags where file_path = ? ;");
+				stat.setString(1, filePath);
+				stat.executeUpdate();
+
+				conn.commit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					if(conn != null) {
+						conn.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		return;
+	}
+	
+	public void updateTaggedFile(String oldFilePath, String newFilePath) {
+		Connection conn = getConnection();
+		if(conn != null) {
+			PreparedStatement stat = null;
+
+			try {
+				stat = conn.prepareStatement("update t_file_tags set file_path = ? where file_path = ? ;");
+				stat.setString(1, newFilePath);
+				stat.setString(2, oldFilePath);
+				stat.executeUpdate();
+
+				conn.commit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					if(conn != null) {
+						conn.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		return;
+	}
+	
 	public static void main(String[] args) {
 		DbUtils db = new DbUtils();
 		List<String> list = new ArrayList<String>();

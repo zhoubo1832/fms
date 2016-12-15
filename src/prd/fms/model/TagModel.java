@@ -46,4 +46,12 @@ public class TagModel {
 	public static List<String> getTagFiles(String tagName) {
 		return new DbUtils().selectTagFiles(tagName);
 	}
+	
+	public static void deleteTaggedFile(String fileName) {
+		new DbUtils().deleteTaggedFile(fileName);
+	}
+	
+	public static void renameTaggedFile(String oldName, String newName) {
+		new DbUtils().updateTaggedFile(oldName, newName);
+	}
 }
