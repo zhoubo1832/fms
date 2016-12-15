@@ -9,6 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import prd.fms.bean.DirNode;
 import prd.fms.bean.TagBean;
 import prd.fms.util.DbUtils;
+import prd.fms.view.LeftPanel;
+import prd.fms.view.TagTree;
 
 public class TagModel {
 
@@ -53,5 +55,20 @@ public class TagModel {
 	
 	public static void renameTaggedFile(String oldName, String newName) {
 		new DbUtils().updateTaggedFile(oldName, newName);
+	}
+	
+	public static void updateFileTags(String filePath, List<String> list) {
+		new DbUtils().updateFileTags(filePath, list);
+	}
+	
+	public static void refreshTagTree() {
+		TagTree tagTree = LeftPanel.instance.getTagTree();
+		DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode)tagTree.getModel().getRoot();
+		rootNode.removeAllChildren();
+		List<String> list = new DbUtils().selectAllTags();
+		for(String s : list) {
+			rootNode.add(new DefaultMutableTreeNode(s));
+		}
+		tagTree.updateUI();
 	}
 }

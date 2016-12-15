@@ -8,10 +8,14 @@ import java.util.StringTokenizer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import prd.fms.controller.BaseActionListener;
+import prd.fms.model.TagModel;
 import prd.fms.util.DbUtils;
+import prd.fms.view.LeftPanel;
 import prd.fms.view.TagDialog;
+import prd.fms.view.TagTree;
 import prd.fms.view.ViewConstants;
 
 public class TagDialogActionExecutor extends BaseActionListener{
@@ -45,8 +49,8 @@ public class TagDialogActionExecutor extends BaseActionListener{
 				}
 			}
 			
-			DbUtils db = new DbUtils();
-			db.updateFileTags(dialog.getFilePath(), tagList);
+			TagModel.updateFileTags(dialog.getFilePath(), tagList);
+			TagModel.refreshTagTree();
 		} else if(btn.getText().equals(ViewConstants.COMMON_BUTTON_CANCEL) ) {
 			dialog.dispose();
 		} 

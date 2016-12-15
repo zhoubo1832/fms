@@ -24,6 +24,10 @@ public class LeftPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
+	private TagTree tagTree;
+	
+	public static LeftPanel instance;
+	
 	public LeftPanel() {
 		this.setPreferredSize(new Dimension(200,100));
 		this.setLayout(new BorderLayout());
@@ -36,10 +40,16 @@ public class LeftPanel extends JPanel{
 		leftSplit.setDividerLocation(300);
 		leftSplit.add(scrollPane, JSplitPane.TOP, 0);
 		
-		JScrollPane tagPane = new JScrollPane(new TagTree(),JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tagTree = new TagTree();
+		JScrollPane tagPane = new JScrollPane(tagTree,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		leftSplit.add(tagPane, JSplitPane.BOTTOM, 0);
 		
 		// add scroll pane
 		this.add(leftSplit);
+		instance = this;
+	}
+
+	public TagTree getTagTree() {
+		return tagTree;
 	}
 }
