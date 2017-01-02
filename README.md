@@ -20,7 +20,7 @@ Function list:
     3)Tag information is stored by Sqlite built-in database  
     4)Use Jnotify to update tag information automatically  
     
-3.Main technologies  
+Main technologies:  
     1)Java swing  
     2)Java multi-thread  
     3)Sqlite built-in database  
