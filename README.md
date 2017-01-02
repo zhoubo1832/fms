@@ -1,8 +1,8 @@
 # FMS
 File management system developed with java swing.
 
-Function list:
-1.Local file/folder management as windows explorer
+Function list:   
+1.Local file/folder management as windows explorer   
     1)Show file list and detailed information
     2)Support 2 ways view to show file list(Large icons and detail list)
     3)File copy and paste supporting multi-thread
